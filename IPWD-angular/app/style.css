@@ -1,0 +1,70 @@
+@CHARSET "UTF-8";
+
+* {
+    @include box-sizing(border-box); 
+}
+
+#mainNav, footer {
+    background-color: #222;
+    border-color: #222;
+}
+
+footer {
+	bottom: 0;
+  min-height: 50px;
+  width: 100%;
+}
+
+.footer-img {
+  background-image: url("images/slide-2.png");
+  background-repeat: no-repeat;
+  height: 400px;
+}
+
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Pad the edges of the mobile views a bit */
+.marketing {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-lg-4 p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.cocktail-small{
+  width: 140px;
+  height: 140px;
+}
+.cocktail-small-div{
+  width: 25%;
+}
+
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+.featurette {
+  padding-top: 20px; /* Vertically center images part 1: add padding above and below text. */
+  overflow: hidden; /* Vertically center images part 2: clear their floats. */
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+
