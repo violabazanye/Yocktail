@@ -18,6 +18,7 @@ footer {
 .footer-img {
   background-image: url("images/slide-2.png");
   background-repeat: no-repeat;
+  background-size: cover;
   height: 400px;
 }
 
