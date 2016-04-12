@@ -1,6 +1,6 @@
 // Dinner controller that we use whenever we have view that needs to 
 // display or modify the dinner menu
-yocktailApp.controller('CocktailCtrl', function ($scope,Dinner) {
+yocktailApp.controller('CocktailCtrl', function ($scope,Cocktail) {
 
   // $scope.numberOfGuests = Dinner.getNumberOfGuests();
 
