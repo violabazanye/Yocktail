@@ -87,3 +87,79 @@ table.center {
 }
 
 
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+
+  /* Remve the edge padding needed for mobile */
+  .marketing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: 20px;
+    margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+  }
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+  .cocktail-small{
+    width: 140px;
+    height: 140px;
+  }
+  .cocktail-small-div{
+    width: 25%;
+  }
+  .support{
+    margin: 2em 0em 0 0;
+    //background-color: rgba(42, 137, 115, 0.52);
+    padding: 2em 2em;
+  }
+  .support input[type="text"] {
+    width: 79%;
+    padding: 12px;
+    font-size: 15px;
+    text-align: left;
+    font-weight: 400;
+    border: 1px solid #fff;
+    outline: none;
+    margin: 0px 0px 0 0;
+    webkit-appearance: none;
+}
+.support input[type="submit"]{
+   background:#b23917;
+  cursor: pointer;
+   border: 0;
+  color: #fff;
+  font-weight: 400;
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 0.88em;
+  text-align: center;
+  webkit-appearance:none;
+  outline:none;
+  width: 20%;
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  -ms-transition: 0.5s all;
+}
+.cocktail-rectangle{
+  width: 200px;
+  height: 100px
+}
+ 
+}
+
