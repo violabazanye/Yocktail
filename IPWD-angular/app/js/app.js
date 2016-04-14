@@ -4,7 +4,8 @@ yocktailApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/home', {
-        templateUrl: 'partials/home.html'
+        templateUrl: 'partials/home.html',
+        controller: 'HomeCtrl'
       }).
       when('/explore', {
         templateUrl: 'partials/explore.html',

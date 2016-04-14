@@ -5,21 +5,24 @@ yocktailApp.controller('ExploreCtrl', function ($scope,Cocktail) {
 	      $scope.search($cookieStore.get("query"));
 	    }else{*/
 	      $scope.status = "Searching...";
-
-	      // chrome extention: https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi
-	      
 	      Cocktail.CocktailSearch.get(function(data){
-	      	if(data.result){
-	      		$scope.cocktails = data.result;
-		        console.log(data.result);
-		        $scope.status = "Showing " + data.result.length + " results";
-	      	}else{
-	      		$scope.status = "There was an error. Please try again.";
-	      	}
+	        $scope.cocktails=data.result;
+	        $scope.status = "Showing " + data.result.length + " results";
 	      },function(data){
-	        $scope.status = "There was an error. Please try again.";
+	        $scope.status = "There was an error. Try again.";
 	      });
-	   // }
+	    //}
 	});
+
+	$scope.search = function(query) {
+	    //$cookieStore.put("query", query);
+	  	$scope.status = "Searching...";
+	   	Cocktail.CocktailQuerySearch.get({input:query},function(data){
+	    	$scope.cocktails=data.result;
+	     	$scope.status = "Showing " + data.result.length + " results";
+	   	},function(data){
+	     	$scope.status = "There was an error. Try again.";
+	   	});
+	}
 
 });
