@@ -22,6 +22,14 @@ yocktailApp.config(['$routeProvider',
         templateUrl: 'partials/cocktail.html',
         controller: 'CocktailCtrl'
       }).
+      when('/signin', {
+        templateUrl: 'partials/signin.html',
+        controller: 'SigninCtrl'
+      }).
+      when('/signup', {
+        templateUrl: 'partials/signup.html',
+        controller: 'SignupCtrl'
+      }).
       otherwise({
         redirectTo: '/home'
       });
