@@ -1,4 +1,4 @@
-var yocktailApp = angular.module('yocktail', ['ngRoute','ngResource']);
+var yocktailApp = angular.module('yocktail', ['ngRoute','ngResource', 'firebase']);
 
 yocktailApp.config(['$routeProvider',
   function($routeProvider) {

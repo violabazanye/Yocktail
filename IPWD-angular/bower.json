@@ -1,9 +1,9 @@
 {
-  "name": "dinner-planner",
-  "description": "A starter project for Interaction Programming course Lab5",
+  "name": "yocktail",
+  "description": "A starter project for Interaction Programming course project",
   "version": "0.0.0",
-  "homepage": "https://github.com/kth-csc-iprog/dinnerplanner-html",
-  "license": "MIT",
+  "homepage": "https://github.com/violabazanye/Yocktail",
+  "license": "",
   "private": true,
   "dependencies": {
     "angular": "1.3.x",
