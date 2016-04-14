@@ -40,6 +40,12 @@ table.center {
   border-spacing: 15px 30px; /* NOTE: syntax is <horizontal value> <vertical value> */
 }
 
+#search-btn {
+  width: 200px;
+  height: 100px;
+}
+
+
 
 /* MARKETING CONTENT
 -------------------------------------------------- */
@@ -123,7 +129,6 @@ table.center {
   }
   .support{
     margin: 2em 0em 0 0;
-    //background-color: rgba(42, 137, 115, 0.52);
     padding: 2em 2em;
   }
   .support input[type="text"] {
@@ -158,7 +163,7 @@ table.center {
 }
 .cocktail-rectangle{
   width: 200px;
-  height: 100px
+  height: 100px;
 }
  
 }

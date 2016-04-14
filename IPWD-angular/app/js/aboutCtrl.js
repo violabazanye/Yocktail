@@ -1,4 +1,4 @@
-yocktailApp.controller('AboutCtrl', function ($scope,Dinner) {
+yocktailApp.controller('AboutCtrl', function ($scope,Cocktail) {
 
 
 });
