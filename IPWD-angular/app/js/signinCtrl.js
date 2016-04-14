@@ -21,7 +21,7 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
 				console.log("loggedIn:" + Cocktail.getLoggedIn());
 				console.log("user:" + Cocktail.getUser());
 
-	            //$location.path('/home');
+	            $location.path('/home');
 	        }, function(error) {
 	            //Failure callback
 	            console.log('Authentication failure');
