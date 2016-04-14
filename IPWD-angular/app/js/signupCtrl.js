@@ -14,7 +14,7 @@ yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $location,
                     .then(function() {
                         // do things if success
                         Cocktail.setLoggedIn(true);
-                        Cocktail.setUser(scope.user.email);
+                        Cocktail.setUser(email);
                         console.log('User creation success');
                         $location.path('/home');
                     }, function(error) {
