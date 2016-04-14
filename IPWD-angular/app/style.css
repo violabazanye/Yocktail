@@ -4,13 +4,10 @@
     @include box-sizing(border-box); 
 }
 
-#mainNav, footer {
-    background-color: #222;
-    border-color: #222;
-}
-
 footer {
-	bottom: 0;
+  background-color: #222;
+  border-color: #222;
+  bottom: 0;
   min-height: 50px;
   width: 100%;
 }
@@ -39,6 +36,26 @@ table.center {
   border-collapse: separate; /* allow spacing between cell borders */
   border-spacing: 15px 30px; /* NOTE: syntax is <horizontal value> <vertical value> */
 }
+
+/* CAROUSEL
+--------------------------------------------------*/
+
+.pgl, .pgr {
+	display: block;
+	position: absolute;
+	width: 55px;
+	height: 55px;
+	cursor: pointer;
+	background: url('/images/a03.png') no-repeat;
+	overflow: hidden;
+	z-index:10000;
+	top:95px;
+}
+
+.pgl { background-position: -3px -33px; }
+.pgr { background-position: -63px -33px; }
+.pgl:hover { background-position: -123px -33px; }
+.pgr:hover { background-position: -183px -33px; }
 
 
 /* MARKETING CONTENT

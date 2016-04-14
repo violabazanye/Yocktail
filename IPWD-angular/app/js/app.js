@@ -18,7 +18,7 @@ yocktailApp.config(['$routeProvider',
         templateUrl: 'partials/about.html',
         controller: 'AboutCtrl'
       }).
-      when('/cocktail/:cocktailId', {
+      when('/cocktail', {							///:cocktailId
         templateUrl: 'partials/cocktail.html',
         controller: 'CocktailCtrl'
       }).
