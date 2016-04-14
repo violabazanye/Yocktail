@@ -1,13 +1,13 @@
 <div class="container marketing" style="padding-top: 120px">
 
-  <h2 style="margin:auto;width:400px;">discover cocktail receipes</h2>
+  <h2 style="margin:auto;width:400px;">discover cocktail recipes</h2>
   <br>
   <div class="row">
     <div class="col-lg-6 col-md-offset-3">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for...">
+        <input type="text" class="form-control" ng-model="query" placeholder="Search for...">
         <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Go!</button>
+          <button class="btn btn-default" type="button" ng-click="search(query)">Go!</button>
         </span>
       </div><!-- /input-group -->
     </div><!-- /.col-lg-6 -->
@@ -19,49 +19,41 @@
     <div class="images-box" style="padding-top: 60px">
 
     <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
-      <input type="image" src="images/food.png" />
-      <h4>All Day</h4>
+      <input type="image" src="images/food-4.png" />
+      <h4>Afternoon Drinks</h4>
     </div>
     <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
-      <input type="image" src="images/food-5.png" />
+      <input type="image" src="images/food.png" />
       <h4>Before Dinner</h4>
     </div>
     <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
-      <input type="image" src="images/food-3.png" />
+      <input type="image" src="images/food-5.png" />
       <h4>After Dinner</h4>
     </div>
 
     <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
-      <input type="image" src="images/food-4.png" />
-      <h4>Long Drinks</h4>
+      <input type="image" src="images/food-3.png" />
+      <h4>Evening Drinks</h4>
     </div>
-    <!-- <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
-      <input type="image" src="images/food-2.png" />
-      <h4>Sparkling</h4>
-    </div> -->
   </div>
 
   </div><!-- /.row -->
-
-  <!-- START THE FEATURETTES -->
 
   <hr class="featurette-divider" style="margin-bottom: 20px">
 
   <div class="featurette">
 
-    <h2 style="margin:auto;width:400px;">Search results of "Negorni"</h2>
+    <h2 style="margin:auto;width:400px;">{{status}}</h2>
     <br>
     <br>
 
     <div class="row" style="margin-bottom: 60px">
-      <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
+      <div class="col-xs-6 col-sm-3 text-center cocktail-small-div" ng-repeat="cocktail in cocktails">
         <img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
-        <h3>Negorine</h3>
-        <p>Gin, Campari, Vermouth Sweet, Orange</p>
+        <h3>{{cocktail.name}}</h3>
+        <p>{{cocktail.tastes}}</p>
         <p><a class="btn btn-default" href="#">View details »</a></p>
       </div>
     </div>
-
-  <!-- /END THE FEATURETTES -->
 
 </div><!-- /.container -->
