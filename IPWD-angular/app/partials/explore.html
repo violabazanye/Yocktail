@@ -1,108 +1,60 @@
-
-
-
-<!-- Marketing messaging and featurettes
-================================================== -->
-<!-- Wrap the rest of the page in another container to center all the content. -->
-
 <div class="container marketing" style="padding-top: 120px">
 
-  <h1 style="padding-left: 25%;padding-bottom: 5%; align="center"">Discover Cocktail Receipes &nbsp;</h1>
-  <div class="support" style="background-color: rgba(1, 13, 31, 0.22); padding: 1em 1em;">
-      <input type="text" class="text" value="Enter email..." onfocus="this.value = '';" onblur="if (this.value == 'Enter email...') {this.value = 'Enter email...';}">
-      <input class="btn btn-lg btn-primary" type="submit" value="Search">
-    </div>
-  <!-- Three columns of text below the carousel -->
+  <h2 style="margin:auto;width:400px;">discover cocktail recipes</h2>
+  <br>
+  <div class="row">
+    <div class="col-lg-6 col-md-offset-3">
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="query" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="search(query)">Go!</button>
+        </span>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+  </div><!-- /.row -->
+
+  
   <div class="row">
     
     <div class="images-box" style="padding-top: 60px">
 
-    <div class="col-md-4 text-center cocktail-small-div">
-      <a href="#"><img class="img-rounded cocktail-rectangle" src="images/allday.jpg"  ></a>
-      <h2>Negorine</h2>
+    <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
+      <input type="image" src="images/food-4.png" />
+      <h4>Afternoon Drinks</h4>
     </div>
-    <div class="col-md-4 text-center cocktail-small-div">
-      <img class="img-rounded cocktail-rectangle" src="images/Cocktail-2.jpg">
-      <h2>Negorine</h2>
+    <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
+      <input type="image" src="images/food.png" />
+      <h4>Before Dinner</h4>
     </div>
-    <div class="col-md-4 text-center cocktail-small-div">
-      <img class="img-rounded cocktail-rectangle" src="images/Cocktail-3.jpg">
-      <h2>Negorine</h2>
+    <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
+      <input type="image" src="images/food-5.png" />
+      <h4>After Dinner</h4>
     </div>
 
-    <div class="col-md-4 text-center cocktail-small-div">
-      <img class="img-rounded cocktail-rectangle" src="images/Cocktail-4.jpg">
-      <h2>Negorine</h2>
+    <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
+      <input type="image" src="images/food-3.png" />
+      <h4>Evening Drinks</h4>
     </div>
   </div>
 
   </div><!-- /.row -->
 
-  <!-- START THE FEATURETTES -->
+  <hr class="featurette-divider" style="margin-bottom: 20px">
 
-  <hr class="featurette-divider" style="padding-bottom: 0px; margin-bottom: 0px">
+  <div class="featurette">
 
-  <div class="featurette" >
-    <h1 style="padding-left: 25%;padding-bottom: 5%;color: rgba(3, 3, 3, 0.7)">Search results of "Negorni" &nbsp;</h1>
+    <h3>{{status}}</h3>
+    <br>
+    <br>
+
     <div class="row" style="margin-bottom: 60px">
-    <div class="col-md-4 text-center cocktail-small-div">
-      <img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
-      <h2>Negorine</h2>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
-      <p><a class="btn btn-default" href="#">View details »</a></p>
+      <div class="col-xs-6 col-sm-3 text-center cocktail-small-div" ng-repeat="cocktail in cocktails">
+        <img class="img-circle cocktail-small" src="http://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" style="margin-bottom:20px;"><br>
+        <a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
+        <p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
+        <p><strong>Skill: </strong>{{cocktail.skill.name}}</p>
+      </div>
+      <br>
     </div>
-    <div class="col-md-4 text-center cocktail-small-div">
-      <img class="img-circle cocktail-small" src="images/Cocktail-2.jpg">
-      <h2>Negorine</h2>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
-      <p><a class="btn btn-default" href="#">View details »</a></p>
-    </div>
-    <div class="col-md-4 text-center cocktail-small-div">
-      <img class="img-circle cocktail-small" src="images/Cocktail-3.jpg">
-      <h2>Negorine</h2>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
-      <p><a class="btn btn-default" href="#">View details »</a></p>
-    </div>
-
-    <div class="col-md-4 text-center cocktail-small-div">
-      <img class="img-circle cocktail-small" src="images/Cocktail-4.jpg">
-      <h2>Negorine</h2>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
-      <p><a class="btn btn-default" href="#">View details »</a></p>
-    </div>
-    <div class="col-md-4 text-center cocktail-small-div">
-      <img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
-      <h2>Negorine</h2>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
-      <p><a class="btn btn-default" href="#">View details »</a></p>
-    </div>
-    <div class="col-md-4 text-center cocktail-small-div">
-      <img class="img-circle cocktail-small" src="images/Cocktail-2.jpg">
-      <h2>Negorine</h2>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
-      <p><a class="btn btn-default" href="#">View details »</a></p>
-    </div>
-    <div class="col-md-4 text-center cocktail-small-div">
-      <img class="img-circle cocktail-small" src="images/Cocktail-3.jpg">
-      <h2>Negorine</h2>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
-      <p><a class="btn btn-default" href="#">View details »</a></p>
-    </div>
-
-    <div class="col-md-4 text-center cocktail-small-div">
-      <img class="img-circle cocktail-small" src="images/Cocktail-4.jpg">
-      <h2>Negorine</h2>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
-      <p><a class="btn btn-default" href="#">View details »</a></p>
-    </div>
-  </div>
-
-
- 
-
-
-  <!-- /END THE FEATURETTES -->
-
 
 </div><!-- /.container -->
-	<!-- script references -->

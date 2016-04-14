@@ -4,7 +4,8 @@ yocktailApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/home', {
-        templateUrl: 'partials/home.html'
+        templateUrl: 'partials/home.html',
+        controller: 'HomeCtrl'
       }).
       when('/explore', {
         templateUrl: 'partials/explore.html',
@@ -21,6 +22,14 @@ yocktailApp.config(['$routeProvider',
       when('/cocktail', {							///:cocktailId
         templateUrl: 'partials/cocktail.html',
         controller: 'CocktailCtrl'
+      }).
+      when('/signin', {
+        templateUrl: 'partials/signin.html',
+        controller: 'SigninCtrl'
+      }).
+      when('/signup', {
+        templateUrl: 'partials/signup.html',
+        controller: 'SignupCtrl'
       }).
       otherwise({
         redirectTo: '/home'
