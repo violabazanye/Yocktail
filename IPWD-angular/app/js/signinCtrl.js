@@ -1,4 +1,4 @@
-yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, Cocktail) {
+yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location, Cocktail) {
 
     var firebaseObj = new Firebase("https://yocktail.firebaseio.com");
     var authObj = $firebaseAuth(firebaseObj);
@@ -15,6 +15,9 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, Cocktail) 
 	        .then(function(user) {
 	            //Success callback
 	            console.log('Authentication successful');
+	            Cocktail.setLoggedIn(true);
+	            Cocktail.setUser(scope.user.email);
+	            $location.path('/home');
 	        }, function(error) {
 	            //Failure callback
 	            console.log('Authentication failure');

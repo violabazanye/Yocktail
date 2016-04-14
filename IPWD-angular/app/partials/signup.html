@@ -16,6 +16,7 @@
         <label class="checkbox">
             <a href="#/signin"> Sign In</a>
         </label>
+        <p style="color:red;" ng-show="regError">{{regErrorMessage}}</p>
         <button type="button" ng-click="SignUp();" ng-disabled="!user.email || !user.password" class="btn btn-lg btn-primary btn-block">Sign Up</button>
     </form>
     <br/>
