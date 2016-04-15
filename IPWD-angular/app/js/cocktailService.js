@@ -29,6 +29,8 @@ yocktailApp.factory('Cocktail',function ($resource) {
 
 	this.OccasionSearch = $resource('http://addb.absolutdrinks.com/drinks/for/:occasion_id',{apiKey:'003234e57e7a4a0a83f3b1d671c597da'});
 
+	this.SingleCocktail = $resource('http://addb.absolutdrinks.com/drinks/:id',{apiKey:'003234e57e7a4a0a83f3b1d671c597da'});
+
 	return this;
 
 });
