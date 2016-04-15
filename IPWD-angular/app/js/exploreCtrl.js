@@ -25,4 +25,14 @@ yocktailApp.controller('ExploreCtrl', function ($scope,Cocktail) {
 	   	});
 	}
 
+	$scope.occasions = function(category){
+		$scope.status = "Searching...";
+	   	Cocktail.OccasionSearch.get({occasion_id:category},function(data){
+	    	$scope.cocktails=data.result;
+	     	$scope.status = "Showing " + category + " drinks";
+	   	},function(data){
+	     	$scope.status = "There was an error. Try again.";
+	   	});
+	}
+
 });
