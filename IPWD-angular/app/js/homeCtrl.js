@@ -10,8 +10,5 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail) {
 	   
 	});
 
-	$scope.go = function ( path ) {
-  		$location.path( path );
-	};
 
 });

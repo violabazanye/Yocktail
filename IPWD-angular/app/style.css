@@ -37,6 +37,25 @@ table.center {
   border-spacing: 15px 30px; /* NOTE: syntax is <horizontal value> <vertical value> */
 }
 
+.categories {
+  width: 285px;
+  height: 90px;
+}
+
+.images-box {
+  margin: auto;
+  width: auto;
+  padding-top:60px;
+}
+
+.img_txt {
+  position: absolute; 
+  top: 30px; 
+  left: 100px; 
+  width: 100%; 
+  color: #fff;
+}
+
 
 /* CAROUSEL
 --------------------------------------------------*/
