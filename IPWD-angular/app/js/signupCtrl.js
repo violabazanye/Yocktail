@@ -15,7 +15,7 @@ yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $location,
                         // do things if success
                         Cocktail.setUser(email);
                         console.log('User creation success');
-                        $location.path('/home');
+                        $location.path('/profile');
                     }, function(error) {
                         // do things if failure
                         console.log(error);
