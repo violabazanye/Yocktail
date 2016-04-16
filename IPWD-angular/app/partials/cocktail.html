@@ -13,15 +13,17 @@
 	</div>
 
 	<div id="part2" class="container">
-		<div class="col-md-12" style="padding-top: 30px">
-			<div class="col-md-7">
+		<div class="col-md-12" style="padding-top: 30px; background-color: pink">
+			<div class="col-md-7" ng>
 				<div>
-				<h3>{{id}}</h3>
+				<h3>{{cocktail.result[0].id}}</h3>
+				{{cocktail.result[0].tastes[0].text}}
 				</div>
 			</div>
 			<div class="col-md-5 text-center" style="background-color: slateblue">
 				<div class="col-md-12">
 					<h3>Image</h3>
+					<img class="img-thumbnail" src="http://assets.absolutdrinks.com/drinks/{{cocktail.result[0].id}}.png" style="margin-bottom:20px;"><br>
 				</div>
 				<div class="col-md-12">
 					<h3>stars</h3>
