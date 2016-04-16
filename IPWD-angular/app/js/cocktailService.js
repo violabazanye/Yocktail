@@ -1,21 +1,24 @@
 yocktailApp.factory('Cocktail',function ($resource) {
   	
-  	var loggedIn = false;
 	var user = '';
 
-	this.getLoggedIn = function(){
-		return loggedIn;
-	}
-
-	this.setLoggedIn = function(value){
-		loggedIn = value;
-	}
-
 	this.getUser = function(){
+		if (user == '') {
+			user = localStorage.getItem("yocktailUser");
+			if(!user){
+				user = '';
+			}else{
+				// do nothing
+			}
+		}else{
+			// do nothing
+		}
+		
 		return user;
 	} 
 
 	this.setUser = function(value){
+		localStorage.setItem("yocktailUser", value);
 		user = value;
 	}
 

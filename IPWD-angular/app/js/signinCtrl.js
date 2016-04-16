@@ -15,10 +15,7 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
 	        .then(function(user) {
 	            //Success callback
 	            console.log('Authentication successful');
-	            Cocktail.setLoggedIn(true);
 	            Cocktail.setUser(username);
-
-				console.log("loggedIn:" + Cocktail.getLoggedIn());
 				console.log("user:" + Cocktail.getUser());
 
 	            $location.path('/home');
