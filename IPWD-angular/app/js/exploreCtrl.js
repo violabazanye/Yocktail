@@ -7,6 +7,7 @@ yocktailApp.controller('ExploreCtrl', function ($scope,Cocktail) {
 	      $scope.status = "Searching...";
 	      Cocktail.CocktailSearch.get(function(data){
 	        $scope.cocktails=data.result;
+			console.log($scope.cocktails);
 	        $scope.status = "Showing " + data.result.length + " results";
 	      },function(data){
 	        $scope.status = "There was an error. Try again.";
