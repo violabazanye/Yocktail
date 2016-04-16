@@ -8,4 +8,6 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebaseAuth, $location
         }
     });
 
+    $scope.user = Cocktail.getUser();
+
 });
