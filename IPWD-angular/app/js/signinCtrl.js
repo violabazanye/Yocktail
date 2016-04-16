@@ -1,7 +1,11 @@
 yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location, Cocktail) {
 
+    // create authentication object
     var firebaseObj = new Firebase("https://yocktail.firebaseio.com");
     var authObj = $firebaseAuth(firebaseObj);
+
+    // creating a Firebase database Reference for users
+    var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");  
 
 	$scope.SignIn = function(e) {
 
@@ -16,20 +20,36 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
 	        })
 	        .then(function(userData) {
 	            //Success callback
-	            console.log("user");
+	            console.log("SigninCtrl user");
 	            console.log(userData);
-	            console.log('SigninCtrl Authentication successful' + userData.uid);
-	            
-	            Cocktail.setUser(username);
-				console.log("user:" + Cocktail.getUser());
+	            console.log('SigninCtrl Authentication successful with uid: ' + userData.uid);
 
-	            $location.path('/profile');
+	            // get the user's info from firebase
+	            var uid = userData.uid;
+	            usersRef.child(uid).once("value", function(data){
+	            	console.log("SigninCtrl signin user data");
+	            	console.log(data.val());
+	            	var signinUserData = data.val();
+                    var signinUser = { uid: uid, name: signinUserData.name, email: signinUserData.email, birthday: signinUserData.birthday };
+                    Cocktail.setUser(signinUser);
+
+                    console.log("user:" + Cocktail.getUser());
+
+                    $location.path('/profile');
+                    $scope.$apply();
+                    
+	            });
 	        }, function(error) {
 	            //Failure callback
 	            $scope.regError = true;
 				$scope.regErrorMessage = "Sorry, failed to sign in. Please try again.";
 	            console.log('SigninCtrl Authentication failure');
 	        });
+	}
+
+	function setUserInfo(signinUserData) {
+
+
 	}
 
 });
