@@ -1,5 +1,13 @@
 yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location, Cocktail) {
 
+	$scope.$on('$viewContentLoaded', function(){
+		if(Cocktail.getUser() != ''){
+			$location.path('/profile');
+		}else{
+			// dp nothing
+		}
+	});
+
     // create authentication object
     var firebaseObj = new Firebase("https://yocktail.firebaseio.com");
     var authObj = $firebaseAuth(firebaseObj);
@@ -37,7 +45,7 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
 
                     $location.path('/profile');
                     $scope.$apply();
-                    
+
 	            });
 	        }, function(error) {
 	            //Failure callback
