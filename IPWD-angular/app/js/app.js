@@ -20,7 +20,7 @@ yocktailApp.config(['$routeProvider',
         controller: 'AboutCtrl'
       }).
       when('/cocktail/:cocktailId', {					
-        templateUrl: 'partials/cocktail.html',
+	templateUrl: 'partials/cocktail.html',
         controller: 'CocktailCtrl'
       }).
       when('/signin', {
