@@ -7,7 +7,7 @@ yocktailApp.factory('Cocktail',function ($resource, $firebaseAuth) {
 
 	this.getUser = function(){
 		if (user == '') {
-			user = localStorage.getItem("yocktailUser");
+			user = JSON.parse(localStorage.getItem("yocktailUser"));
 			if(!user){
 				user = '';
 			}else{
@@ -21,7 +21,7 @@ yocktailApp.factory('Cocktail',function ($resource, $firebaseAuth) {
 	} 
 
 	this.setUser = function(value){
-		localStorage.setItem("yocktailUser", value);
+		localStorage.setItem("yocktailUser", JSON.stringify(value));
 		user = value;
 	}
 
