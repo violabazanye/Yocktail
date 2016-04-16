@@ -14,17 +14,14 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
 	        })
 	        .then(function(user) {
 	            //Success callback
-	            console.log('Authentication successful');
-	            Cocktail.setLoggedIn(true);
+	            console.log('SigninCtrl Authentication successful');
 	            Cocktail.setUser(username);
-
-				console.log("loggedIn:" + Cocktail.getLoggedIn());
 				console.log("user:" + Cocktail.getUser());
 
-	            $location.path('/home');
+	            $location.path('/profile');
 	        }, function(error) {
 	            //Failure callback
-	            console.log('Authentication failure');
+	            console.log('SigninCtrl Authentication failure');
 	        });
 	}
 
