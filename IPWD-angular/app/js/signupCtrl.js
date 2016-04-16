@@ -4,10 +4,10 @@ yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase,
         if(Cocktail.getUser() != ''){
             $location.path('/profile');
         }else{
-            // dp nothing
+            // do nothing
         }
     });
-    
+
     // create authentication object
     var firebaseObj = new Firebase("https://yocktail.firebaseio.com/");
     var authObj = $firebaseAuth(firebaseObj);  

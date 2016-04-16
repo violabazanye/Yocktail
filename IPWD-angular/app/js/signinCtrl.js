@@ -4,7 +4,7 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
 		if(Cocktail.getUser() != ''){
 			$location.path('/profile');
 		}else{
-			// dp nothing
+			// do nothing
 		}
 	});
 
