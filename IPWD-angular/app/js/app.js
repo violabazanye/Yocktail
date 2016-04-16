@@ -31,6 +31,10 @@ yocktailApp.config(['$routeProvider',
         templateUrl: 'partials/signup.html',
         controller: 'SignupCtrl'
       }).
+      when('/profile', { //:userId
+        templateUrl: 'partials/profile.html',
+        controller: 'ProfileCtrl'
+      }).
       otherwise({
         redirectTo: '/home'
       });
