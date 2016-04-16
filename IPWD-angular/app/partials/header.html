@@ -27,7 +27,17 @@
                     <a href="#/signup">Sign Up / Sign In</a>
                 </li>
                 <li ng-if="user != ''">
-                    <a href="#/home">{{ user }}</a>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{ user }}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#/profile">My Profile</a></li>
+                            <li><a href="#">Account Settings</a></li>
+                            <li><a ng-click="logout();">Log out</a></li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>

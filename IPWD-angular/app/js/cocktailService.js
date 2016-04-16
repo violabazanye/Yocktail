@@ -1,6 +1,9 @@
-yocktailApp.factory('Cocktail',function ($resource) {
+yocktailApp.factory('Cocktail',function ($resource, $firebaseAuth) {
   	
 	var user = '';
+
+	var firebaseObj = new Firebase("https://yocktail.firebaseio.com");
+	var authObj = $firebaseAuth(firebaseObj);
 
 	this.getUser = function(){
 		if (user == '') {
@@ -20,6 +23,12 @@ yocktailApp.factory('Cocktail',function ($resource) {
 	this.setUser = function(value){
 		localStorage.setItem("yocktailUser", value);
 		user = value;
+	}
+
+	this.logoutUser = function(){
+		authObj.$unauth();
+	    user = '';
+	    localStorage.removeItem('yocktailUser');
 	}
 
 	var firebaseObj = new Firebase("https://yocktail.firebaseio.com");

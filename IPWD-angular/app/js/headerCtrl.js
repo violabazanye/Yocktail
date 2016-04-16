@@ -1,4 +1,4 @@
-yocktailApp.controller('HeaderCtrl', function ($scope, Cocktail) {
+yocktailApp.controller('HeaderCtrl', function ($scope, Cocktail, $location) {
 	
 	$scope.user = Cocktail.getUser();
 	console.log("HeaderCtrl $scope.user:" + $scope.user);
@@ -8,5 +8,8 @@ yocktailApp.controller('HeaderCtrl', function ($scope, Cocktail) {
     });
 
     $scope.logout = function() {
+    	Cocktail.logoutUser();
+    	$location.path('/home');
+    	console.log("HeaderCtrl: already logged out");
     }
 });
