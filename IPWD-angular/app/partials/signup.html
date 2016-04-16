@@ -1,23 +1,60 @@
-<div class="container">
-    <div class="jumbotron" style="padding-bottom:0px;">
+
+<div class="top-content-log">
+    <div class="inner-bg login-bg">
+        <div class="container login-container">
+            
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3>Create your own account to our site</h3>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-lock"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom">
+                        <form class="login-form" name="regForm">
+                            <div class="form-group " ng-class="{ 'has-error' : regForm.username.$invalid }">
+                                <label class="sr-only">Name</label>
+                                <input type="text" name="username" placeholder="Name" class="form-control" id="form-username" ng-model="user.name">
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : regForm.email.$invalid }">
+                                <label class="sr-only">Email</label>
+                                <input type="email" name="email" placeholder="Email" class="form-control" id="form-email" ng-model="user.email">
+                                <p class="help-block" ng-show="regForm.email.$invalid">Enter a valid email.</p>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : regForm.birthday.$invalid }">
+                                <label class="sr-only" >Birthday(YYYYYMMDD)</label>
+                                <input type="text" name="birthday" placeholder="Birthday(YYYYYMMDD)" class="form-control" id="form-username" ng-model="user.birthday">
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : regForm.password.$invalid }">
+                                <label class="sr-only" >Password</label>
+                                <input type="password" name="password" placeholder="Password" class="form-control" id="form-password" ng-model="user.password" ng-minlength="8">
+                                <p class="help-block" ng-show="regForm.password.$error.minlength">Min password length is 8 characters.</p>
+                            </div>
+                             <div class="form-group" ng-class="{ 'has-error' : regForm.confirmedPassword.$invalid }">
+                                <label class="sr-only" >Confirm your password</label>
+                                <input type="password" name="confirmedPassword" placeholder="Confirm your password" class="form-control" id="form-password" ng-model="user.confirmedPassword" ng-minlength="8">
+                                <p class="help-block" ng-show="regForm.confirmedPassword.$error.minlength">Min password length is 8 characters.</p>
+                            </div>
+                            <p style="color:red;" ng-show="regError">{{regErrorMessage}}</p>
+                            <button type="button" ng-click="SignUp();" ng-disabled="!user.name || ! user.birthday || !user.email || !user.password || !user.confirmedPassword" class="btn btn-lg btn-primary btn-block">Sign Up!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 social-login">
+                    <h4 style="color:white; padding-bottom: 0px">...or aready have an account?</h4></br>
+                    <a href="#/signin"> 
+                        <h3 style="padding-top: 0px; margin-top: 0px;">Click here to sign in</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-    <form class="form-signin" name="regForm">
-        <div class="form-group" ng-class="{ 'has-error' : regForm.email.$invalid }">
-            <label>Email</label>
-            <input type="email" name="email" class="form-control" ng-model="user.email">
-            <p class="help-block" ng-show="regForm.email.$invalid">Enter a valid email.</p>
-        </div>
-         
-        <div class="form-group" ng-class="{ 'has-error' : regForm.password.$invalid }">
-            <label>Password</label>
-            <input type="password" name="password" class="form-control" ng-model="user.password" ng-minlength="8">
-            <p class="help-block" ng-show="regForm.password.$error.minlength">Min password length is 8 characters.</p>
-        </div>
-        <label class="checkbox">
-            <a href="#/signin"> Sign In</a>
-        </label>
-        <p style="color:red;" ng-show="regError">{{regErrorMessage}}</p>
-        <button type="button" ng-click="SignUp();" ng-disabled="!user.email || !user.password" class="btn btn-lg btn-primary btn-block">Sign Up</button>
-    </form>
-    <br/>
 </div>
+
+
+
