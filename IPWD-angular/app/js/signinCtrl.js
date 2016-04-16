@@ -6,21 +6,28 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
 	$scope.SignIn = function(e) {
 
 	    e.preventDefault();
-	    var username = $scope.user.email;
+	    var email = $scope.user.email;
 	    var password = $scope.user.password;
+
+	    // signed in on firebase
 	    authObj.$authWithPassword({
-	            email: username,
+	            email: email,
 	            password: password
 	        })
-	        .then(function(user) {
+	        .then(function(userData) {
 	            //Success callback
-	            console.log('SigninCtrl Authentication successful');
+	            console.log("user");
+	            console.log(userData);
+	            console.log('SigninCtrl Authentication successful' + userData.uid);
+	            
 	            Cocktail.setUser(username);
 				console.log("user:" + Cocktail.getUser());
 
 	            $location.path('/profile');
 	        }, function(error) {
 	            //Failure callback
+	            $scope.regError = true;
+				$scope.regErrorMessage = "Sorry, failed to sign in. Please try again.";
 	            console.log('SigninCtrl Authentication failure');
 	        });
 	}
