@@ -1,5 +1,13 @@
 yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase, $location, Cocktail) {
 
+    $scope.$on('$viewContentLoaded', function(){
+        if(Cocktail.getUser() != ''){
+            $location.path('/profile');
+        }else{
+            // do nothing
+        }
+    });
+
     // create authentication object
     var firebaseObj = new Firebase("https://yocktail.firebaseio.com/");
     var authObj = $firebaseAuth(firebaseObj);  
@@ -32,15 +40,17 @@ yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase,
                                     usersRef.child(uid).set(newUser);
 
                                     // save the user's full information for local use
-                                    var newUser2 = { uid: uid, name: name, email: email, irthday: birthday };
+                                    var newUser2 = { uid: uid, name: name, email: email, birthday: birthday };
                                     //console.log("newUser2");
                                     //console.log(newUser2);
                                     Cocktail.setUser(newUser2);
 
                                     console.log('SignupCtrl User creation success with uid: ' + userData.uid);
                                     $location.path('/profile');
+
                                 }, function(error) {
                                     // do things if failure
+
                                     console.log(error);
                                     $scope.regError = true;
                                     $scope.regErrorMessage = error.message;

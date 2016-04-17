@@ -7,9 +7,14 @@ yocktailApp.factory('Cocktail',function ($resource, $firebaseAuth) {
 
 	this.getUser = function(){
 		if (user == '') {
-			user = JSON.parse(localStorage.getItem("yocktailUser"));
-			if(!user){
-				user = '';
+			var userObject = localStorage.getItem("yocktailUser");
+			if (userObject) {
+				try{
+					console.log("userObject: " + userObject);
+			        user = JSON.parse(userObject);
+			    }catch(e){
+			    	console.log("Error in parse JSON: " + e);
+			    }
 			}else{
 				// do nothing
 			}
