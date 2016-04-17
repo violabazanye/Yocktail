@@ -10,6 +10,6 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 		// user signed in
 	}
 
-	$scope.user = currentUser;
+	$scope.editUser = currentUser;
 
 });
