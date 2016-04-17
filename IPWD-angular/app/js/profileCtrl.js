@@ -2,7 +2,12 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebaseAuth, $location
 
 	var visitingUid = $routeParams.userUid;
 	var currentUser = Cocktail.getUser();
+	var isSameUser = false;
 
+	// creating a Firebase database Reference for users
+    var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");  
+
+    // check if visitingUid is in routeParams
 	if (visitingUid) {
 		// visitingUid specified
 	}else{
@@ -10,17 +15,14 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebaseAuth, $location
 		// check if user signed in
 		if (currentUser == '') {
 			// no user signed in
+			// redirect to signin page
 			$location.path('/signin');
 		}else{
 			// user signed in
+			// redirect to the profile with uid
 			$location.path('/profile/'+currentUser.uid);
 		}
 	}
-
-	var isSameUser = false;
-
-	// creating a Firebase database Reference for users
-    var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");  
 
 	// check if it is the profile page of the signed in user
 	if(currentUser == ''){
