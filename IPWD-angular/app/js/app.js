@@ -39,9 +39,9 @@ yocktailApp.config(['$routeProvider',
         templateUrl: 'partials/profile.html',
         controller: 'ProfileCtrl'
       }).
-      when('/edit_profile//:userUid', {
+      when('/edit_profile/', {
         templateUrl: 'partials/edit_profile.html',
-        controller: 'ProfileCtrl'
+        controller: 'EditProfileCtrl'
       }).
       otherwise({
         redirectTo: '/home'
