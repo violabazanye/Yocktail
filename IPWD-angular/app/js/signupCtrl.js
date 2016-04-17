@@ -46,7 +46,7 @@ yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase,
                                     Cocktail.setUser(newUser2);
 
                                     console.log('SignupCtrl User creation success with uid: ' + userData.uid);
-                                    $location.path('/profile');
+                                    $location.path('/profile/'+uid);
 
                                 }, function(error) {
                                     // do things if failure
