@@ -77,6 +77,11 @@ table.center {
 .pgl:hover { background-position: -123px -33px; }
 .pgr:hover { background-position: -183px -33px; }
 
+.border{
+	border-top: 3px solid #ccc;
+	border-bottom: 3px solid #ccc;
+}
+
 
 #search-btn {
   width: 200px;

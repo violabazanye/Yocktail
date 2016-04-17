@@ -12,38 +12,67 @@
 		</div>
 	</div>
 
-	<div id="part2" class="container">
-		<div class="col-md-12" style="padding-top: 30px">
-			<div class="col-md-7">
+	<div id="part2" class="container border">
+		<div class="col-md-12" style="padding-top: 30px;">
+			<div class="col-md-6 col-md-offset-1">
 				<div>
-				<h3>{{cocktail.result[0].name}}</h3>
+					<h3><b>{{cocktail.result[0].name}}</b></h3>
+				</div>	
+				<div style="margin-top:3vh; margin-bottom:3vh">
+					<span class="col-md-12 col-sm-12 col-xs-12">Rating: {{cocktail.result[0].rating}}</span>
+					<span class="col-md-12 col-sm-12 col-xs-12">Glass Type: {{cocktail.result[0].servedIn.text}}</span>
+					<span class="col-md-12 col-sm-12 col-xs-12">Taste: {{cocktail.result[0].tastes[0].text}} </span>
+					<span class="col-md-12 col-sm-12 col-xs-12">Skill Level: {{cocktail.result[0].skill.name}} </span>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 5vh; margin-bottom:3vh">
+					<h4><b>Ingredients</b></h4>
+					<div class="table-responsive">
+						<table class="">
+								<tr ng-repeat="ingredients in cocktail.result[0].ingredients">
+									<td>{{ingredients.textPlain}}</td>
+								</tr> 
+						</table>
+					</div>
+				</div>
+				<div class="col-md-8" style="margin-top: 5vh; margin-bottom:3vh">
+					<h4><b>How to Mix</b></h4>
+					<p>{{cocktail.result[0].descriptionPlain}}</p>
 				</div>
 			</div>
-			<div class="col-md-5 text-center" style="background-color: slateblue">
+			<div class="col-md-5 text-center">
 				<div class="col-md-12">
-					<h3>Image</h3>
+					<img class="img-thumbnail" src="http://assets.absolutdrinks.com/drinks/{{cocktail.result[0].id}}.png" style="margin-bottom:20px; height: 60vh"><br>
 				</div>
 				<div class="col-md-12">
-					<h3>stars</h3>
-					<h3>add to favourites</h3>
+					<h4><b>Ratings:</b> {{cocktail.result[0].rating}}</h4>
+					<h4>add to favourites</h4>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-12 text-center" style="background-color: gray">
+		<div class="col-md-12 text-center">
 			<h3>Link to video goes here</h3>
+			<div class="embed-responsive embed-responsive-16by9">
+			  <iframe class="embed-responsive-item" src=""></iframe>
+			</div>
 		</div>
 	</div>
 
 	<div id="part3" class="container-fluid">
 		<div class="col-md-12">
-			<h4 class="text-center">You might also be intrested in</h4>
-			<div class="col-md-12" style="background-color: orange; height: 200px">
-				<div class="col-md-12" style="background-color: #bbb; height: 200px" id="suggestions">
-					<span class="btn-lg pgl" aria-hidden="true" style="left:25px;"></span>
-					<span class="text-right btn-lg pgr" aria-hidden="true" style="right:25px"></span>
-					
-					<h4>suggestions goes in here from the controller page</h4>
-				</div>
+			<h4 class="text-center"><b>You might also be intrested in</b></h4>
+			<div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 20px">
+				  {{status}}
+				<br>
+				<br>
+				<div class="col-xs-6 col-sm-3 text-center cocktail-small-div" ng-repeat="cocktail in cocktails">
+				  <img class="img-circle cocktail-small" src="http://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" ><br>
+				  <a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
+				  <p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
+				</div> 
+				<!--
+				<span class="btn-lg pgl" aria-hidden="true" style="left:25px;"></span>
+				<span class="text-right btn-lg pgr" aria-hidden="true" style="right:25px"></span>
+				-->
 			</div>
 		</div>
 	</div>
