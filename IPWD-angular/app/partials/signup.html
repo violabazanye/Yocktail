@@ -8,7 +8,6 @@
                     <div class="form-top">
                         <div class="form-top-left">
                             <h3>Create your own account to our site</h3>
-                            
                         </div>
                         <div class="form-top-right">
                             <i class="fa fa-lock"></i>
@@ -17,32 +16,30 @@
                     <div class="form-bottom">
                         <form class="login-form" name="regForm">
                             <div class="form-group " ng-class="{ 'has-error' : regForm.username.$invalid }">
-                                <label class="sr-only">Enter your username </label>
-                                <input type="text" name="username" placeholder="Enter your username *" class="form-username form-control" id="form-username" ng-model="user.username">
-                                <p class="help-block" ng-show="regForm.username.$invalid">Enter a valid email.</p>
+                                <label class="sr-only">Name</label>
+                                <input type="text" name="username" placeholder="Name" class="form-control" id="form-username" ng-model="user.name">
                             </div>
                             <div class="form-group" ng-class="{ 'has-error' : regForm.email.$invalid }">
-                                <label class="sr-only">Enter your email </label>
-                                <input type="text" name="email" placeholder="Enter your email" class="form-username form-control" id="form-username" ng-model="user.email">
+                                <label class="sr-only">Email</label>
+                                <input type="email" name="email" placeholder="Email" class="form-control" id="form-email" ng-model="user.email">
                                 <p class="help-block" ng-show="regForm.email.$invalid">Enter a valid email.</p>
                             </div>
                             <div class="form-group" ng-class="{ 'has-error' : regForm.birthday.$invalid }">
-                                <label class="sr-only" >Enter your birthday </label>
-                                <input type="text" name="birthday" placeholder="birthday( are we gonna use jquery or not? :) " class="form-username form-control" id="form-username" ng-model="user.birthday">
-                                <p class="help-block" ng-show="regForm.birthday.$invalid">Enter a valid email.</p>
+                                <label class="sr-only" >Birthday(YYYYYMMDD)</label>
+                                <input type="text" name="birthday" placeholder="Birthday(YYYYYMMDD)" class="form-control" id="form-username" ng-model="user.birthday">
                             </div>
                             <div class="form-group" ng-class="{ 'has-error' : regForm.password.$invalid }">
-                                <label class="sr-only" >Enter your password</label>
-                                <input type="password" name="password" placeholder="Enter your password" class="form-password form-control" id="form-password" ng-model="user.password">
+                                <label class="sr-only" >Password</label>
+                                <input type="password" name="password" placeholder="Password" class="form-control" id="form-password" ng-model="user.password" ng-minlength="8">
                                 <p class="help-block" ng-show="regForm.password.$error.minlength">Min password length is 8 characters.</p>
                             </div>
-                             <div class="form-group" ng-class="{ 'has-error' : regForm.password.$invalid }">
+                             <div class="form-group" ng-class="{ 'has-error' : regForm.confirmedPassword.$invalid }">
                                 <label class="sr-only" >Confirm your password</label>
-                                <input type="password" name="password" placeholder="Confirm your password" class="form-password form-control" id="form-password">
-                                <p class="help-block" ng-show="regForm.password.$error.minlength">Min password length is 8 characters.</p>
-
+                                <input type="password" name="confirmedPassword" placeholder="Confirm your password" class="form-control" id="form-password" ng-model="user.confirmedPassword" ng-minlength="8">
+                                <p class="help-block" ng-show="regForm.confirmedPassword.$error.minlength">Min password length is 8 characters.</p>
                             </div>
-                            <button type="button" ng-click="SignUp();" ng-disabled="!user.email || !user.password" class="btn btn-lg btn-primary btn-block">Sign Up!</button>
+                            <p style="color:red;" ng-show="regError">{{regErrorMessage}}</p>
+                            <button type="button" ng-click="SignUp();" ng-disabled="!user.name || ! user.birthday || !user.email || !user.password || !user.confirmedPassword" class="btn btn-lg btn-primary btn-block">Sign Up!</button>
                         </form>
                     </div>
                 </div>
@@ -55,10 +52,7 @@
                     </a>
                 </div>
             </div>
-
-
         </div>
-
     </div>
 </div>
 

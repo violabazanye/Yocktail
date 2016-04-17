@@ -1,22 +1,34 @@
-yocktailApp.factory('Cocktail',function ($resource) {
+yocktailApp.factory('Cocktail',function ($resource, $firebaseAuth) {
   	
-  	var loggedIn = false;
 	var user = '';
 
-	this.getLoggedIn = function(){
-		return loggedIn;
-	}
-
-	this.setLoggedIn = function(value){
-		loggedIn = value;
-	}
+	var firebaseObj = new Firebase("https://yocktail.firebaseio.com");
+	var authObj = $firebaseAuth(firebaseObj);
 
 	this.getUser = function(){
+		if (user == '') {
+			user = JSON.parse(localStorage.getItem("yocktailUser"));
+			if(!user){
+				user = '';
+			}else{
+				// do nothing
+			}
+		}else{
+			// do nothing
+		}
+		
 		return user;
 	} 
 
 	this.setUser = function(value){
+		localStorage.setItem("yocktailUser", JSON.stringify(value));
 		user = value;
+	}
+
+	this.logoutUser = function(){
+		authObj.$unauth();
+	    user = '';
+	    localStorage.removeItem('yocktailUser');
 	}
 
 	var firebaseObj = new Firebase("https://yocktail.firebaseio.com");

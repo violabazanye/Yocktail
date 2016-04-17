@@ -1,31 +1,63 @@
 yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location, Cocktail) {
 
+	$scope.$on('$viewContentLoaded', function(){
+		if(Cocktail.getUser() != ''){
+			$location.path('/profile');
+		}else{
+			// do nothing
+		}
+	});
+
+    // create authentication object
     var firebaseObj = new Firebase("https://yocktail.firebaseio.com");
     var authObj = $firebaseAuth(firebaseObj);
+
+    // creating a Firebase database Reference for users
+    var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");  
 
 	$scope.SignIn = function(e) {
 
 	    e.preventDefault();
-	    var username = $scope.user.email;
+	    var email = $scope.user.email;
 	    var password = $scope.user.password;
+
+	    // signed in on firebase
 	    authObj.$authWithPassword({
-	            email: username,
+	            email: email,
 	            password: password
 	        })
-	        .then(function(user) {
+	        .then(function(userData) {
 	            //Success callback
-	            console.log('Authentication successful');
-	            Cocktail.setLoggedIn(true);
-	            Cocktail.setUser(username);
+	            console.log("SigninCtrl user");
+	            console.log(userData);
+	            console.log('SigninCtrl Authentication successful with uid: ' + userData.uid);
 
-				console.log("loggedIn:" + Cocktail.getLoggedIn());
-				console.log("user:" + Cocktail.getUser());
+	            // get the user's info from firebase
+	            var uid = userData.uid;
+	            usersRef.child(uid).once("value", function(data){
+	            	console.log("SigninCtrl signin user data");
+	            	console.log(data.val());
+	            	var signinUserData = data.val();
+                    var signinUser = { uid: uid, name: signinUserData.name, email: signinUserData.email, birthday: signinUserData.birthday };
+                    Cocktail.setUser(signinUser);
 
-	            $location.path('/home');
+                    console.log("user:" + Cocktail.getUser());
+
+                    $location.path('/profile');
+                    $scope.$apply();
+
+	            });
 	        }, function(error) {
 	            //Failure callback
-	            console.log('Authentication failure');
+	            $scope.regError = true;
+				$scope.regErrorMessage = "Sorry, failed to sign in. Please try again.";
+	            console.log('SigninCtrl Authentication failure');
 	        });
+	}
+
+	function setUserInfo(signinUserData) {
+
+
 	}
 
 });
