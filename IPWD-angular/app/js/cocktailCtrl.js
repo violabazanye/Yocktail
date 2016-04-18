@@ -2,8 +2,11 @@ yocktailApp.controller('CocktailCtrl', function ($scope,$sce,$routeParams,Cockta
 
   $scope.cocktail = Cocktail.SingleCocktail.get({id:$routeParams.cocktailId});
   
-  console.log($scope.cocktail.length);
+  if($scope.cocktail != undefined){
+  	console.log($scope.cocktail);
+  }
+  
+  $scope.url = $sce.trustAsResourceUrl('http://assets.absolutdrinks.com/videos/' + '');
 
-  //$scope.url = $sce.trustAsResourceUrl('http://assets.absolutdrinks.com/drinks/' + $scope.cocktail.videos[1].video);
 
 });
