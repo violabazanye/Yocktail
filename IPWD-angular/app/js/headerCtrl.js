@@ -4,7 +4,7 @@ yocktailApp.controller('HeaderCtrl', function ($scope, Cocktail, $location) {
 	console.log("HeaderCtrl $scope.user:");
 	console.log($scope.user);
 
-	$scope.$watch(Cocktail.getUser, function(newVal, oldVal){
+	$scope.$watch(Cocktail.getUser(), function(newVal, oldVal){
       $scope.user = newVal;
     });
 

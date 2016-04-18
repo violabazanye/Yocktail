@@ -46,3 +46,4 @@ yocktailApp.factory('Cocktail',function ($resource, $firebaseAuth) {
 	return this;
 
 });
+
