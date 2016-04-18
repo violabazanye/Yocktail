@@ -56,6 +56,26 @@ table.center {
   color: #fff;
 }
 
+.DocumentList
+{
+    overflow-x:scroll;
+    overflow-y:hidden;
+    height:200px;
+    width:auto;
+    padding: 0 15px;
+}
+
+.DocumentItem
+{
+    padding:0;
+    height:200px;
+    margin-right: 50px;
+}
+
+.list-inline {
+  white-space:nowrap;
+}
+
 
 /* CAROUSEL
 --------------------------------------------------*/
