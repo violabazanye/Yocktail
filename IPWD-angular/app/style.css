@@ -202,6 +202,19 @@ table.center {
   width: 200px;
   height: 100px;
 }
+.drink-cata{
+  margin-left:70px;
+}
+
+.wine-creater{
+  
+  z-index: 10;
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 60px;
+  left:160px;
+}
  
 }
 

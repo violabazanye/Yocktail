@@ -20,7 +20,7 @@ yocktailApp.config(['$routeProvider',
         controller: 'AboutCtrl'
       }).
       when('/cocktail/:cocktailId', {					
-	templateUrl: 'partials/cocktail.html',
+	      templateUrl: 'partials/cocktail.html',
         controller: 'CocktailCtrl'
       }).
       when('/signin', {
@@ -31,9 +31,17 @@ yocktailApp.config(['$routeProvider',
         templateUrl: 'partials/signup.html',
         controller: 'SignupCtrl'
       }).
-      when('/profile', { //:userId
+      when('/profile/', {
         templateUrl: 'partials/profile.html',
         controller: 'ProfileCtrl'
+      }).
+      when('/profile/:userUid', {
+        templateUrl: 'partials/profile.html',
+        controller: 'ProfileCtrl'
+      }).
+      when('/edit_profile/', {
+        templateUrl: 'partials/edit_profile.html',
+        controller: 'EditProfileCtrl'
       }).
       otherwise({
         redirectTo: '/home'

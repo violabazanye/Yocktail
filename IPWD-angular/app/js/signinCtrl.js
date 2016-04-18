@@ -38,12 +38,12 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
 	            	console.log("SigninCtrl signin user data");
 	            	console.log(data.val());
 	            	var signinUserData = data.val();
-                    var signinUser = { uid: uid, name: signinUserData.name, email: signinUserData.email, birthday: signinUserData.birthday };
+                    var signinUser = { uid: uid, name: signinUserData.name, bio: signinUserData.bio, email: signinUserData.email, birthday: signinUserData.birthday };
                     Cocktail.setUser(signinUser);
 
                     console.log("user:" + Cocktail.getUser());
 
-                    $location.path('/profile');
+                    $location.path('/profile/'+uid);
                     $scope.$apply();
 
 	            });
@@ -53,11 +53,6 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
 				$scope.regErrorMessage = "Sorry, failed to sign in. Please try again.";
 	            console.log('SigninCtrl Authentication failure');
 	        });
-	}
-
-	function setUserInfo(signinUserData) {
-
-
-	}
+	};
 
 });
