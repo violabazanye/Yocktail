@@ -1,6 +1,12 @@
-yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,Cocktail) {
+yocktailApp.controller('CocktailCtrl', function ($scope,$sce,$routeParams,Cocktail) {
 
   $scope.cocktail = Cocktail.SingleCocktail.get({id:$routeParams.cocktailId});
-  console.log($scope.cocktail);
+  
+  /*if($scope.cocktail != undefined){
+  	console.log($scope.cocktail);
+  }
+  
+  $scope.url = $sce.trustAsResourceUrl('http://assets.absolutdrinks.com/videos/' + '');
+*/
 
 });

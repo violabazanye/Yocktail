@@ -56,6 +56,26 @@ table.center {
   color: #fff;
 }
 
+.DocumentList
+{
+    overflow-x:scroll;
+    overflow-y:hidden;
+    height:200px;
+    width:auto;
+    padding: 0 15px;
+}
+
+.DocumentItem
+{
+    padding:0;
+    height:200px;
+    margin-right: 50px;
+}
+
+.list-inline {
+  white-space:nowrap;
+}
+
 
 /* CAROUSEL
 --------------------------------------------------*/
@@ -202,19 +222,20 @@ table.center {
   width: 200px;
   height: 100px;
 }
-.drink-cata{
-  margin-left:70px;
-}
 
-.wine-creater{
+.drink-cata{
+    margin-left:70px;
+  }
+ 
+ .wine-creater{
   
-  z-index: 10;
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  top: 60px;
-  left:160px;
-}
+   z-index: 10;
+   position: absolute;
+   width: 80px;
+   height: 80px;
+   top: 60px;
+   left:160px;
+ }
  
 
 /**about page*/

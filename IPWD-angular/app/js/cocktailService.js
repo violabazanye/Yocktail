@@ -40,7 +40,7 @@ yocktailApp.factory('Cocktail',function ($resource, $firebaseAuth) {
 
 	this.CocktailQuerySearch = $resource('http://addb.absolutdrinks.com/drinks/with/:input',{apiKey:'003234e57e7a4a0a83f3b1d671c597da'});
 
-	this.PopularCocktails = $resource('http://addb.absolutdrinks.com/drinks/rating/:numerical_condition',{start:0,pageSize:4,apiKey:'003234e57e7a4a0a83f3b1d671c597da'});
+	this.PopularCocktails = $resource('http://addb.absolutdrinks.com/drinks/rating/:numerical_condition',{apiKey:'003234e57e7a4a0a83f3b1d671c597da'});
 
 	this.CocktailSearch = $resource('http://addb.absolutdrinks.com/drinks/',{apiKey:'003234e57e7a4a0a83f3b1d671c597da'});
 
@@ -48,6 +48,10 @@ yocktailApp.factory('Cocktail',function ($resource, $firebaseAuth) {
 
 	this.SingleCocktail = $resource('http://addb.absolutdrinks.com/drinks/:id',{apiKey:'003234e57e7a4a0a83f3b1d671c597da'});
 
+	this.CocktailTastes = $resource('http://addb.absolutdrinks.com/drinks/tasting/:taste_id',{apiKey:'003234e57e7a4a0a83f3b1d671c597da'});
+	//was for searching similar drinks, but...
+
 	return this;
 
 });
+
