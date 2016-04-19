@@ -40,20 +40,20 @@
 			</div>
 			<div class="col-md-5 text-center">
 				<div class="col-md-12">
-					<img class="img-thumbnail" src="http://assets.absolutdrinks.com/drinks/{{cocktail.result[0].id}}.png" style="margin-bottom:20px; height: 60vh"><br>
+					<img class="img-thumbnail" ng-src="http://assets.absolutdrinks.com/drinks/{{cocktail.result[0].id}}.png" style="margin-bottom:20px; height: 60vh"><br>
 				</div>
 				<div class="col-md-12">
-					<h4><b>Ratings:</b> {{cocktail.result[0].rating}}</h4>
+					<!-- <h4><b>Ratings:</b> {{cocktail.result[0].rating}}</h4> -->
 					<button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-heart"></span>  Add to favorites</button>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-12 text-center">
+		<!-- <div class="col-md-12 text-center">
 			<h3>Link to video goes here</h3>
 			<div class="embed-responsive embed-responsive-4by3">
-			  <iframe class="embed-responsive-item" src="{{url}}"></iframe>
+			  <iframe class="embed-responsive-item" ng-src="http://assets.absolutdrinks.com/videos/" + {{cocktail.result[0].id}} + ".mp4"></iframe>
 			</div>
-		</div>
+		</div> -->
 	</div>
 
 	<div id="part3" class="container-fluid">
