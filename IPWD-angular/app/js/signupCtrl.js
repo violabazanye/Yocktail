@@ -1,4 +1,4 @@
-yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase, $location, Cocktail) {
+yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase, $location, Cocktail, $window) {
 
     $scope.$on('$viewContentLoaded', function(){
         if(Cocktail.getUser() != ''){
@@ -58,7 +58,8 @@ yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase,
                                     //console.log(newUser2);
                                     Cocktail.setUser(newUser2);
 
-                                    $location.path('/profile/'+uid);
+                                    //$location.path('/profile/'+uid);
+                                    $window.location.reload();
 
                                 }, function(error) {
                                     //Failure callback
