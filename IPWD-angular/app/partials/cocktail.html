@@ -3,9 +3,9 @@
 		<div id="part1" class="col-md-12"> 	<!-- search button -->
 			<div class="col-md-6 col-md-offset-3" style="margin-bottom: 1em;">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search for...">
+					<input type="text" class="form-control" ng-model="query" placeholder="search for ingredients like grapes, lemon...">
 					<span class="input-group-btn">
-						<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+						<button class="btn btn-default" type="button" ng-click="search(query)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 					</span>
 				</div>
 			</div>

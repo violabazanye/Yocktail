@@ -14,17 +14,16 @@
       <div class="container">
         <div class="carousel-caption" style="padding-bottom: 10%">
           <h1>start exploring the world of cocktails</h1>
-          <form class="form-inline">
-            <div class="form-group">
-              <!-- <input type="text" class="form-control" ng-model="search_input" placeholder="search cocktails..." style="width:400px;"> -->
-              <a ng-href="#/explore" class="btn btn-default btn-lg btn-block" style="width:400px;">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>  search now
-              </a>
-            </div>
-            <!-- <div class="form-group">
-              <a ng-href="#/explore"><image src="images/search.png" style="width:40px"/></a>
-            </div> -->
-          </form> 
+          <div class="row">
+            <div class="col-lg-6 col-md-offset-3">
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="query" placeholder="search for ingredients like grapes, lemon...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="search(query)"><span class="glyphicon glyphicon-search" aria-hidden="true"></button>
+                </span>
+              </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+          </div><!-- /.row --> 
         </div>
       </div>
     </div>

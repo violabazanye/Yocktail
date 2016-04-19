@@ -1,4 +1,4 @@
-yocktailApp.controller('CocktailCtrl', function ($scope,$sce,$routeParams,Cocktail) {
+yocktailApp.controller('CocktailCtrl', function ($scope,$sce,$routeParams,$location,Cocktail) {
 
   $scope.cocktail = Cocktail.SingleCocktail.get({id:$routeParams.cocktailId});
   
@@ -18,5 +18,9 @@ yocktailApp.controller('CocktailCtrl', function ($scope,$sce,$routeParams,Cockta
 	      });
 	   
 	});
+
+	$scope.search = function(query){
+		$location.path("/explore/" + query);
+	}
 
 });

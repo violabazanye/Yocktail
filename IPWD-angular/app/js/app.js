@@ -11,6 +11,10 @@ yocktailApp.config(['$routeProvider',
         templateUrl: 'partials/explore.html',
         controller: 'ExploreCtrl'
       }).
+      when('/explore/:search_input', {
+        templateUrl: 'partials/explore.html',
+        controller: 'ExploreCtrl'
+      }).
       when('/community', {
         templateUrl: 'partials/community.html',
         controller: 'CommunityCtrl'
