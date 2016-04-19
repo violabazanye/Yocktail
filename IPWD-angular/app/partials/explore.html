@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-lg-6 col-md-offset-3">
       <div class="input-group">
-        <input type="text" class="form-control" ng-model="query" placeholder="Search for...">
+        <input type="text" class="form-control" ng-model="query" placeholder="Search for ingredients like grapes, lemon...">
         <span class="input-group-btn">
           <button class="btn btn-default" type="button" ng-click="search(query)"><span class="glyphicon glyphicon-search" aria-hidden="true"></button>
         </span>
@@ -18,19 +18,19 @@
 
         <div class="row">
           <div class="col-xs-6 col-sm-3" style="position:relative;">
-            <input type="image" src="images/Cocktail-1.jpg" class="categories" ng-click="occasions('afternoon')" />
+            <input type="image" src="images/Cocktail-1.jpg" class="categories" ng-click="occasions('afternoon',query)" />
             <h4 class="img_txt">Afternoon Drinks</h4>
           </div>
           <div class="col-xs-6 col-sm-3" style="position:relative;">
-            <input type="image" src="images/Cocktail-2.jpg" class="categories" ng-click="occasions('pre-dinner')"/>
+            <input type="image" src="images/Cocktail-2.jpg" class="categories" ng-click="occasions('pre-dinner',query)"/>
             <h4 class="img_txt">Pre - Dinner</h4>
           </div>
           <div class="col-xs-6 col-sm-3" style="position:relative;">
-            <input type="image" src="images/Cocktail-3.jpg" class="categories" ng-click="occasions('after-dinner')"/>
+            <input type="image" src="images/Cocktail-3.jpg" class="categories" ng-click="occasions('after-dinner',query)"/>
             <h4 class="img_txt">After Dinner</h4>
           </div>
           <div class="col-xs-6 col-sm-3" style="position:relative;">
-            <input type="image" src="images/Cocktail-4.jpg" class="categories" ng-click="occasions('evening')" />
+            <input type="image" src="images/Cocktail-4.jpg" class="categories" ng-click="occasions('evening',query)" />
             <h4 class="img_txt">Evening Drinks</h4>
           </div>
         </div>

@@ -56,6 +56,26 @@ table.center {
   color: #fff;
 }
 
+.DocumentList
+{
+    overflow-x:scroll;
+    overflow-y:hidden;
+    height:200px;
+    width:auto;
+    padding: 0 15px;
+}
+
+.DocumentItem
+{
+    padding:0;
+    height:200px;
+    margin-right: 50px;
+}
+
+.list-inline {
+  white-space:nowrap;
+}
+
 
 /* CAROUSEL
 --------------------------------------------------*/
@@ -202,6 +222,50 @@ table.center {
   width: 200px;
   height: 100px;
 }
+
+.drink-cata{
+    margin-left:70px;
+  }
  
+ .wine-creater{
+  
+   z-index: 10;
+   position: absolute;
+   width: 80px;
+   height: 80px;
+   top: 60px;
+   left:160px;
+ }
+ 
+
+/**about page*/
+#about-header{
+  background: url("images/about-header.jpg");
+  height:350px;
+  background-size: 100% 100%;
+  width:1248px;
+
+  
+}
+
+#about-title{
+  width: 500px;
+  height: 300px;
+  background-color: rgba(51, 17, 17, 0.18);
+  margin-left: 28%
+}
+#about-info-content{
+  text-align:center; 
+  padding-bottom:30px;
+  padding-top:30px;
+  font-family: fantasy;
+  font-size: 19px;
+  margin:50px;
+}
+.icon-img{
+  float:left;
+  width: 30px;
+  margin-left: 40px
+}
 }
 
