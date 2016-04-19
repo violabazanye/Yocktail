@@ -216,5 +216,35 @@ table.center {
   left:160px;
 }
  
+
+/**about page*/
+#about-header{
+  background: url("images/about-header.jpg");
+  height:350px;
+  background-size: 100% 100%;
+  width:1248px;
+
+  
+}
+
+#about-title{
+  width: 500px;
+  height: 300px;
+  background-color: rgba(51, 17, 17, 0.18);
+  margin-left: 28%
+}
+#about-info-content{
+  text-align:center; 
+  padding-bottom:30px;
+  padding-top:30px;
+  font-family: fantasy;
+  font-size: 19px;
+  margin:50px;
+}
+.icon-img{
+  float:left;
+  width: 30px;
+  margin-left: 40px
+}
 }
 
