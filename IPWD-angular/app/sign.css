@@ -186,8 +186,26 @@ h3 {
 }
 
 
-/**/
+/*account editing*/
+#account-edit-body{
+	/*background: url(images/account-edit-bg.jpg);*/
+	background-color:rgb(252, 252, 252);
+	background-size: 100% 100%;
 
+}
+.account-edit-panel{
+	border-width: 1px;
+	border-style: dotted;
+	border-color: black;
+	height:400px;
+	margin-left: px
+}
+#account-edit-row{
+	background: rgba(143, 120, 116, 0.09); 
+	margin-top: 4%;  
+	margin-left: 2%; 
+	margin-bottom:200px;
+}
 
 
 
