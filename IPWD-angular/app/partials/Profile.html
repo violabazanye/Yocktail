@@ -24,27 +24,104 @@
   </div>
 
 <div class="row" style="margin-top:50px">
-  <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
-    <img class="img-circle cocktail-small" src="images/cocktail_mockup.png" >
-      <h3>Create new cocktail</h3>
-      <button type="button" class="btn btn-default">Create</button>
-  </div>
-  <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
-    <img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
-      <h3>Negorine</h3>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
-  </div>
+	<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
+		<img class="img-circle cocktail-small" src="images/cocktail_mockup.png" >
+		<h3>Create new cocktail</h3>
+		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Create</button>
+	</div>
+	
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title text-center" id="myModalLabel">Create a new cocktail</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-5">
+								<img class="img-circle cocktail-small" src="images/cocktail_mockup.png">
+								</br></br>
+								<input type="file" id="exampleInputFile">
+							</div>
+							<div class="col-md-7" style="border-left: 2px solid #ccc">
+								<input type="text" class="form-control" id="newCocktailName" placeholder="Name of the cocktail"> 
+								</br>
+								<input type="text" class="form-control" id="newCocktailGlasstype" placeholder="Type of glass"> 
+								</br>
+								<input type="text" class="form-control" id="newCocktailTaste" placeholder="Taste of the cocktail"> 
+								</br>
+								<select class="form-control" id="newCocktailSkills">
+									<option value="Select category" selected="selected">Skills required</option>
+									<option value="Easy">Easy</option>
+									<option value="Average">Average</option>
+									<option value="High">High</option>
+								</select>
+								</br>
+								<div class="input-group">
+									<input type="text" class="form-control" id="newCocktailIngredient" placeholder="Ingredients with quantity required">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button" onclick="addData()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+									</span>
+								</div>
+								<p id="displayIngredient" class="text-primary"></p>
+								</br>
+								<select class="form-control" id="newCocktailCategory">
+									<option value="Select category" selected="selected">Select Category</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+								</select>
+								</br>
+								<textarea class="form-control" id="newCocktailDescription" placeholder="Description" rows="5"></textarea>
+								</br>
+								<textarea class="form-control" id="newCocktailHowtomix" placeholder="How to mix" rows="5"></textarea>
+								</br>
+								<input type="text" class="form-control" id="newCocktailVideolink" placeholder="Video link">
+								</br>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+  
+	<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
+		<img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
+			<h3>Negorine</h3>
+			<p>Gin, Campari, Vermouth Sweet, Orange</p>
+	</div>
 
 
-  <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
-    <img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
-      <h3>Negorine</h3>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
-  </div>
-  <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
-    <img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
-      <h3>Negorine</h3>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
-  </div>
+	<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
+		<img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
+		<h3>Negorine</h3>
+		<p>Gin, Campari, Vermouth Sweet, Orange</p>
+	</div>
+	<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
+		<img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
+		<h3>Negorine</h3>
+		<p>Gin, Campari, Vermouth Sweet, Orange</p>
+	</div>
 </div>
 <br>
+
+	<script>
+		var ingredientList = [];
+		function addData(){
+			var ingredient = document.getElementById('newCocktailIngredient');
+			var display = document.getElementById('displayIngredient');
+			ingredientList.push(ingredient.value);
+			display.innerHTML= "";
+			display.innerHTML += ingredientList.join(",");
+			ingredient.value="";
+		}
+		
+	</script>
