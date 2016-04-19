@@ -3,6 +3,7 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebaseAuth, $location
 	var visitingUid = $routeParams.userUid;
 	var currentUser = Cocktail.getUser();
 	var isSameUser = false;
+	$scope.isSignedIn = Cocktail.isSignedIn();
 
 	// creating a Firebase database Reference for users
     var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");  

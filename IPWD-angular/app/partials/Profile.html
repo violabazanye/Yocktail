@@ -14,37 +14,38 @@
 </div>
 
 <div class="row" style="margin:auto;width:600px;">
-    <hr>
-    <div class="row">
-        <div class="col-xs-6 col-sm-4" style="text-align:center;">My Cocktails</div>
-        <div class="col-xs-6 col-sm-4" style="text-align:center;">Favorites</div>
-        <div class="col-xs-6 col-sm-4" style="text-align:center;">Ratings</div>
-    </div>
-    <hr>
+  <hr>
+  <div class="row">
+    <div class="col-xs-6 col-sm-4" style="text-align:center;">My Cocktails</div>
+    <div class="col-xs-6 col-sm-4" style="text-align:center;">Favorites</div>
+    <div class="col-xs-6 col-sm-4" style="text-align:center;">Ratings</div>
   </div>
+  <hr>
+</div>
 
 <div class="row" style="margin-top:50px">
-  <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
-    <img class="img-circle cocktail-small" src="images/cocktail_mockup.png" >
+  <div ng-show="isSignedIn">
+    <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
+      <img class="img-circle cocktail-small" src="images/cocktail_mockup.png" >
       <h3>Create new cocktail</h3>
       <button type="button" class="btn btn-default">Create</button>
+    </div>
   </div>
   <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
     <img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
-      <h3>Negorine</h3>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
+    <h3>Negorine</h3>
+    <p>Gin, Campari, Vermouth Sweet, Orange</p>
   </div>
 
-
   <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
     <img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
-      <h3>Negorine</h3>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
+    <h3>Negorine</h3>
+    <p>Gin, Campari, Vermouth Sweet, Orange</p>
   </div>
   <div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
     <img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
-      <h3>Negorine</h3>
-      <p>Gin, Campari, Vermouth Sweet, Orange</p>
+    <h3>Negorine</h3>
+    <p>Gin, Campari, Vermouth Sweet, Orange</p>
   </div>
 </div>
 <br>
