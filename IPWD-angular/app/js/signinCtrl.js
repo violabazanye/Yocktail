@@ -1,4 +1,4 @@
-yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location, Cocktail) {
+yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location, Cocktail, $window) {
 
 	$scope.$on('$viewContentLoaded', function(){
 		if(Cocktail.getUser() != ''){
@@ -43,8 +43,9 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
 
                     console.log("user:" + Cocktail.getUser());
 
-                    $location.path('/profile/'+uid);
-                    $scope.$apply();
+                    //$location.path('/profile/'+uid);
+                    $window.location.reload();
+                    //$scope.$apply();
 
 	            });
 	        }, function(error) {

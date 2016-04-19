@@ -22,18 +22,33 @@ yocktailApp.factory('Cocktail',function ($resource, $firebaseAuth) {
 			// do nothing
 		}
 		
+		console.log("CocktailService getUser user"+user);
 		return user;
 	} 
 
 	this.setUser = function(value){
 		localStorage.setItem("yocktailUser", JSON.stringify(value));
 		user = value;
+		console.log("CocktailService setUser user"+user);
 	}
 
 	this.logoutUser = function(){
 		authObj.$unauth();
 	    user = '';
 	    localStorage.removeItem('yocktailUser');
+	    console.log("CocktailService logoutUser user"+user);
+	}
+
+	this.isSignedIn = function(){
+		var isSignedIn = false;
+
+		if(user == ''){
+			// do nothing
+		}else{
+			isSignedIn = true;
+		}
+
+		return isSignedIn;
 	}
 
 	var firebaseObj = new Firebase("https://yocktail.firebaseio.com");
