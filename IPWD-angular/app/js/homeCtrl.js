@@ -10,5 +10,5 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail) {
 	   
 	});
 
-
+	$scope.isSignedIn = Cocktail.isSignedIn();
 });
