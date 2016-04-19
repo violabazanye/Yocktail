@@ -32,20 +32,10 @@
   	<p style="margin:auto;width:50px;color:#ccc">Top 10</p>
   	<br>
   	<table class="center">
-  		<tr>
-  			<td style="text-align:center;"><img src="images/Cocktail-1.jpg" alt="..." class="img-circle profile-thumbnail"></td>
-  			<td style="text-align:center;"><a href="#">Negorine</a>
-  			<p style="color:#ccc;">Gin, Campari, Vermouth Sweet, Orange</p></td>
-  		</tr>
-  		<tr>
-  			<td style="text-align:center;"><img src="images/Cocktail-2.jpg" alt="..." class="img-circle profile-thumbnail"></td>
-  			<td style="text-align:center;"><a href="#">Negorine</a>
-  			<p style="color:#ccc;">Gin, Campari, Vermouth Sweet, Orange</p></td>
-  		</tr>
-  		<tr>
-  			<td style="text-align:center;"><img src="images/Cocktail-3.jpg" alt="..." class="img-circle profile-thumbnail"></td>
-  			<td style="text-align:center;"><a href="#">Negorine</a>
-  			<p style="color:#ccc;">Gin, Campari, Vermouth Sweet, Orange</p></td>
+  		<tr ng-repeat="cocktail in cocktails">
+  			<td style="text-align:center;"><img ng-src="http://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" alt="..." class="img-circle profile-thumbnail"></td>
+  			<td style="text-align:center;"><a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
+  			<p ng-repeat="taste in cocktail.tastes" style="display:inline;color:#ccc">{{taste.text}}.</p>
   		</tr>
   	</table>
   	<br>
