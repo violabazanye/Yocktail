@@ -20,6 +20,72 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 	var firebaseObj = new Firebase("https://yocktail.firebaseio.com");
 	var authObj = $firebaseAuth(firebaseObj);
 
+	$scope.imageString = "";
+
+	usersRef.child(currentUser.uid).once("value", function(data){
+		console.log("EditProfileCtrl signin user data");
+		console.log(data.val());
+		var signinUserData = data.val();
+		if(signinUserData.profile_image){
+			console.log("set profile image");
+			$scope.$apply(function() {
+				$scope.imageString = signinUserData.profile_image;
+			});
+		}else{
+			console.log("the user does's have a profile_image, use mockup image instead");
+			$scope.imageString = "images/profile_mockup.png";
+		}
+	});
+
+	console.log("$scope.imageString: "+$scope.imageString);
+
+	$scope.imageSelect = function(event){
+		var files = event.target.files; //FileList object
+		console.log("files");
+		console.log(files);
+
+		file = files[0];
+
+		if(file){
+			if(file.type.match('image.*')){
+				console.log("in files");
+				var fireReader = new FileReader();
+				fireReader.onload = $scope.imageIsLoaded; 
+				fireReader.readAsDataURL(file);
+			}else{
+
+			}
+		}else{
+
+		}
+	}
+
+	$scope.imageIsLoaded = function(e){
+		$scope.$apply(function() {
+			console.log("e.target.result");
+			console.log(e.target.result);
+			$scope.imageString = e.target.result;
+			console.log("$scope.imageSrc");
+			console.log($scope.imageString);
+		});
+	}
+
+	$scope.UpdateProfileImage = function(){
+		var imageData = $scope.imageString;
+		if(imageData){
+			usersRef.child(currentUser.uid).child("profile_image").set(imageData, function(error){
+				if(!error){
+					console.log("imageData uploaded success");
+				}else{
+					console.log("imageData uploaded failure "+ error.message);
+				}
+			});
+		}else{
+			console.log("imageData is null");
+		}
+	};
+
+
 	$scope.UpdatBasicInfo = function() {
 		if (!$scope.updateBasicInfoForm.$invalid) {
 			var newName = $scope.editUser.name;

@@ -6,11 +6,12 @@
 </br></br>
 
 <div class="container row-fluid">
-    <img class="img-circle cocktail-small" src="images/profile_mockup.png">
+<!--     <img class="img-circle cocktail-small" src="images/profile_mockup.png" /> -->
+    <img ng-src="{{imageString}}" />
     </br></br>
-    <input type="file" id="exampleInputFile">
+    <input type='file' ng-model-instant onchange="angular.element(this).scope().imageSelect(event)" />
     <br/><br/>
-    <button type="button" ng-click="UpdateProfileImage" ng-disabled="" class="btn btn-lg btn-primary btn-block">Update Profile Image</button>
+    <button type="button" ng-click="UpdateProfileImage();" ng-disabled="" class="btn btn-lg btn-primary btn-block">Update Profile Image</button>
 </div>
 
 <div class="row span12" id="account-edit-row">
