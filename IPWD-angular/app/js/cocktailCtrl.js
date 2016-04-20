@@ -1,13 +1,15 @@
-yocktailApp.controller('CocktailCtrl', function ($scope,$sce,$routeParams,$location,Cocktail) {
+yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$location,Cocktail) {
 
-  $scope.cocktail = Cocktail.SingleCocktail.get({id:$routeParams.cocktailId});
-  
-  /*if($scope.cocktail != undefined){
-  	console.log($scope.cocktail);
-  }
-  
-  $scope.url = $sce.trustAsResourceUrl('http://assets.absolutdrinks.com/videos/' + '');
-*/
+  	$scope.cocktail = Cocktail.SingleCocktail.get({id:$routeParams.cocktailId}, function(cocktail) {
+    	console.log(cocktail.result[0].name);
+    	console.log($scope.cocktail.result[0].name); // will print the same
+    	$scope.url = $scope.getUrl($scope.cocktail.result[0].id);
+	});
+
+	$scope.getUrl = function (givenId) {
+		//console.log($scope.cocktail);
+	    return '//assets.absolutdrinks.com/videos/'+ givenId +'.mp4'
+	}
 
 	$scope.$on('$viewContentLoaded', function(){
 
@@ -23,4 +25,6 @@ yocktailApp.controller('CocktailCtrl', function ($scope,$sce,$routeParams,$locat
 		$location.path("/explore/" + query);
 	}
 
+
 });
+

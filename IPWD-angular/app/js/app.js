@@ -1,7 +1,11 @@
 var yocktailApp = angular.module('yocktail', ['ngRoute','ngResource', 'firebase']);
 
-yocktailApp.config(['$routeProvider',
-  function($routeProvider) {
+yocktailApp.config(['$routeProvider', '$sceDelegateProvider',
+  function($routeProvider, $sceDelegateProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist([
+        'self',
+        '*://assets.absolutdrinks.com/**'
+      ]);
     $routeProvider.
       when('/home', {
         templateUrl: 'partials/home.html',
@@ -50,4 +54,5 @@ yocktailApp.config(['$routeProvider',
       otherwise({
         redirectTo: '/home'
       });
+    
   }]);
