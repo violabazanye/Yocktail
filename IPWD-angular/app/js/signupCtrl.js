@@ -41,6 +41,7 @@ yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase,
                                 usersRef.child(uid).set(newUser);
 
                                 // signup is not enough, need to signed in on firebase
+                                // Sign in:
                                 authObj.$authWithPassword({
                                     email: email,
                                     password: password
