@@ -21,6 +21,8 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 	var authObj = $firebaseAuth(firebaseObj);
 
 	$scope.imageString = "";
+	$scope.hasProfileImage = false;
+	$scope.hasLoadedImage = false;
 
 	usersRef.child(currentUser.uid).once("value", function(data){
 		console.log("EditProfileCtrl signin user data");
@@ -30,10 +32,15 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 			console.log("set profile image");
 			$scope.$apply(function() {
 				$scope.imageString = signinUserData.profile_image;
+				$scope.hasProfileImage = true;
 			});
 		}else{
 			console.log("the user does's have a profile_image, use mockup image instead");
-			$scope.imageString = "images/profile_mockup.png";
+			
+			$scope.$apply(function() {
+				$scope.imageString = "";
+				$scope.hasProfileImage = false;
+			});
 		}
 	});
 
@@ -53,10 +60,14 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 				fireReader.onload = $scope.imageIsLoaded; 
 				fireReader.readAsDataURL(file);
 			}else{
-
+				console.log("Sorry, please select a image.");
+				$scope.uploadImageError = true;
+				$scope.uploadImageErrorMessage = "Sorry, please select a image.";
 			}
 		}else{
-
+			console.log("Sorry, please try again.");
+			$scope.uploadImageError = true;
+			$scope.uploadImageErrorMessage = "Sorry, please try again.";
 		}
 	}
 
@@ -67,23 +78,57 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 			$scope.imageString = e.target.result;
 			console.log("$scope.imageSrc");
 			console.log($scope.imageString);
+			$scope.hasLoadedImage = true;
 		});
 	}
 
 	$scope.UpdateProfileImage = function(){
 		var imageData = $scope.imageString;
-		if(imageData){
+
+		if(imageData && $scope.hasLoadedImage){
+
+			$scope.hasLoadedImage = false;
+
 			usersRef.child(currentUser.uid).child("profile_image").set(imageData, function(error){
 				if(!error){
 					console.log("imageData uploaded success");
+					$scope.$apply(function() {
+						$scope.uploadImageError = false;
+						$scope.uploadImageSuccessMessage = "Your profile image has been updated.";
+						$scope.hasProfileImage = true;
+					});
 				}else{
-					console.log("imageData uploaded failure "+ error.message);
+					$scope.$apply(function() {
+						$scope.uploadImageError = true;
+						$scope.uploadImageErrorMessage = "Failed to update your profile image. Please try again.";
+					});
 				}
 			});
 		}else{
-			console.log("imageData is null");
+			$scope.uploadImageError = true;
+			$scope.uploadImageErrorMessage = "Please choose a image to upload.";
 		}
 	};
+
+	$scope.DeleteProfileImage = function(){
+		usersRef.child(currentUser.uid).child("profile_image").set("", function(error){
+			if(!error){
+				console.log("imageData deleted success");
+				$scope.$apply(function() {
+					$scope.imageString = "";
+					$scope.hasProfileImage = false;
+					$scope.uploadImageError = false;
+					$scope.uploadImageSuccessMessage = "Your profile image has been deleted.";
+				});
+			}else{
+				console.log("imageData deleted failure "+ error.message);
+				$scope.$apply(function() {
+					$scope.uploadImageError = true;
+					$scope.uploadImageErrorMessage = "Your profile image has been deleted.";
+				});
+			}
+		});
+	}
 
 
 	$scope.UpdatBasicInfo = function() {
