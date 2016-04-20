@@ -37,7 +37,7 @@
             </div>
             <p style="color:green;" ng-show="!updateBasicInfoFormError">{{updateBasicInfoFormSuccessMessage}}</p>
             <p style="color:red;" ng-show="updateBasicInfoFormError">{{updateBasicInfoFormErrorMessage}}</p>
-            <button type="button" ng-click="UpdatBasicInfo();" ng-disabled="!editUser.name || ! editUser.birthday" class="btn btn-lg btn-primary btn-block">Update Basic Information</button>
+            <button type="button" ng-click="UpdatBasicInfo();" ng-disabled="!editUser.name" class="btn btn-lg btn-primary btn-block">Update Basic Information</button>
         </form>
     </div>
 
