@@ -1,5 +1,5 @@
 yocktailApp.factory('Cocktail',function ($resource, $firebaseAuth) {
-  	
+
 	var user = '';
 
 	var firebaseObj = new Firebase("https://yocktail.firebaseio.com");
@@ -11,10 +11,10 @@ yocktailApp.factory('Cocktail',function ($resource, $firebaseAuth) {
 			if (userObject) {
 				try{
 					console.log("userObject: " + userObject);
-			        user = JSON.parse(userObject);
-			    }catch(e){
-			    	console.log("Error in parse JSON: " + e);
-			    }
+					user = JSON.parse(userObject);
+				}catch(e){
+					console.log("Error in parse JSON: " + e);
+				}
 			}else{
 				// do nothing
 			}
@@ -22,21 +22,36 @@ yocktailApp.factory('Cocktail',function ($resource, $firebaseAuth) {
 			// do nothing
 		}
 		
-		console.log("CocktailService getUser user"+user);
+		console.log("CocktailService getUser user:");
+		console.log(user);
 		return user;
 	} 
 
-	this.setUser = function(value){
-		localStorage.setItem("yocktailUser", JSON.stringify(value));
-		user = value;
-		console.log("CocktailService setUser user"+user);
+	this.setUser = function(type, value){
+		console.log("Cocktail setuser");
+		if (type === "user") {
+			localStorage.setItem("yocktailUser", JSON.stringify(value));
+			user = value;
+			console.log("CocktailService setUser user");
+			console.log(user);
+		}else{
+			if(user){
+				user[type] = value;
+				localStorage.setItem("yocktailUser", JSON.stringify(user));
+				console.log("CocktailService setUser user");
+				console.log(user);
+			}else{
+				// do nothing
+				console.log("user is null");
+			}
+		}
 	}
 
 	this.logoutUser = function(){
 		authObj.$unauth();
-	    user = '';
-	    localStorage.removeItem('yocktailUser');
-	    console.log("CocktailService logoutUser user"+user);
+		user = '';
+		localStorage.removeItem('yocktailUser');
+		console.log("CocktailService logoutUser user"+user);
 	}
 
 	this.isSignedIn = function(){
