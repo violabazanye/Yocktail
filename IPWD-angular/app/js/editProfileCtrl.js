@@ -43,8 +43,6 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 					$scope.updateBasicInfoFormError = false;
 					$scope.updateBasicInfoFormSuccessMessage = "You information is updated!";
 					console.log('EditProfileCtrl UpdatBasicInfo success');
-
-					$location.path("/edit_profile");
 				}
 			}else{
 				$scope.updateBasicInfoFormError = true;
@@ -89,8 +87,6 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 						console.log('EditProfileCtrl ChangeEmail success');
 
 						$location.path("/edit_profile");
-
-						//$scope.$apply();
 
 					}).catch(function(error) {
 						$scope.changeEmailFormError = true;
