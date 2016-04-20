@@ -54,10 +54,10 @@ yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase,
 
                                     // save the user's full information for local use
                                     var uid = userData.uid;
-                                    var newUser2 = { uid: uid, name: name, bio: "", email: email, birthday: birthday };
+                                    var newUser2 = { uid: uid, name: name, email: email, birthday: birthday };
                                     //console.log("newUser2");
                                     //console.log(newUser2);
-                                    Cocktail.setUser(newUser2);
+                                    Cocktail.setUser("user", newUser2);
 
                                     //$location.path('/profile/'+uid);
                                     $window.location.reload();

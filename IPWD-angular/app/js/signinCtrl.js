@@ -40,11 +40,11 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
 	            	var signinUser = data.val();
 	            	signinUser.uid = uid;
                     //var signinUser = { uid: uid, name: signinUserData.name, bio: signinUserData.bio, email: signinUserData.email, birthday: signinUserData.birthday };
-                    Cocktail.setUser(signinUser);
+                    Cocktail.setUser("user", signinUser);
 
                     console.log("user:" + Cocktail.getUser());
 
-                    //$location.path('/profile/'+uid);
+                    // $location.path('/profile/'+uid);
                     $window.location.reload();
                     //$scope.$apply();
 	            });

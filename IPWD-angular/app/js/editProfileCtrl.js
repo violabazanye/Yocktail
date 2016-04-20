@@ -81,7 +81,8 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 			usersRef.child(currentUser.uid).child("profile_image").set(imageData, function(error){
 				if(!error){
 					console.log("imageData uploaded success");
-					currentUser.profile_image = imageData;
+					//currentUser.profile_image = imageData;
+					Cocktail.setUser("profile_image", imageData);
 
 					$scope.$apply(function() {
 						$scope.uploadImageError = false;
@@ -105,7 +106,8 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 		usersRef.child(currentUser.uid).child("profile_image").set("", function(error){
 			if(!error){
 				console.log("imageData deleted success");
-				currentUser.profile_image = "";
+				//currentUser.profile_image = "";
+				Cocktail.setUser("profile_image", "");
 
 				$scope.$apply(function() {
 					$scope.imageString = "";
@@ -139,7 +141,8 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 					if (newName != currentUser.name) {
 						usersRef.child(currentUser.uid).child("name").set(newName, function(error){
 							if(!error){
-								currentUser.name = newName;
+								// currentUser.name = newName;
+								Cocktail.setUser("name", newName);
 
 								$scope.$apply(function(){
 									$scope.updateBasicInfoFormError = false;
@@ -164,6 +167,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 						usersRef.child(currentUser.uid).child("bio").set(newBio, function(error){
 							if(!error){
 								currentUser.bio = newBio;
+								Cocktail.setUser("bio", newBio);
 
 								$scope.$apply(function(){
 									$scope.updateBasicInfoFormError = false;
@@ -218,7 +222,9 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 						//var updatedUser = {name: currentUser.name, bio: currentUser.bio, birthday: currentUser.birthday, email: newEmail};
 						usersRef.child(currentUser.uid).child("email").set(newEmail, function(error){
 							if(!error){
-								currentUser.email = newEmail;
+								//currentUser.email = newEmail;
+								Cocktail.setUser("email", newEmail);
+
 								$scope.$apply(function(){
 									$scope.changeEmailFormError = false;
 									$scope.changeEmailFormSuccessMessage = "You email has been changed successfully"; // why not showing?
@@ -259,6 +265,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 
 			if(currentPassword && newPassword && confirmedNewPassword){
 				if(newPassword == confirmedNewPassword){
+					
 					authObj.$changePassword({
 						email: currentUser.email,
 						oldPassword: currentPassword,
