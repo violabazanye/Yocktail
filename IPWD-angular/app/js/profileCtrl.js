@@ -47,12 +47,13 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 			    	console.log(data.val());
 
 			    	cocktail = data.val();
+			    	cocktail.key = childData;
 
 			    	$scope.userMadeCocktails.push(cocktail);
 			    });
 			});
 
-			 $scope.userMadeCocktails.reverse();
+			$scope.userMadeCocktails.reverse();
 		});
 	}
 
@@ -123,16 +124,16 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	}
 	
 	$scope.addIngredient = function(ingredient){
-			if(ingredient){
-				if (newIngredients.length > 0) {
-					$scope.newIngredientsString = $scope.newIngredientsString + ", " + ingredient;
-				}else{
-					$scope.newIngredientsString += ingredient;
-				}
-
-				newIngredients.push(ingredient);
-				$scope.newIngredient = "";
+		if(ingredient){
+			if (newIngredients.length > 0) {
+				$scope.newIngredientsString = $scope.newIngredientsString + ", " + ingredient;
 			}else{
+				$scope.newIngredientsString += ingredient;
+			}
+
+			newIngredients.push(ingredient);
+			$scope.newIngredient = "";
+		}else{
 			// do nothing
 		}
 	}
@@ -227,7 +228,7 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 		  	$scope.createNewCocktailError = true;
 		  	$scope.createNewCocktailErrorMessage = "Failed to create your cocktail. Please try again.";
 		  });
-	}
+}
 
 	// $scope.UpdateCocktail = function(id){
 	// 	cocktails.$save(id).then(function(ref) {
@@ -235,17 +236,30 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	// 	});
 	// }
 
-	$scope.DeleteCocktail = function(id){
-		// remove from the cocktail array
-		cocktails.$remove(id).then(function(ref){
+	// $scope.DeleteCocktail = function(cocktail){
+	// 	console.log("DeleteCocktail cocktail:");
+	// 	console.log(cocktail);
 
-			// remove from the user's self-made cocktail array
-			userMadeCocktailsFirebaseArray.$remove(id).then(function(ref){
-				console.log("The cocktail is successfully removed: "+ref.key());
-			});
+	// 	// remove from the cocktail array
+	// 	// var cocktailKey = cocktails.$getRecord(cocktail);
+	// 	console.log("DeleteCocktail cocktail.key: "+ cocktail.key);
 
-		});
-	}
+	// 	cocktailsRef.$remove(cocktail.key).then(function(ref) {
+	// 		console.log('item removed from cocktail');
+
+	// 		var userMadeCocktailKey = ref.key();
+	// 		console.log("DeleteCocktail userMadeCocktailKey: "+ userMadeCocktailKey);
+
+	// 		userMadeCocktailsRef.$remove(userMadeCocktailKey);
+	// 		console.log('item removed from user made cocktail');
+
+	// 	    // refresh the page
+	// 	    $window.location.reload();
+
+	// 	}).catch(function(error) {
+	// 		console.log('DeleteCocktail error in delete from cocktails: ', error);
+	// 	});
+	// }
 
 	$scope.CancelCreateNewCocktail = function(){
 		newIngredients = [];
