@@ -63,41 +63,119 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	}
 
 
+	var newIngredients = [];
+	$scope.newIngredient = "";
+	$scope.newIngredientsString = "";
+
+	$scope.addIngredient = function(ingredient){
+		if(ingredient){
+			if (newIngredients.length > 0) {
+				$scope.newIngredientsString = $scope.newIngredientsString + ", " + ingredient;
+			}else{
+				$scope.newIngredientsString += ingredient;
+			}
+
+			newIngredients.push(ingredient);
+			$scope.newIngredient = "";
+		}else{
+			// do nothing
+		}
+	}
+
+	$scope.CancelCreateNewCocktail = function(){
+		newIngredients = [];
+		$scope.newIngredientsString = "";
+		$scope.newCocktail = null; 
+	}
+
 	var cocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/cocktails"); 
 	var cocktails = $firebaseArray(cocktailsRef);
 
 	var userMadeCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + currentUser.uid + "/cocktails");
-	var userMadeCocktails = $firebaseArray(userMadeCocktailsRef);
+	var userMadeCocktailsFirebaseArray = $firebaseArray(userMadeCocktailsRef);
+
+	console.log("userMadeCocktailsFirebaseArray $keyAt 0: ");
+	console.log(userMadeCocktailsFirebaseArray.$keyAt(0));
+
+	console.log("cocktails: ");
+	console.log(cocktails);
+
+	$scope.userMadeCocktails = [];
+
+	// get the id in userMadeCocktails
+	userMadeCocktailsRef.once("value", function(snapshot) {
+		console.log(snapshot);
+		console.log("snapshot");
+		 // The callback function will get all the cocktails the user has made
+		 snapshot.forEach(function(childSnapshot) {
+		    // key will be "fred" the first time and "barney" the second time
+		    var key = childSnapshot.key();
+		    // childData will be the id of the cocktail
+		    var childData = childSnapshot.val();
+		    console.log("childData");
+		    console.log(childData);
+
+		    // use the id to retrieve the data in cocktailsRef and get the whole object back
+		    cocktailsRef.child(childData).once("value", function(data) {
+		    	console.log("cocktail");
+		    	console.log(data.val());
+
+		    	cocktail = data.val();
+
+		    	$scope.userMadeCocktails.push(cocktail);
+		    });
+		});
+
+		$scope.userMadeCocktails.reverse();
+	});
+
+
+	// for(var i=0; i<userMadeCocktailsFirebaseArray.length; i++){
+	// 	//console.log("userMadeCocktailId", userMadeCocktailId);
+	// 	// var cocktail = cocktails.$getRecord(userMadeCocktailId);
+	// 	console.log("userMadeCocktailsFirebaseArray[i]");
+	// 	console.log(userMadeCocktailsFirebaseArray[i]);
+	// 	userMadeCocktailsFirebaseArray[i]
+	// 	//$scope.userMadeCocktails.push(cocktail);
+	// }
 
 	$scope.CreateNewCocktail = function(){
 		var newCocktail = $scope.newCocktail;
 
+		newCocktail.ingredients = newIngredients;
 		newCocktail.creator_uid = currentUser.uid; 
 		newCocktail.timestamp = Firebase.ServerValue.TIMESTAMP;
+
+		console.log("newCocktail:");
+		console.log(newCocktail);
 
 		// add this new cocktail into the cocktail array
 		cocktails.$add(newCocktail).then(function(ref){
 			var newCocktailId = ref.key();
 
 			// add this new cocktail id into the user's self-made cocktail array
-			userMadeCocktails.$add(newCocktailId).then(function(ref){
+			userMadeCocktailsFirebaseArray.$add(newCocktailId).then(function(ref){
 				console.log("The cocktail is successfully added");
+
+				newIngredients = [];
+				$scope.newIngredientsString = "";
+				$scope.newCocktail = null; 
 			});
 		});
 	}
 
-	$scope.UpdateCocktail = function(id){
-		cocktails.$save(id).then(function(ref) {
-		   console.log("The cocktail is successfully updated: "+ref.key());
-		});
-	}
+	// $scope.UpdateCocktail = function(id){
+	// 	cocktails.$save(id).then(function(ref) {
+	// 	   console.log("The cocktail is successfully updated: "+ref.key());
+	// 	});
+	// }
 
 	$scope.DeleteCocktail = function(id){
 		// remove from the cocktail array
 		cocktails.$remove(id).then(function(ref){
 
 			// remove from the user's self-made cocktail array
-			userMadeCocktails.$remove(id).then(function(ref){
+			userMadeCocktailsFirebaseArray.$remove(id).then(function(ref){
 				console.log("The cocktail is successfully removed: "+ref.key());
 			});
 
