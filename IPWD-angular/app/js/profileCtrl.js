@@ -1,4 +1,4 @@
-yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth, $firebaseArray, $location, $routeParams, Cocktail) {
+yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth, $firebaseArray, $location, $routeParams, Cocktail, $window) {
 
 	var visitingUid = $routeParams.userUid;
 	var currentUser = Cocktail.getUser();
@@ -10,6 +10,8 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	var cocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/cocktails"); 
 	var cocktails = $firebaseArray(cocktailsRef);
 
+	var userMadeCocktailsRef, userMadeCocktailsFirebaseArray;
+
 	console.log("cocktails: ");
 	console.log(cocktails);
 
@@ -20,8 +22,8 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	$scope.newIngredientsString = "";
 
 	this.setUserMadeCocktail = function(uid){
-		var userMadeCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + uid + "/cocktails");
-		var userMadeCocktailsFirebaseArray = $firebaseArray(userMadeCocktailsRef);
+		userMadeCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + uid + "/cocktails");
+		userMadeCocktailsFirebaseArray = $firebaseArray(userMadeCocktailsRef);
 
 		console.log("userMadeCocktailsFirebaseArray $keyAt 0: ");
 		console.log(userMadeCocktailsFirebaseArray.$keyAt(0));
@@ -135,12 +137,6 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 		}
 	}
 
-	$scope.CancelCreateNewCocktail = function(){
-		newIngredients = [];
-		$scope.newIngredientsString = "";
-		$scope.newCocktail = null; 
-	}
-
 	$scope.imageSelect = function(event){
 		var files = event.target.files; //FileList object
 		console.log("files");
@@ -175,16 +171,23 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 			console.log("e.target.result");
 			console.log(e.target.result);
 
-			$scope.newCocktail.image = e.target.result;
+			// console.log("e.target.result");
+			// console.log(e.target.result);
 
 			console.log("$scope.newCocktail.image");
-			console.log($scope.newCocktail.image);
+			console.log($scope.newCocktailImage);
+
+			$scope.newCocktailImage = e.target.result;
+
+			console.log("$scope.newCocktail.image");
+			console.log($scope.newCocktailImage);
 		});
 	}
 
 	$scope.CreateNewCocktail = function(){
 		var newCocktail = $scope.newCocktail;
 
+		newCocktail.image = $scope.newCocktailImage;
 		newCocktail.ingredients = newIngredients;
 		newCocktail.creator_uid = currentUser.uid; 
 		newCocktail.timestamp = Firebase.ServerValue.TIMESTAMP;
@@ -199,13 +202,19 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 			// add this new cocktail id into the user's self-made cocktail array
 			userMadeCocktailsFirebaseArray.$add(newCocktailId).then(function(ref){
 				console.log("The cocktail is successfully added");
-
+				
+				// empty all the fields in modal
 				newIngredients = [];
+				$scope.newCocktailImage = "";
 				$scope.newIngredientsString = "";
-				$scope.newCocktail = null; 
+				$scope.newCocktail = null;
 
 				$scope.createNewCocktailError = false;
 				$scope.createNewCocktailSuccessMessage = "Your cocktail has been created!";
+
+				// refresh the page
+				$window.location.reload();
+
 			}, function(error) {
 		  	// The Promise was rejected.
 		  	console.error(error);
@@ -239,15 +248,10 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	}
 
 	$scope.CancelCreateNewCocktail = function(){
-		if ($scope.createNewCocktailError) {
-			// if failed to create a cocktail or the use didn't create a cocktail
-			// just dimiss the modal
-			// do nothing
-		}else{
-			// if succeeded in creating a cocktail
-			// refresh page on close the page
-			$location.path('/profile/'+currentUser.uid);
-		}
+		newIngredients = [];
+		$scope.newCocktailImage = "";
+		$scope.newIngredientsString = "";
+		$scope.newCocktail = null;
 	}
 
 });

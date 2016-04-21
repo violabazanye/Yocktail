@@ -19,7 +19,7 @@
 	<hr>
 	<div class="row">
 		<div class="col-xs-6 col-sm-4 col-md-5 text-right">
-			<span ng-click="cocktails=true; favourites=false" class="profile-option">{{user.name}}'s Cocktails</span>
+			<span ng-click="cocktails=true; favourites=false" class="profile-option">Self-made Cocktails</span>
 		</div>
 		<div class="col-xs-6 col-sm-4 col-md-5 col-md-offset-2">
 			<span class="profile-option" ng-click="cocktails=false; favourites=true">Favorites</span>
@@ -28,7 +28,8 @@
 	<hr>
 
 	<div ng-show="cocktails" ng-cloak ng-init="cocktails=true">
-		<h4 class="text-center" style="color:#333"> Here are the self-made cocktails </h4>
+		<h4 class="text-center" style="color:#333" ng-show="isSignedInUser">Here are cocktails you made</h4>
+		<h4 class="text-center" style="color:#333" ng-show="!isSignedInUser">Here are cocktails he/she made</h4>
 		<div class="row" style="margin-top:50px" ng-show="isSignedInUser">
 			<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
 				<img class="img-circle cocktail-small" src="images/cocktail_mockup.png" >
@@ -47,8 +48,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="col-md-5">
-									    <img ng-show="!newCocktail.image" ng-src="images/cocktail_mockup.png" />
-									    <img ng-show="newCocktail.image" ng-src="{{newCocktail.image}}" />
+									    <img ng-show="!newCocktailImage" ng-src="images/cocktail_mockup.png" />
+									    <img ng-show="newCocktailImage" ng-src="{{newCocktailImage}}" />
 									    </br></br>
 									    <input type='file' ng-model-instant onchange="angular.element(this).scope().imageSelect(event)" />
 									    <p style="color:red;" ng-show="selectImageError">{{selectImageErrorMessage}}</p>
@@ -96,7 +97,7 @@
 							<p style="color:green;" ng-show="!createNewCocktailError">{{createNewCocktailSuccessMessage}}</p>
     						<p style="color:red;" ng-show="createNewCocktailError">{{createNewCocktailErrorMessage}}</p>
 							<button type="button" class="btn btn-default" ng-click="CancelCreateNewCocktail();" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" ng-click="CreateNewCocktail();">Save changes</button>
+							<button type="button" class="btn btn-primary" ng-click="CreateNewCocktail();" ng-disabled="!newCocktail.name || !newCocktail.type || !newCocktail.taste || !newCocktail.skill || !newIngredientsString || !newCocktail.category || !newCocktail.description || !newCocktail.how_to_mix">Save changes</button>
 						</div>
 					</div>
 				</div>
@@ -113,7 +114,8 @@
 	</div>
 	
 	<div ng-show="favourites" ng-cloak>
-		<h4 class="text-center" style="color:#333;"> Here are {{user.name}}'s favourite cocktails</h4>
+		<h4 class="text-center" style="color:#333;" ng-show="isSignedInUser">Here are your favourite cocktails</h4>
+		<h4 class="text-center" style="color:#333;" ng-show="!isSignedInUser">Here are his/her favourite cocktails</h4>
 		<div class="row" style="margin-top:50px" ng-show="isSignedIn">
 			<div class="col-md-12">
 				<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
