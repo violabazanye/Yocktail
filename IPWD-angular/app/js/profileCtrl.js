@@ -2,28 +2,79 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 
 	var visitingUid = $routeParams.userUid;
 	var currentUser = Cocktail.getUser();
-	var isSameUser = false;
-	$scope.isSignedIn = Cocktail.isSignedIn();
+	$scope.isSignedInUser = false;
 
 	// creating a Firebase database Reference for users
 	var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");  
+
+	var cocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/cocktails"); 
+	var cocktails = $firebaseArray(cocktailsRef);
+
+	console.log("cocktails: ");
+	console.log(cocktails);
+
+	$scope.userMadeCocktails = [];
+
+	var newIngredients = [];
+	$scope.newIngredient = "";
+	$scope.newIngredientsString = "";
+
+	this.setUserMadeCocktail = function(uid){
+		var userMadeCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + uid + "/cocktails");
+		var userMadeCocktailsFirebaseArray = $firebaseArray(userMadeCocktailsRef);
+
+		console.log("userMadeCocktailsFirebaseArray $keyAt 0: ");
+		console.log(userMadeCocktailsFirebaseArray.$keyAt(0));
+
+		// get the id in userMadeCocktails
+		userMadeCocktailsRef.once("value", function(snapshot) {
+			console.log(snapshot);
+			console.log("snapshot");
+			// The callback function will get all the cocktails the user has made
+			snapshot.forEach(function(childSnapshot) {
+			    // key will be "fred" the first time and "barney" the second time
+			    var key = childSnapshot.key();
+			    // childData will be the id of the cocktail
+			    var childData = childSnapshot.val();
+			    console.log("childData");
+			    console.log(childData);
+
+			    // use the id to retrieve the data in cocktailsRef and get the whole object back
+			    cocktailsRef.child(childData).once("value", function(data) {
+			    	console.log("cocktail");
+			    	console.log(data.val());
+
+			    	cocktail = data.val();
+
+			    	$scope.userMadeCocktails.push(cocktail);
+			    });
+			});
+
+			 $scope.userMadeCocktails.reverse();
+		});
+	}
+
+	this.setUserFavorites = function(uid){
+
+	}
+
     // check if visitingUid is in routeParams
     if (visitingUid) {
 		// visitingUid specified
 		// check if it is the profile page of the signed in user
 		if(currentUser == ''){
 			// no signed in user
-			// do nothing
+			$scope.isSignedInUser = false;
 		}else{
 	    	// user signed in
 	    	if(currentUser.uid == visitingUid){
-	    		isSameUser = true;
+	    		$scope.isSignedInUser = true;
 	    	}else{
-	    		// do nothing
+	    		$scope.isSignedInUser = false;
 	    	}
 	    }
 
-	    if (isSameUser) {
+	    if ($scope.isSignedInUser) {
 	    	// is the profile page of the signed in user 
 	    	$scope.user = currentUser;
 	    }else{
@@ -48,6 +99,13 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	        	// (For example from browser DOM events, setTimeout, XHR or third party libraries).
 	        });
 	    }
+
+	    // set the user made cocktails
+	    this.setUserMadeCocktail(visitingUid);
+
+	    // set the user's favorites
+	    this.setUserFavorites(visitingUid);
+
 	}else{
 		// no visitingUid specified
 		// check if user signed in
@@ -61,23 +119,18 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 			$location.path('/profile/'+currentUser.uid);
 		}
 	}
-
-
-	var newIngredients = [];
-	$scope.newIngredient = "";
-	$scope.newIngredientsString = "";
-
+	
 	$scope.addIngredient = function(ingredient){
-		if(ingredient){
-			if (newIngredients.length > 0) {
-				$scope.newIngredientsString = $scope.newIngredientsString + ", " + ingredient;
-			}else{
-				$scope.newIngredientsString += ingredient;
-			}
+			if(ingredient){
+				if (newIngredients.length > 0) {
+					$scope.newIngredientsString = $scope.newIngredientsString + ", " + ingredient;
+				}else{
+					$scope.newIngredientsString += ingredient;
+				}
 
-			newIngredients.push(ingredient);
-			$scope.newIngredient = "";
-		}else{
+				newIngredients.push(ingredient);
+				$scope.newIngredient = "";
+			}else{
 			// do nothing
 		}
 	}
@@ -88,56 +141,46 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 		$scope.newCocktail = null; 
 	}
 
-	var cocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/cocktails"); 
-	var cocktails = $firebaseArray(cocktailsRef);
+	$scope.imageSelect = function(event){
+		var files = event.target.files; //FileList object
+		console.log("files");
+		console.log(files);
 
-	var userMadeCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + currentUser.uid + "/cocktails");
-	var userMadeCocktailsFirebaseArray = $firebaseArray(userMadeCocktailsRef);
+		file = files[0];
 
-	console.log("userMadeCocktailsFirebaseArray $keyAt 0: ");
-	console.log(userMadeCocktailsFirebaseArray.$keyAt(0));
+		if(file){
+			if(file.type.match('image.*')){
+				console.log("in files");
+				var fireReader = new FileReader();
+				fireReader.onload = $scope.imageIsLoaded; 
+				fireReader.readAsDataURL(file);
+			}else{
+				console.log("Sorry, please select a image.");
+				$scope.$apply(function() {
+					$scope.selectImageError = true;
+					$scope.selectImageErrorMessage = "Sorry, please select a image.";
+				});
+			}
+		}else{
+			console.log("Sorry, please try again.");
+			$scope.$apply(function() {
+				$scope.selectImageError = true;
+				$scope.selectImageErrorMessage = "Sorry, please try again.";
+			});
+		}
+	}
 
-	console.log("cocktails: ");
-	console.log(cocktails);
+	$scope.imageIsLoaded = function(e){
+		$scope.$apply(function() {
+			console.log("e.target.result");
+			console.log(e.target.result);
 
-	$scope.userMadeCocktails = [];
+			$scope.newCocktail.image = e.target.result;
 
-	// get the id in userMadeCocktails
-	userMadeCocktailsRef.once("value", function(snapshot) {
-		console.log(snapshot);
-		console.log("snapshot");
-		 // The callback function will get all the cocktails the user has made
-		 snapshot.forEach(function(childSnapshot) {
-		    // key will be "fred" the first time and "barney" the second time
-		    var key = childSnapshot.key();
-		    // childData will be the id of the cocktail
-		    var childData = childSnapshot.val();
-		    console.log("childData");
-		    console.log(childData);
-
-		    // use the id to retrieve the data in cocktailsRef and get the whole object back
-		    cocktailsRef.child(childData).once("value", function(data) {
-		    	console.log("cocktail");
-		    	console.log(data.val());
-
-		    	cocktail = data.val();
-
-		    	$scope.userMadeCocktails.push(cocktail);
-		    });
+			console.log("$scope.newCocktail.image");
+			console.log($scope.newCocktail.image);
 		});
-
-		$scope.userMadeCocktails.reverse();
-	});
-
-
-	// for(var i=0; i<userMadeCocktailsFirebaseArray.length; i++){
-	// 	//console.log("userMadeCocktailId", userMadeCocktailId);
-	// 	// var cocktail = cocktails.$getRecord(userMadeCocktailId);
-	// 	console.log("userMadeCocktailsFirebaseArray[i]");
-	// 	console.log(userMadeCocktailsFirebaseArray[i]);
-	// 	userMadeCocktailsFirebaseArray[i]
-	// 	//$scope.userMadeCocktails.push(cocktail);
-	// }
+	}
 
 	$scope.CreateNewCocktail = function(){
 		var newCocktail = $scope.newCocktail;
@@ -160,8 +203,21 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 				newIngredients = [];
 				$scope.newIngredientsString = "";
 				$scope.newCocktail = null; 
-			});
-		});
+
+				$scope.createNewCocktailError = false;
+				$scope.createNewCocktailSuccessMessage = "Your cocktail has been created!";
+			}, function(error) {
+		  	// The Promise was rejected.
+		  	console.error(error);
+		  	$scope.createNewCocktailError = true;
+		  	$scope.createNewCocktailErrorMessage = "Failed to create your cocktail. Please try again.";
+		  });
+		}, function(error) {
+		  	// The Promise was rejected.
+		  	console.error(error);
+		  	$scope.createNewCocktailError = true;
+		  	$scope.createNewCocktailErrorMessage = "Failed to create your cocktail. Please try again.";
+		  });
 	}
 
 	// $scope.UpdateCocktail = function(id){
@@ -180,6 +236,18 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 			});
 
 		});
+	}
+
+	$scope.CancelCreateNewCocktail = function(){
+		if ($scope.createNewCocktailError) {
+			// if failed to create a cocktail or the use didn't create a cocktail
+			// just dimiss the modal
+			// do nothing
+		}else{
+			// if succeeded in creating a cocktail
+			// refresh page on close the page
+			$location.path('/profile/'+currentUser.uid);
+		}
 	}
 
 });
