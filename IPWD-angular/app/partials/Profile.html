@@ -3,7 +3,10 @@
 	<div class="row">
 		<div class="col-md-12"> 
 			<div class="col-md-3 text-center" style="float: none; margin: 0 auto">
-				<div class="col-md-12"><img src="images/profile_mockup.png" alt="..." class="img-circle profile-thumbnail"></div>
+				<div class="col-md-12">
+					<img ng-show="user.profile_image" ng-src="{{user.profile_image}}" alt="..." class="img-circle profile-thumbnail">
+					<img ng-show="!user.profile_image" ng-src="images/profile_mockup.png" alt="..." class="img-circle profile-thumbnail">
+				</div>
 				<div class="col-md-12">
 					<p class="lead" style="margin-bottom:0px">{{user.name}}</p>
 					<span style="color:#ccc;">Cocktail master</span>

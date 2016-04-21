@@ -1,4 +1,4 @@
-yocktailApp.controller('HomeCtrl', function ($scope,Cocktail) {
+yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 
 	$scope.$on('$viewContentLoaded', function(){
 
@@ -11,4 +11,8 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail) {
 	});
 
 	$scope.isSignedIn = Cocktail.isSignedIn();
+
+	$scope.search = function(query){
+		$location.path("/explore/" + query);
+	}
 });

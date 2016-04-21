@@ -1,51 +1,74 @@
-<br/><br/><br/>
+<div class="container row-fluid" id="account-edit-body" >
+    <br/><br/><br/>
+    <a href="#/profile" class="btn btn-default " style="margin-top: 2%;margin-left:2%">Return to my profile</a>
+</div>
 
-<a href="#/profile">Return to my profile</a>
+</br></br>
 
-<h3>Update Basic Information</h3>
-<form class="" name="updateBasicInfoForm">
-    <div class="form-group " ng-class="{ 'has-error' : updateBasicInfoForm.username.$invalid }">
-        <label>Name</label>
-        <input type="text" name="username" placeholder="Name" class="form-control" id="form-username" ng-model="editUser.name">
-    </div>
-    <div class="form-group " ng-class="{ 'has-error' : updateBasicInfoForm.username.$invalid }">
-        <label>Bio</label>
-        <input type="text" name="username" placeholder="Bio" class="form-control" id="form-username" ng-model="editUser.bio">
-    </div>
-    <div class="form-group" ng-class="{ 'has-error' : updateBasicInfoForm.birthday.$invalid }">
-        <label>Birthday(YYYYYMMDD) (The data of birth could not be changed.)</label>
-        <input type="text" name="birthday" placeholder="Birthday(YYYYYMMDD)" class="form-control" id="form-username" ng-model="editUser.birthday" ng-disabled=true>
-    </div>
-    <p style="color:green;" ng-show="!updateBasicInfoFormError">{{updateBasicInfoFormSuccessMessage}}</p>
-    <p style="color:red;" ng-show="updateBasicInfoFormError">{{updateBasicInfoFormErrorMessage}}</p>
-    <button type="button" ng-click="UpdatBasicInfo();" ng-disabled="!editUser.name || ! editUser.birthday" class="btn btn-lg btn-primary btn-block">Update basic information</button>
-</form>
+<div class="container row-fluid">
+<!--     <img class="img-circle cocktail-small" src="images/profile_mockup.png" /> -->
+    <img ng-show="!imageString" ng-src="images/profile_mockup.png" />
+    <img ng-show="imageString" ng-src="{{imageString}}" />
+    </br></br>
+    <input type='file' ng-model-instant onchange="angular.element(this).scope().imageSelect(event)" />
+    <br/><br/>
+    <p style="color:green;" ng-show="!uploadImageError">{{uploadImageSuccessMessage}}</p>
+    <p style="color:red;" ng-show="uploadImageError">{{uploadImageErrorMessage}}</p>
+    <button type="button" ng-click="UpdateProfileImage();" ng-disabled="!hasLoadedImage" class="btn btn-lg btn-primary btn-block">Update Profile Image</button>
+    <button type="button" ng-click="DeleteProfileImage();" ng-show="hasProfileImage" class="btn btn-lg btn-danger btn-block">Delete Profile Image</button>
+</div>
 
-<h3>Change Email(credential)</h3>
-<form class="" name="changeEmailForm">
-   <div class="form-group">
-        <label>Current Email</label>
-        <input type="email" name="email" placeholder="Email" class="form-control" id="form-email" ng-model="user.email" ng-disabled=true>
+<div class="row span12" id="account-edit-row">
+
+    <div class="col-md-4 span4 account-edit-panel">
+        <h3>Update Basic Information</h3>
+        <form class="" name="updateBasicInfoForm">
+            <div class="form-group " ng-class="{ 'has-error' : updateBasicInfoForm.username.$invalid }">
+                <label>Name</label>
+                <input type="text" name="username" placeholder="Name" class="form-control" id="form-username" ng-model="editUser.name">
+            </div>
+            <div class="form-group " ng-class="{ 'has-error' : updateBasicInfoForm.username.$invalid }">
+                <label>Bio</label>
+                <input type="text" name="username" placeholder="Bio" class="form-control" id="form-username" ng-model="editUser.bio">
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : updateBasicInfoForm.birthday.$invalid }">
+                <label>Birthday(YYYYYMMDD) (The data of birth could not be changed.)</label>
+                <input type="text" name="birthday" placeholder="Birthday(YYYYYMMDD)" class="form-control" id="form-username" ng-model="editUser.birthday" ng-disabled=true>
+            </div>
+            <p style="color:green;" ng-show="!updateBasicInfoFormError">{{updateBasicInfoFormSuccessMessage}}</p>
+            <p style="color:red;" ng-show="updateBasicInfoFormError">{{updateBasicInfoFormErrorMessage}}</p>
+            <button type="button" ng-click="UpdatBasicInfo();" ng-disabled="!editUser.name" class="btn btn-lg btn-primary btn-block">Update Basic Information</button>
+        </form>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error' : changeEmailForm.email.$invalid }">
-        <label>New Email</label>
-        <input type="email" name="email" placeholder="Email" class="form-control" id="form-email" ng-model="editUser.email">
-        <p class="help-block" ng-show="changeEmailForm.email.$invalid">Enter a valid email.</p>
-    </div>
+    <div class="col-md-4 span4 account-edit-panel">
+        <h3>Change Email(credential)</h3>
+        <form class="" name="changeEmailForm">
+           <div class="form-group">
+            <label>Current Email</label>
+            <input type="email" name="email" placeholder="Email" class="form-control" id="form-email" ng-model="user.email" ng-disabled=true>
+        </div>
 
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Password" class="form-control" id="form-password" ng-model="editUser.password" ng-minlength="8">
-    </div>
-    <p style="color:green;" ng-show="!changeEmailFormError">{{changeEmailFormSuccessMessage}}</p>
-    <p style="color:red;" ng-show="changeEmailFormError">{{changeEmailFormErrorMessage}}</p>
-    <button type="button" ng-click="ChangeEmail();" ng-disabled="!editUser.email || !editUser.password" class="btn btn-lg btn-primary btn-block">Change Email</button>
-</form>
+        <div class="form-group" ng-class="{ 'has-error' : changeEmailForm.email.$invalid }">
+            <label>New Email</label>
+            <input type="email" name="email" placeholder="Email" class="form-control" id="form-email" ng-model="editUser.email">
+            <p class="help-block" ng-show="changeEmailForm.email.$invalid">Enter a valid email.</p>
+        </div>
 
-<h3>Change Password(credential)</h3>
-<form class="" name="changePasswordForm">
-	<div class="form-group">
+        <div class="form-group">
+            <label style="margin-bottom: 25px">Password</label>
+            <input type="password" name="password" placeholder="Password" class="form-control" id="form-password" ng-model="editUser.password" ng-minlength="8">
+        </div>
+        <p style="color:green;" ng-show="!changeEmailFormError">{{changeEmailFormSuccessMessage}}</p>
+        <p style="color:red;" ng-show="changeEmailFormError">{{changeEmailFormErrorMessage}}</p>
+        <button type="button" ng-click="ChangeEmail();" ng-disabled="!editUser.email || !editUser.password" class="btn btn-lg btn-primary btn-block">Change Email</button>
+    </form>
+</div>
+
+<div class="col-md-4 span4 account-edit-panel">
+    <h3>Change Password(credential)</h3>
+    <form class="" name="changePasswordForm">
+     <div class="form-group">
         <label>Current Password</label>
         <input type="password" name="currentPassword" placeholder="Current Password" class="form-control" id="form-password" ng-model="editUser.currentPassword" ng-minlength="8">
     </div>
@@ -54,8 +77,8 @@
         <input type="password" name="newPassword" placeholder="New Password" class="form-control" id="form-password" ng-model="editUser.newPassword" ng-minlength="8">
         <p class="help-block" ng-show="changePasswordForm.newPassword.$error.minlength">Min password length is 8 characters.</p>
     </div>
-     <div class="form-group" ng-class="{ 'has-error' : changePasswordForm.confirmedNewPassword.$invalid }">
-        <label>Confirm your new password</label>
+    <div class="form-group" ng-class="{ 'has-error' : changePasswordForm.confirmedNewPassword.$invalid }">
+        <label style="margin-bottom: 25px">Confirm your new password</br></label>
         <input type="password" name="confirmedNewPassword" placeholder="Confirm your new password" class="form-control" id="form-password" ng-model="editUser.confirmedNewPassword" ng-minlength="8">
         <p class="help-block" ng-show="changePasswordForm.confirmedNewPassword.$error.minlength">Min password length is 8 characters.</p>
     </div>
@@ -63,4 +86,6 @@
     <p style="color:red;" ng-show="changePasswordFormError">{{changePasswordFormErrorMessage}}</p>
     <button type="button" ng-click="ChangePassword();" ng-disabled=" !editUser.currentPassword || !editUser.newPassword || !editUser.confirmedNewPassword" class="btn btn-lg btn-primary btn-block">Change Password</button>
 </form>
-
+</div>
+</div>
+</div>

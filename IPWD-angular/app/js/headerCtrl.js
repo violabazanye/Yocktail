@@ -15,6 +15,10 @@ yocktailApp.controller('HeaderCtrl', function ($scope, Cocktail, $location, $win
  //        $scope.isSignedIn = newVal;
  //    });
 
+    $scope.search = function(query){
+        $location.path("/explore/" + query);
+    }
+
     $scope.logout = function() {
     	Cocktail.logoutUser();
         $window.location.reload();
