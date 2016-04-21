@@ -76,6 +76,15 @@ table.center {
   white-space:nowrap;
 }
 
+input:disabled {
+  opacity:0.5;
+}
+
+/*input:hover:disabled {
+  cursor: pointer;
+}*/
+
+
 
 /* CAROUSEL
 --------------------------------------------------*/
