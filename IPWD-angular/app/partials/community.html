@@ -1,5 +1,31 @@
-<div class="row" style="padding-top:100px;">
-  <div class="col-md-4" style="border-right:medium #ccc solid; height:100%;">
+<div class="container">
+	<div class="row" style="padding-top:100px;">
+		<div class="col-md-12">
+			<div class="col-md-3 text-center" ng-repeat="cocktail in cocktails">
+				<div class="panel panel-default" ng-mouseover="showCreator=true" ng-mouseleave="showCreator=false">
+					<div class="panel-body" style="height: 280px">
+						<img class="img-rounded cocktail-small" src="http://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" style="margin-bottom:20px;"><br>
+						<a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
+						<p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
+						<p><strong>Skill: </strong>{{cocktail.skill.name}}</p>
+						<br>
+						<div class="col-md-11 text-left" style="position: absolute; top:0; left:12px; background-color: #81D4FA; opacity: 0.8" ng-show="showCreator" ng-animate="{enter: 'animate slidedown'}">
+							<div class="col-md-3">
+							<img ng-show="user.profile_image" ng-src="{{user.profile_image}}" alt="..." class="img-circle" style="width:40px; height:40px; margin-top: 3px">
+							<img ng-show="!user.profile_image" ng-src="images/profile_mockup.png" alt="..." class="img-circle" style="width:40px; height:40px; margin-top: 3px">
+							</div>
+							<div class="col-md-9 text-left">
+								<p style="margin-bottom:0px; font-size: 15px; color: white">{{user.name}}User name</p>
+								<p style="margin-bottom:5px; font-size: 15px;">{{user.bio}} User bio</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 
+
+<!--  <div class="col-md-4" style="border-right:medium #ccc solid; height:100%;">
   	<h4 style="margin:auto;width:105px;">Hall of Fame</h4>
   	<br>
   	<p style="margin:auto;width:50px;color:#ccc">Top 10</p>
@@ -22,11 +48,11 @@
   		</tr>
   	</table>
   	<br>
-  </div>
+  </div> -->
 
   <!-- end hall of fame -->
 
-  <div class="col-md-4" style="border-right:medium #ccc solid; height:100%;">
+  <!-- <div class="col-md-4" style="border-right:medium #ccc solid; height:100%;">
   	<h4 class="center">Most Popular Cocktails</h4>
   	<br>
   	<p style="margin:auto;width:50px;color:#ccc">Top 10</p>
@@ -39,11 +65,11 @@
   		</tr>
   	</table>
   	<br>
-  </div>
+  </div> -->
 
   <!-- end of popular cocktails -->
 
-  <div class="col-md-4">
+  <!--<div class="col-md-4">
   	<h4 class="center">Newly-made Cocktails</h4>
   	<br>
   	<p style="margin:auto;width:80px;color:#ccc">Latest 10</p>
@@ -66,5 +92,13 @@
   		</tr>
   	</table>
   	<br>
-  </div>
+  </div> -->
 </div>
+
+<script> 
+$(document).ready(function(){
+    $("#flip").click(function(){
+        $("#panel").slideDown("slow");
+    });
+});
+</script>
