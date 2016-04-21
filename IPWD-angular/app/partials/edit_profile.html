@@ -16,7 +16,7 @@
             <img ng-show="!imageString" ng-src="images/profile_mockup.png"  style="width:80%"/>
             <img ng-show="imageString" ng-src="{{imageString}}" style="width:80%"/>
             </br></br>
-            <input type='file' ng-model-instant onchange="angular.element(this).scope().imageSelect(event)" />
+            <input type='file' ng-model-instant onchange="angular.element(this).scope().imageSelect(event)" style="font-size: 80%"/>
             <br/><br/>
             <p style="color:green;" ng-show="!uploadImageError">{{uploadImageSuccessMessage}}</p>
             <p style="color:red;" ng-show="uploadImageError">{{uploadImageErrorMessage}}</p>
