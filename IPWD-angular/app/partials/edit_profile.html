@@ -6,11 +6,16 @@
 </br></br>
 
 <div class="container row-fluid">
-    <img class="img-circle cocktail-small" src="images/profile_mockup.png">
+<!--     <img class="img-circle cocktail-small" src="images/profile_mockup.png" /> -->
+    <img ng-show="!imageString" ng-src="images/profile_mockup.png" />
+    <img ng-show="imageString" ng-src="{{imageString}}" />
     </br></br>
-    <input type="file" id="exampleInputFile">
+    <input type='file' ng-model-instant onchange="angular.element(this).scope().imageSelect(event)" />
     <br/><br/>
-    <button type="button" ng-click="UpdateProfileImage" ng-disabled="" class="btn btn-lg btn-primary btn-block">Update Profile Image</button>
+    <p style="color:green;" ng-show="!uploadImageError">{{uploadImageSuccessMessage}}</p>
+    <p style="color:red;" ng-show="uploadImageError">{{uploadImageErrorMessage}}</p>
+    <button type="button" ng-click="UpdateProfileImage();" ng-disabled="!hasLoadedImage" class="btn btn-lg btn-primary btn-block">Update Profile Image</button>
+    <button type="button" ng-click="DeleteProfileImage();" ng-show="hasProfileImage" class="btn btn-lg btn-danger btn-block">Delete Profile Image</button>
 </div>
 
 <div class="row span12" id="account-edit-row">
@@ -32,7 +37,7 @@
             </div>
             <p style="color:green;" ng-show="!updateBasicInfoFormError">{{updateBasicInfoFormSuccessMessage}}</p>
             <p style="color:red;" ng-show="updateBasicInfoFormError">{{updateBasicInfoFormErrorMessage}}</p>
-            <button type="button" ng-click="UpdatBasicInfo();" ng-disabled="!editUser.name || ! editUser.birthday" class="btn btn-lg btn-primary btn-block">Update Basic Information</button>
+            <button type="button" ng-click="UpdatBasicInfo();" ng-disabled="!editUser.name" class="btn btn-lg btn-primary btn-block">Update Basic Information</button>
         </form>
     </div>
 

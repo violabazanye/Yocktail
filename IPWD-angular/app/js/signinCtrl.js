@@ -37,16 +37,16 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
 	            usersRef.child(uid).once("value", function(data){
 	            	console.log("SigninCtrl signin user data");
 	            	console.log(data.val());
-	            	var signinUserData = data.val();
-                    var signinUser = { uid: uid, name: signinUserData.name, bio: signinUserData.bio, email: signinUserData.email, birthday: signinUserData.birthday };
-                    Cocktail.setUser(signinUser);
+	            	var signinUser = data.val();
+	            	signinUser.uid = uid;
+                    //var signinUser = { uid: uid, name: signinUserData.name, bio: signinUserData.bio, email: signinUserData.email, birthday: signinUserData.birthday };
+                    Cocktail.setUser("user", signinUser);
 
                     console.log("user:" + Cocktail.getUser());
 
-                    //$location.path('/profile/'+uid);
+                    // $location.path('/profile/'+uid);
                     $window.location.reload();
                     //$scope.$apply();
-
 	            });
 	        }, function(error) {
 	            //Failure callback

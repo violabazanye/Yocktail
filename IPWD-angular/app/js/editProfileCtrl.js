@@ -2,6 +2,10 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 
 	var currentUser = Cocktail.getUser();
 	$scope.user = currentUser;
+	$scope.imageString = "";
+	$scope.hasProfileImage = false;
+	$scope.hasLoadedImage = false;
+	$scope.editUser = {uid: currentUser.uid, name: currentUser.name, bio: currentUser.bio, birthday: currentUser.birthday, email: currentUser.email};
 
 	// check if user already signed in
 	if (currentUser == '') {
@@ -9,9 +13,18 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 		$location.path('/signin');
 	}else{
 		// user signed in
-	}
+		if(currentUser.profile_image){
+			console.log("set profile image");
 
-	$scope.editUser = {uid: currentUser.uid, name: currentUser.name, bio: currentUser.bio, birthday: currentUser.birthday, email: currentUser.email};
+			$scope.imageString = currentUser.profile_image;
+			$scope.hasProfileImage = true;
+		}else{
+			console.log("the user does's have a profile_image, use mockup image instead");
+
+			$scope.imageString = "";
+			$scope.hasProfileImage = false;
+		}
+	}
 
 	// creating a Firebase database Reference for users
 	var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");  
@@ -19,6 +32,98 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 	// create authentication object
 	var firebaseObj = new Firebase("https://yocktail.firebaseio.com");
 	var authObj = $firebaseAuth(firebaseObj);
+
+	console.log("$scope.imageString: "+$scope.imageString);
+
+	$scope.imageSelect = function(event){
+		var files = event.target.files; //FileList object
+		console.log("files");
+		console.log(files);
+
+		file = files[0];
+
+		if(file){
+			if(file.type.match('image.*')){
+				console.log("in files");
+				var fireReader = new FileReader();
+				fireReader.onload = $scope.imageIsLoaded; 
+				fireReader.readAsDataURL(file);
+			}else{
+				console.log("Sorry, please select a image.");
+				$scope.uploadImageError = true;
+				$scope.uploadImageErrorMessage = "Sorry, please select a image.";
+			}
+		}else{
+			console.log("Sorry, please try again.");
+			$scope.uploadImageError = true;
+			$scope.uploadImageErrorMessage = "Sorry, please try again.";
+		}
+	}
+
+	$scope.imageIsLoaded = function(e){
+		$scope.$apply(function() {
+			console.log("e.target.result");
+			console.log(e.target.result);
+			$scope.imageString = e.target.result;
+			console.log("$scope.imageSrc");
+			console.log($scope.imageString);
+			$scope.hasLoadedImage = true;
+		});
+	}
+
+	$scope.UpdateProfileImage = function(){
+		var imageData = $scope.imageString;
+
+		if(imageData && $scope.hasLoadedImage){
+
+			$scope.hasLoadedImage = false;
+
+			usersRef.child(currentUser.uid).child("profile_image").set(imageData, function(error){
+				if(!error){
+					console.log("imageData uploaded success");
+					//currentUser.profile_image = imageData;
+					Cocktail.setUser("profile_image", imageData);
+
+					$scope.$apply(function() {
+						$scope.uploadImageError = false;
+						$scope.uploadImageSuccessMessage = "Your profile image has been updated.";
+						$scope.hasProfileImage = true;
+					});
+				}else{
+					$scope.$apply(function() {
+						$scope.uploadImageError = true;
+						$scope.uploadImageErrorMessage = "Failed to update your profile image. Please try again.";
+					});
+				}
+			});
+		}else{
+			$scope.uploadImageError = true;
+			$scope.uploadImageErrorMessage = "Please choose a image to upload.";
+		}
+	};
+
+	$scope.DeleteProfileImage = function(){
+		usersRef.child(currentUser.uid).child("profile_image").set("", function(error){
+			if(!error){
+				console.log("imageData deleted success");
+				//currentUser.profile_image = "";
+				Cocktail.setUser("profile_image", "");
+
+				$scope.$apply(function() {
+					$scope.imageString = "";
+					$scope.hasProfileImage = false;
+					$scope.uploadImageError = false;
+					$scope.uploadImageSuccessMessage = "Your profile image has been deleted.";
+				});
+			}else{
+				console.log("imageData deleted failure "+ error.message);
+				$scope.$apply(function() {
+					$scope.uploadImageError = true;
+					$scope.uploadImageErrorMessage = "Your profile image has been deleted.";
+				});
+			}
+		});
+	}
 
 	$scope.UpdatBasicInfo = function() {
 		if (!$scope.updateBasicInfoForm.$invalid) {
@@ -29,20 +134,59 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 				if(newName == currentUser.name && newBio == currentUser.bio){
 					// no change, not update
 					$scope.updateBasicInfoFormError = false;
-					$scope.updateBasicInfoFormSuccessMessage = "You information remains the same.";
+					$scope.updateBasicInfoFormSuccessMessage = "You information is updated!";
 					console.log('EditProfileCtrl UpdatBasicInfo success');
 				}else{
 					// update in firebase
-					var updatedUser = {name: newName, bio: newBio, birthday: currentUser.birthday, email: currentUser.email};
-					usersRef.child(currentUser.uid).set(updatedUser);
+					if (newName != currentUser.name) {
+						usersRef.child(currentUser.uid).child("name").set(newName, function(error){
+							if(!error){
+								// currentUser.name = newName;
+								Cocktail.setUser("name", newName);
 
-					// update in local
-					var updatedUser2 = {uid: currentUser.uid, name: newName, bio: newBio, birthday: currentUser.birthday, email: currentUser.email};
-					Cocktail.setUser(updatedUser2);
+								$scope.$apply(function(){
+									$scope.updateBasicInfoFormError = false;
+									$scope.updateBasicInfoFormSuccessMessage = "You information is updated!";
+									console.log('EditProfileCtrl UpdatBasicInfo success');
+								});
+							}else{
+								$scope.$apply(function(){
+									$scope.updateBasicInfoFormError = true;
+									$scope.updateBasicInfoFormErrorMessage = "Failed to update your name information. Please try again.";
+									console.log('EditProfileCtrl UpdatBasicInfo success');
+								});
+							}
+						});
+					}else{
+						$scope.updateBasicInfoFormError = false;
+						$scope.updateBasicInfoFormSuccessMessage = "You information is updated!";
+						console.log('EditProfileCtrl UpdatBasicInfo success');
+					}
+					
+					if (newBio != currentUser.bio) {
+						usersRef.child(currentUser.uid).child("bio").set(newBio, function(error){
+							if(!error){
+								currentUser.bio = newBio;
+								Cocktail.setUser("bio", newBio);
 
-					$scope.updateBasicInfoFormError = false;
-					$scope.updateBasicInfoFormSuccessMessage = "You information is updated!";
-					console.log('EditProfileCtrl UpdatBasicInfo success');
+								$scope.$apply(function(){
+									$scope.updateBasicInfoFormError = false;
+									$scope.updateBasicInfoFormSuccessMessage = "You information is updated!";
+									console.log('EditProfileCtrl UpdatBasicInfo success');
+								});
+							}else{
+								$scope.$apply(function(){
+									$scope.updateBasicInfoFormError = true;
+									$scope.updateBasicInfoFormErrorMessage = "Failed to update your bio information. Please try again.";
+									console.log('EditProfileCtrl UpdatBasicInfo success');
+								});
+							}
+						});
+					}else{
+						$scope.updateBasicInfoFormError = false;
+						$scope.updateBasicInfoFormSuccessMessage = "You information is updated!";
+						console.log('EditProfileCtrl UpdatBasicInfo success');
+					}
 				}
 			}else{
 				$scope.updateBasicInfoFormError = true;
@@ -75,18 +219,25 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 						password: password
 					}).then(function() {
 						// update in firebase
-						var updatedUser = {name: currentUser.name, bio: currentUser.bio, birthday: currentUser.birthday, email: newEmail};
-						usersRef.child(currentUser.uid).set(updatedUser);
+						//var updatedUser = {name: currentUser.name, bio: currentUser.bio, birthday: currentUser.birthday, email: newEmail};
+						usersRef.child(currentUser.uid).child("email").set(newEmail, function(error){
+							if(!error){
+								//currentUser.email = newEmail;
+								Cocktail.setUser("email", newEmail);
 
-						// update in local
-						var updatedUser2 = {uid: currentUser.uid, name: currentUser.name, bio: currentUser.bio, birthday: currentUser.birthday, email: newEmail};
-						Cocktail.setUser(updatedUser2);
-
-						$scope.changeEmailFormError = false;
-						$scope.changeEmailFormSuccessMessage = "You email has been changed successfully"; // why not showing?
-						console.log('EditProfileCtrl ChangeEmail success');
-
-						$location.path("/edit_profile");
+								$scope.$apply(function(){
+									$scope.changeEmailFormError = false;
+									$scope.changeEmailFormSuccessMessage = "You email has been changed successfully"; // why not showing?
+									console.log('EditProfileCtrl ChangeEmail success');
+								});
+							}else{
+								$scope.$apply(function(){
+									$scope.changeEmailFormError = true;
+									$scope.changeEmailFormErrorMessage = error.message;
+									console.log("EditProfileCtrl ChangeEmail failure Error: " + error);
+								});
+							}
+						});
 
 					}).catch(function(error) {
 						$scope.changeEmailFormError = true;
@@ -114,6 +265,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 
 			if(currentPassword && newPassword && confirmedNewPassword){
 				if(newPassword == confirmedNewPassword){
+					
 					authObj.$changePassword({
 						email: currentUser.email,
 						oldPassword: currentPassword,
@@ -122,9 +274,6 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 						$scope.changePasswordFormError = false;
 						$scope.changePasswordFormSuccessMessage = "You password has been changed successfully";
 						console.log('EditProfileCtrl Password changed successfully!');
-
-						$location.path("/edit_profile");
-
 					}).catch(function(error) {
 						console.error("Error: ", error);
 						$scope.changePasswordFormError = true;
