@@ -11,11 +11,14 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	var cocktails = $firebaseArray(cocktailsRef);
 
 	var userMadeCocktailsRef, userMadeCocktailsFirebaseArray;
+	var favoriteCocktailsAbsolutDrinksRef, favoriteCocktailsAbsolutDrinks;
+	var favoriteCocktailsUserMadeCocktailsRef, favoriteCocktailsUserMadeCocktails;
 
 	console.log("cocktails: ");
 	console.log(cocktails);
 
 	$scope.userMadeCocktails = [];
+	$scope.favoriteCocktails = [];
 
 	var newIngredients = [];
 	$scope.newIngredient = "";
@@ -58,6 +61,60 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	}
 
 	this.setUserFavorites = function(uid){
+		// get cocktails from absolute drinks
+		favoriteCocktailsAbsolutDrinksRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + uid + "/favorites/absolutDrinks");
+		favoriteCocktailsAbsolutDrinks = $firebaseArray(favoriteCocktailsAbsolutDrinksRef);
+
+		favoriteCocktailsAbsolutDrinksRef.once("value", function(snapshot) {
+
+			snapshot.forEach(function(childSnapshot) {
+
+				var childData = childSnapshot.val();  // absolute drink id
+
+				// fetch from absolute drink
+				Cocktail.SingleCocktail.get({id: childData}, function(data) {
+
+					// construct a new cocktail to show
+					var cocktail = {};
+					cocktail.name = data.result[0].name;
+					cocktail.image = "https://assets.absolutdrinks.com/drinks/" + data.result[0].id + ".png";
+					var tastes = "";
+					for(var i=0; i<data.result[0].tastes.length; i++){
+						tastes = tastes + data.result[0].tastes[i].text + ". ";
+					}
+					cocktail.taste = tastes;
+					cocktail.key = data.result[0].id;
+					cocktail.api_source = "absolut";
+
+			    	$scope.favoriteCocktails.push(cocktail);
+				});
+
+			});
+		});
+
+		// get cocktails from user made cocktails
+		favoriteCocktailsUserMadeCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + uid + "/favorites/userMadeCocktails");
+		favoriteCocktailsUserMadeCocktails = $firebaseArray(favoriteCocktailsUserMadeCocktailsRef);
+
+		favoriteCocktailsUserMadeCocktailsRef.once("value", function(snapshot){
+
+			snapshot.forEach(function(childSnapshot){
+
+				var childData = childSnapshot.val();  // user made cocktail id
+
+				// use the id to retrieve the data in cocktailsRef and get the whole object back
+			    cocktailsRef.child(childData).once("value", function(data) {
+			    	console.log("cocktail");
+			    	console.log(data.val());
+
+			    	cocktail = data.val(); 
+			    	cocktail.key = childData;
+			    	cocktail.api_source = "yocktail";
+
+			    	$scope.favoriteCocktails.push(cocktail);
+			    });
+			});
+		});
 
 	}
 
@@ -247,7 +304,7 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 
 					for(var i=0; i<userMadeCocktailsFirebaseArray.length; i++){
 						if(userMadeCocktailsFirebaseArray[i].$value == cocktail.key){
-							
+
 							userMadeCocktailsFirebaseArray.$remove(i).then(function(){
 								console.log('item removed from user made cocktail');
 							    // refresh the page

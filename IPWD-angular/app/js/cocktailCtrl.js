@@ -11,7 +11,7 @@ yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$firebaseAr
 	});
 
 	$scope.getUrl = function (givenId) {
-		return '//assets.absolutdrinks.com/videos/'+ givenId +'.mp4'
+		return 'https://assets.absolutdrinks.com/videos/'+ givenId +'.mp4'
 	}
 
 	$scope.$on('$viewContentLoaded', function(){
