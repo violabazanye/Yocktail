@@ -1,5 +1,7 @@
-yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$location,Cocktail) {
-
+yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$firebaseArray,$location,Cocktail) {
+	var currentUser = Cocktail.getUser();
+	$scope.clicked = false;
+  	
   	$scope.cocktail = Cocktail.SingleCocktail.get({id:$routeParams.cocktailId}, function(cocktail) {
     	console.log(cocktail.result[0].name);
     	console.log($scope.cocktail.result[0].name); // will print the same
@@ -23,6 +25,29 @@ yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$location,C
 
 	$scope.search = function(query){
 		$location.path("/explore/" + query);
+	}
+
+	var favoriteCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + currentUser.uid + "/favorites/absolutDrinks");
+	var favoriteCocktails = $firebaseArray(favoriteCocktailsRef);
+
+	$scope.addFavorite = function(drinkID){
+		console.log(drinkID);
+
+		// add this new cocktail into the favorite array
+		favoriteCocktails.$add(drinkID).then(function(ref){
+			var newCocktailId = ref.key();
+			console.log("Success!");
+			$scope.clicked = true;
+			
+		});
+	}
+
+	$scope.removeFavorite = function(drinkID){
+		// remove from the favorite array
+		favoriteCocktails.$remove(drinkID).then(function(ref){
+			$scope.clicked = false;
+
+		});
 	}
 
 
