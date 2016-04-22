@@ -1,11 +1,13 @@
 <div class="container">
-  <h3>Welcome to our community!</h3>
-	<div class="row" style="padding-top:100px;">
+	<div class="row" style="padding-top:60px;">
+    <h3>Welcome to our community!</h3>
+    <br/>
 		<div class="col-md-12">
 			<div class="col-md-3 text-center" ng-repeat="cocktail in communityCocktails">
 				<div class="panel panel-default" ng-mouseover="showCreator=true" ng-mouseleave="showCreator=false">
 					<div class="panel-body" style="height: 280px">
-						<img class="img-rounded cocktail-small" ng-src="{{cocktail.image}}" style="margin-bottom:20px;"><br>
+						<img ng-show="cocktail.image" class="img-rounded cocktail-small" ng-src="{{cocktail.image}}" style="margin-bottom:20px;"><br>
+            <img ng-show="!cocktail.image" class="img-rounded cocktail-small" ng-src="images/cocktail_mockup.png" style="margin-bottom:20px;"><br>
 						<a ng-href="#/user_cocktail/{{cocktail.key}}"><strong>{{cocktail.name}}</strong></a><br>
             <p><strong>{{cocktail.taste}}</strong></p>
 						<p><strong>Skill: </strong>{{cocktail.skill}}</p>
