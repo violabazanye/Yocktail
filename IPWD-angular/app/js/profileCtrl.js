@@ -11,8 +11,7 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	var cocktails = $firebaseArray(cocktailsRef);
 
 	var userMadeCocktailsRef, userMadeCocktailsFirebaseArray;
-	var favoriteCocktailsAbsolutDrinksRef, favoriteCocktailsAbsolutDrinks;
-	var favoriteCocktailsUserMadeCocktailsRef, favoriteCocktailsUserMadeCocktails;
+	var favoriteCocktailsRef, favoriteCocktailsA;
 
 	console.log("cocktails: ");
 	console.log(cocktails);
@@ -62,60 +61,49 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 
 	this.setUserFavorites = function(uid){
 		// get cocktails from absolute drinks
-		favoriteCocktailsAbsolutDrinksRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + uid + "/favorites/absolutDrinks");
-		favoriteCocktailsAbsolutDrinks = $firebaseArray(favoriteCocktailsAbsolutDrinksRef);
+		favoriteCocktailsARef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + uid + "/favorites/");
+		favoriteCocktails = $firebaseArray(favoriteCocktailsAbsolutDrinksRef);
 
 		favoriteCocktailsAbsolutDrinksRef.once("value", function(snapshot) {
 
 			snapshot.forEach(function(childSnapshot) {
 
-				var childData = childSnapshot.val();  // absolute drink id
+				var favoriteCocktail = childSnapshot.val();
+				var cocktailSource = favoriteCocktail.source;
+				var cocktailId = favoriteCocktail.id;  // drink id
 
-				// fetch from absolute drink
-				Cocktail.SingleCocktail.get({id: childData}, function(data) {
+				if(cocktailSource === "absolut"){
+					// fetch from absolute drink
+					Cocktail.SingleCocktail.get({id: cocktailId}, function(data) {
+						// construct a new cocktail to show
+						var cocktail = {};
+						cocktail.name = data.result[0].name;
+						cocktail.image = "https://assets.absolutdrinks.com/drinks/" + data.result[0].id + ".png";
+						var tastes = "";
+						for(var i=0; i<data.result[0].tastes.length; i++){
+							tastes = tastes + data.result[0].tastes[i].text + ". ";
+						}
+						cocktail.taste = tastes;
+						cocktail.key = data.result[0].id;
 
-					// construct a new cocktail to show
-					var cocktail = {};
-					cocktail.name = data.result[0].name;
-					cocktail.image = "https://assets.absolutdrinks.com/drinks/" + data.result[0].id + ".png";
-					var tastes = "";
-					for(var i=0; i<data.result[0].tastes.length; i++){
-						tastes = tastes + data.result[0].tastes[i].text + ". ";
-					}
-					cocktail.taste = tastes;
-					cocktail.key = data.result[0].id;
-					cocktail.api_source = "absolut";
+				    	$scope.favoriteCocktails.push(cocktail);
+					});
+				}else if(cocktailSource === "yocktail"){
+					// use the id to retrieve the data in cocktailsRef and get the whole object back
+				    cocktailsRef.child(cocktailId).once("value", function(data) {
+				    	console.log("cocktail");
+				    	console.log(data.val());
 
-			    	$scope.favoriteCocktails.push(cocktail);
-				});
+				    	cocktail = data.val(); 
+				    	cocktail.key = childData;
 
+				    	$scope.favoriteCocktails.push(cocktail);
+				    });
+				}else{
+					// do nothing
+				}
 			});
 		});
-
-		// get cocktails from user made cocktails
-		favoriteCocktailsUserMadeCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + uid + "/favorites/userMadeCocktails");
-		favoriteCocktailsUserMadeCocktails = $firebaseArray(favoriteCocktailsUserMadeCocktailsRef);
-
-		favoriteCocktailsUserMadeCocktailsRef.once("value", function(snapshot){
-
-			snapshot.forEach(function(childSnapshot){
-
-				var childData = childSnapshot.val();  // user made cocktail id
-
-				// use the id to retrieve the data in cocktailsRef and get the whole object back
-			    cocktailsRef.child(childData).once("value", function(data) {
-			    	console.log("cocktail");
-			    	console.log(data.val());
-
-			    	cocktail = data.val(); 
-			    	cocktail.key = childData;
-			    	cocktail.api_source = "yocktail";
-
-			    	$scope.favoriteCocktails.push(cocktail);
-			    });
-			});
-		});
-
 	}
 
     // check if visitingUid is in routeParams
@@ -325,6 +313,20 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 		$scope.newCocktailImage = "";
 		$scope.newIngredientsString = "";
 		$scope.newCocktail = null;
+	}
+
+	$scope.RemoveFromFavorites = function(){
+		$scope.clicked = false;
+		for (var i = 0; i < favoriteCocktails.length; i++) {
+			if (favoriteCocktails[i].$value.id === drinkID) {
+				favoriteCocktails.$remove(i).then(function(ref){
+					console.log('item removed, yaay!');
+
+					// refresh the page
+					$window.location.reload();
+				});
+			};
+		};
 	}
 
 });

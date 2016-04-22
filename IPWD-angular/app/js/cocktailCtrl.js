@@ -1,7 +1,7 @@
 yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$firebaseArray,$location,Cocktail) {
 	
 	var currentUser = Cocktail.getUser();
-	var favoriteCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + currentUser.uid + "/favorites/absolutDrinks");
+	var favoriteCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + currentUser.uid + "/favorites/");
 	var favoriteCocktails = $firebaseArray(favoriteCocktailsRef);
   	
   	$scope.cocktail = Cocktail.SingleCocktail.get({id:$routeParams.cocktailId}, function(cocktail) {
@@ -34,7 +34,7 @@ yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$firebaseAr
 		favoriteCocktails.$loaded(function(data){
 			
 			for (var i = 0; i < favoriteCocktails.length; i++) {
-				if (favoriteCocktails[i].$value === ID) {
+				if (favoriteCocktails[i].$value.id === ID) {
 					console.log("item exists");
 					$scope.clicked = true;
 				}else{
@@ -47,15 +47,13 @@ yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$firebaseAr
 		
 	}
 
-
 	$scope.addFavorite = function(drinkID){
 		// add this new cocktail into the favorite array
-
-		favoriteCocktails.$add(drinkID).then(function(ref){
+		var newFavortite = {source: "absolut", id: drinkID};
+		favoriteCocktails.$add(newFavortite).then(function(ref){
 			var newCocktailId = ref.key();
 			console.log("Success!");
 			$scope.clicked = true;
-			
 		});
 	}
 
@@ -63,7 +61,7 @@ yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$firebaseAr
 		// remove from the favorite array
 		$scope.clicked = false;
 		for (var i = 0; i < favoriteCocktails.length; i++) {
-			if (favoriteCocktails[i].$value === drinkID) {
+			if (favoriteCocktails[i].$value.id === drinkID) {
 				favoriteCocktails.$remove(i).then(function(ref){
 					console.log('item removed, yaay!');
 				});
