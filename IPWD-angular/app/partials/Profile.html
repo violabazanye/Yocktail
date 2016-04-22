@@ -20,7 +20,7 @@
 	<hr>
 	<div class="row">
 		<div class="col-xs-6 col-sm-4 col-md-5 text-right">
-			<span ng-click="cocktails=true; favourites=false" class="profile-option">My Cocktails</span>
+			<span ng-click="cocktails=true; favourites=false" class="profile-option">Self-made Cocktails</span>
 		</div>
 		<div class="col-xs-6 col-sm-4 col-md-5 col-md-offset-2">
 			<span class="profile-option" ng-click="cocktails=false; favourites=true">Favorites</span>
@@ -29,8 +29,9 @@
 	<hr>
 
 	<div ng-show="cocktails" ng-cloak ng-init="cocktails=true">
-		<h4 class="text-center" style="color:#333"> Here are your cocktails </h4>
-		<div class="row" style="margin-top:50px" ng-show="isSignedIn">
+		<h4 class="text-center" style="color:#333" ng-show="isSignedInUser">Here are cocktails you made</h4>
+		<h4 class="text-center" style="color:#333" ng-show="!isSignedInUser">Here are cocktails he/she made</h4>
+		<div class="row" style="margin-top:50px" ng-show="isSignedInUser">
 			<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
 				<img class="img-circle cocktail-small" src="images/cocktail_mockup.png" >
 				<h3>Create new cocktail</h3>
@@ -41,88 +42,82 @@
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="CancelCreateNewCocktail();"><span aria-hidden="true">&times;</span></button>
 							<h4 class="modal-title text-center" id="myModalLabel">Create a new cocktail</h4>
 						</div>
 						<div class="modal-body">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="col-md-5">
-										<img class="img-circle cocktail-small" src="images/cocktail_mockup.png">
-										</br></br>
-										<input type="file" id="exampleInputFile">
+									    <img ng-show="!newCocktailImage" ng-src="images/cocktail_mockup.png" />
+									    <img ng-show="newCocktailImage" ng-src="{{newCocktailImage}}" />
+									    </br></br>
+									    <input type='file' ng-model-instant onchange="angular.element(this).scope().imageSelect(event)" />
+									    <p style="color:red;" ng-show="selectImageError">{{selectImageErrorMessage}}</p>
 									</div>
 									<div class="col-md-7" style="border-left: 2px solid #ccc">
-										<input type="text" class="form-control" id="newCocktailName" placeholder="Name of the cocktail"> 
+										<input type="text" class="form-control" id="newCocktailName" placeholder="Name of the cocktail" ng-model="newCocktail.name"> 
 										</br>
-										<input type="text" class="form-control" id="newCocktailGlasstype" placeholder="Type of glass"> 
+										<input type="text" class="form-control" id="newCocktailGlasstype" placeholder="Type of glass" ng-model="newCocktail.type"> 
 										</br>
-										<input type="text" class="form-control" id="newCocktailTaste" placeholder="Taste of the cocktail"> 
+										<input type="text" class="form-control" id="newCocktailTaste" placeholder="Taste of the cocktail" ng-model="newCocktail.taste"> 
 										</br>
-										<select class="form-control" id="newCocktailSkills">
-											<option value="Select category" selected="selected">Skills required</option>
+										<select class="form-control" id="newCocktailSkills" ng-model="newCocktail.skill">
+											<option value="" selected="selected">Skills required</option>
 											<option value="Easy">Easy</option>
 											<option value="Average">Average</option>
 											<option value="High">High</option>
 										</select>
 										</br>
 										<div class="input-group">
-											<input type="text" class="form-control" id="newCocktailIngredient" placeholder="Ingredients with quantity required">
+											<input type="text" class="form-control" id="newCocktailIngredient" placeholder="Ingredients with quantity required" ng-model="newIngredient">
 											<span class="input-group-btn">
-												<button class="btn btn-default" type="button" onclick="addData()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+												<button class="btn btn-default" type="button" ng-click="addIngredient(newIngredient);"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
 											</span>
 										</div>
-										<p id="displayIngredient" class="text-primary"></p>
+										<p id="displayIngredient" class="text-primary">{{newIngredientsString}}</p>
 										</br>
-										<select class="form-control" id="newCocktailCategory">
-											<option value="Select category" selected="selected">Select Category</option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
+										<select class="form-control" id="newCocktailCategory" ng-model="newCocktail.category">
+											<option value="" selected="selected">Select Category</option>
+											<option value="Afternoon Drink">Afternoon Drink</option>
+											<option value="Pre-dinner Drink">Pre-dinner Drink</option>
+											<option value="Pre-dinner Drink">Pre-dinner Drink</option>
+											<option value="Evening Drink">Evening Drink</option>
 										</select>
 										</br>
-										<textarea class="form-control" id="newCocktailDescription" placeholder="Description" rows="5"></textarea>
+										<textarea class="form-control" id="newCocktailDescription" placeholder="Description" rows="5" ng-model="newCocktail.description"></textarea>
 										</br>
-										<textarea class="form-control" id="newCocktailHowtomix" placeholder="How to mix" rows="5"></textarea>
+										<textarea class="form-control" id="newCocktailHowtomix" placeholder="How to mix" rows="5" ng-model="newCocktail.how_to_mix"></textarea>
 										</br>
-										<input type="text" class="form-control" id="newCocktailVideolink" placeholder="Video link">
 										</br>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save changes</button>
+							<p style="color:green;" ng-show="!createNewCocktailError">{{createNewCocktailSuccessMessage}}</p>
+    						<p style="color:red;" ng-show="createNewCocktailError">{{createNewCocktailErrorMessage}}</p>
+							<button type="button" class="btn btn-default" ng-click="CancelCreateNewCocktail();" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" ng-click="CreateNewCocktail();" ng-disabled="!newCocktail.name || !newCocktail.type || !newCocktail.taste || !newCocktail.skill || !newIngredientsString || !newCocktail.category || !newCocktail.description || !newCocktail.how_to_mix">Save changes</button>
 						</div>
 					</div>
 				</div>
 			</div>
 	  
-		
-			<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
-				<img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
-				<h3>Negorine</h3>
-				<p>Gin, Campari, Vermouth Sweet, Orange</p>
-			</div>
-
-			<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
-				<img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
-				<h3>Negorine</h3>
-				<p>Gin, Campari, Vermouth Sweet, Orange</p>
-			</div>
-			
-			<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
-				<img class="img-circle cocktail-small" src="images/Cocktail-1.jpg" >
-				<h3>Negorine</h3>
-				<p>Gin, Campari, Vermouth Sweet, Orange</p>
+			<div ng-repeat="cocktail in userMadeCocktails track by $index">
+				<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
+					<img class="img-circle cocktail-small" ng-src="{{cocktail.image}}" >
+					<h3>{{cocktail.name}}</h3>
+					<p>{{cocktail.description}}</p>
+					<!-- <button type="button" class="btn btn-default" ng-click="DeleteCocktail(cocktail);">Delete</button> -->
+				</div>
 			</div>
 		</div>
 	</div>
 	
 	<div ng-show="favourites" ng-cloak>
-		<h4 class="text-center" style="color:#333;"> Here are your favourites</h4>
+		<h4 class="text-center" style="color:#333;" ng-show="isSignedInUser">Here are your favourite cocktails</h4>
+		<h4 class="text-center" style="color:#333;" ng-show="!isSignedInUser">Here are his/her favourite cocktails</h4>
 		<div class="row" style="margin-top:50px" ng-show="isSignedIn">
 			<div class="col-md-12">
 				<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
