@@ -4,7 +4,7 @@
 			<div class="col-md-3 text-center" ng-repeat="cocktail in cocktails">
 				<div class="panel panel-default" ng-mouseover="showCreator=true" ng-mouseleave="showCreator=false">
 					<div class="panel-body" style="height: 280px">
-						<img class="img-rounded cocktail-small" src="http://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" style="margin-bottom:20px;"><br>
+						<img class="img-rounded cocktail-small" src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" style="margin-bottom:20px;"><br>
 						<a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
 						<p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
 						<p><strong>Skill: </strong>{{cocktail.skill.name}}</p>
@@ -59,7 +59,7 @@
   	<br>
   	<table class="center">
   		<tr ng-repeat="cocktail in cocktails">
-  			<td style="text-align:center;"><img ng-src="http://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" alt="..." class="img-circle profile-thumbnail"></td>
+  			<td style="text-align:center;"><img ng-src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" alt="..." class="img-circle profile-thumbnail"></td>
   			<td style="text-align:center;"><a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
   			<p ng-repeat="taste in cocktail.tastes" style="display:inline;color:#ccc">{{taste.text}}.</p>
   		</tr>
