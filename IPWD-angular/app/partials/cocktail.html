@@ -63,8 +63,10 @@
 						</div> something-->
 					
 					
-					<button type="button" class="btn btn-warning" ng-click="addFavorite(cocktail.result[0].id)" ng-show="!clicked"><span class="glyphicon glyphicon-heart-empty"></span>  Add to favorites</button>
-					<button type="button" class="btn btn-default" ng-click="removeFavorite(cocktail.result[0].id)" ng-show="clicked"><span class="glyphicon glyphicon-heart"></span>  Remove from favorites</button>
+					<button type="button" class="btn btn-warning" ng-click="addFavorite(cocktail.result[0].id)" ng-show="!clicked" ng-disabled="!isSignedIn"><span class="glyphicon glyphicon-heart-empty" ></span>  Add to favorites</button>
+					<button type="button" class="btn btn-default" ng-click="removeFavorite(cocktail.result[0].id)" ng-show="clicked" ng-disabled="!isSignedIn"><span class="glyphicon glyphicon-heart"></span>  Remove from favorites</button>
+					<br/>
+					<p style="color:grey;" ng-show="!isSignedIn"><a href="#/signin">Sign in to add this cocktail to your favorites</a></p>
 				</div>
 			</div>
 		</div>

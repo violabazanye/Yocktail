@@ -1,5 +1,7 @@
 yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$firebaseArray,$location,Cocktail) {
 	
+	$scope.isSignedIn = Cocktail.isSignedIn();
+	
 	var currentUser = Cocktail.getUser();
 	var favoriteCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + currentUser.uid + "/favorites/");
 	var favoriteCocktails = $firebaseArray(favoriteCocktailsRef);
