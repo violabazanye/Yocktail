@@ -109,7 +109,7 @@
 					<img class="img-circle cocktail-small" ng-src="{{cocktail.image}}" >
 					<h3>{{cocktail.name}}</h3>
 					<p>{{cocktail.description}}</p>
-					<!-- <button type="button" class="btn btn-default" ng-click="DeleteCocktail(cocktail);">Delete</button> -->
+					<button type="button" class="btn btn-default" ng-show="isSignedInUser" ng-click="DeleteCocktail(cocktail);">Delete</button>
 				</div>
 			</div>
 		</div>

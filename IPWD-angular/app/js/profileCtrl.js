@@ -236,30 +236,32 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	// 	});
 	// }
 
-	// $scope.DeleteCocktail = function(cocktail){
-	// 	console.log("DeleteCocktail cocktail:");
-	// 	console.log(cocktail);
+	$scope.DeleteCocktail = function(cocktail){
+		console.log("DeleteCocktail cocktail.key: "+ cocktail.key);
+		console.log(cocktail);
 
-	// 	// remove from the cocktail array
-	// 	// var cocktailKey = cocktails.$getRecord(cocktail);
-	// 	console.log("DeleteCocktail cocktail.key: "+ cocktail.key);
+		for (var i = 0; i < cocktails.length; i++) {
+			if (cocktails[i].$id === cocktail.key) {
+				cocktails.$remove(i).then(function(ref){
+					console.log('item removed from cocktail');
 
-	// 	cocktailsRef.$remove(cocktail.key).then(function(ref) {
-	// 		console.log('item removed from cocktail');
+					for(var i=0; i<userMadeCocktailsFirebaseArray.length; i++){
+						if(userMadeCocktailsFirebaseArray[i].$value == cocktail.key){
+							
+							userMadeCocktailsFirebaseArray.$remove(i).then(function(){
+								console.log('item removed from user made cocktail');
+							    // refresh the page
+							    $window.location.reload();
 
-	// 		var userMadeCocktailKey = ref.key();
-	// 		console.log("DeleteCocktail userMadeCocktailKey: "+ userMadeCocktailKey);
-
-	// 		userMadeCocktailsRef.$remove(userMadeCocktailKey);
-	// 		console.log('item removed from user made cocktail');
-
-	// 	    // refresh the page
-	// 	    $window.location.reload();
-
-	// 	}).catch(function(error) {
-	// 		console.log('DeleteCocktail error in delete from cocktails: ', error);
-	// 	});
-	// }
+							});
+						}
+					}
+				}).catch(function(error) {
+					console.log('DeleteCocktail error in delete from cocktails: ', error);
+				});
+			}
+		};
+	}
 
 	$scope.CancelCreateNewCocktail = function(){
 		newIngredients = [];
