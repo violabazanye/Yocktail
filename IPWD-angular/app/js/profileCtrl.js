@@ -62,13 +62,15 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	this.setUserFavorites = function(uid){
 		// get cocktails from absolute drinks
 		favoriteCocktailsARef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + uid + "/favorites/");
-		favoriteCocktails = $firebaseArray(favoriteCocktailsAbsolutDrinksRef);
+		favoriteCocktails = $firebaseArray(favoriteCocktailsARef);
 
-		favoriteCocktailsAbsolutDrinksRef.once("value", function(snapshot) {
+		favoriteCocktailsARef.once("value", function(snapshot) {
 
 			snapshot.forEach(function(childSnapshot) {
 
 				var favoriteCocktail = childSnapshot.val();
+				console.log("favoriteCocktail:");
+				console.log(favoriteCocktail);
 				var cocktailSource = favoriteCocktail.source;
 				var cocktailId = favoriteCocktail.id;  // drink id
 
@@ -85,19 +87,27 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 						}
 						cocktail.taste = tastes;
 						cocktail.key = data.result[0].id;
+						cocktail.isAbsolutDrink = true;
 
 				    	$scope.favoriteCocktails.push(cocktail);
 					});
 				}else if(cocktailSource === "yocktail"){
 					// use the id to retrieve the data in cocktailsRef and get the whole object back
 				    cocktailsRef.child(cocktailId).once("value", function(data) {
-				    	console.log("cocktail");
+				    	console.log("yocktail cocktail");
 				    	console.log(data.val());
 
-				    	cocktail = data.val(); 
-				    	cocktail.key = childData;
+				    	if (data.val()) {
+				    		var cocktail = {};
+				    		cocktail = data.val();
 
-				    	$scope.favoriteCocktails.push(cocktail);
+				    		cocktail.key = cocktailId;
+				    		cocktail.isAbsolutDrink = false;
+
+				    		$scope.favoriteCocktails.push(cocktail);
+				    	}else{
+				    		// do nothing
+				    	}
 				    });
 				}else{
 					// do nothing
@@ -315,10 +325,10 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 		$scope.newCocktail = null;
 	}
 
-	$scope.RemoveFromFavorites = function(){
+	$scope.DeleteFavorite = function(cocktail){
 		$scope.clicked = false;
 		for (var i = 0; i < favoriteCocktails.length; i++) {
-			if (favoriteCocktails[i].$value.id === drinkID) {
+			if (favoriteCocktails[i].$value.id === cocktail.key) {
 				favoriteCocktails.$remove(i).then(function(ref){
 					console.log('item removed, yaay!');
 

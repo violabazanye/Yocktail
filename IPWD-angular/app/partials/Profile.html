@@ -14,7 +14,7 @@
 				<div class="col-md-12" style="margin-top:10px;"><p style="color:#ccc;">{{user.bio}}</p></div>
 			</div>	
 		</div>
-	</div>s
+	</div>
 
 	<hr>
 	<div class="row">
@@ -126,7 +126,8 @@
 				<div ng-repeat="cocktail in favoriteCocktails track by $index">
 				<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
 					<img class="img-circle cocktail-small" ng-src="{{cocktail.image}}" >
-					<h5><a ng-href="#/cocktail/{{cocktail.key}}">{{cocktail.name}}</a></h5>
+					<h5><a ng-show="cocktail.isAbsolutDrink" ng-href="#/cocktail/{{cocktail.key}}">{{cocktail.name}}</a></h5>
+					<h5><a ng-show="!cocktail.isAbsolutDrink" ng-href="#/user_cocktail/{{cocktail.key}}">{{cocktail.name}}</a></h5>
 					<p>{{cocktail.taste}}</p>
 					<button type="button" class="btn btn-default" ng-show="isSignedInUser" ng-click="DeleteFavorite(cocktail);">Delete</button>
 				</div>

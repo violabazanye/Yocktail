@@ -10,6 +10,7 @@ yocktailApp.controller('UserCocktailCtrl', function ($scope,$routeParams,$fireba
 	
 	userCocktails.$loaded().then(function(x) {
 	    $scope.userCocktail = userCocktails.$getRecord($routeParams.ID);
+	    $scope.userCocktail.id = $routeParams.ID;
 	  }).catch(function(error) {
 	    console.log("Error:", error);
 	  });
@@ -23,7 +24,7 @@ yocktailApp.controller('UserCocktailCtrl', function ($scope,$routeParams,$fireba
 	      });
 	      
 	      favoriteUserCocktails.$loaded(function(data){
-	      	$scope.checkIfDrinkIsInFavorites($scope.userCocktail.name);
+	      	$scope.checkIfDrinkIsInFavorites($scope.userCocktail.id);
 	      });
 	      	   
 	});
@@ -35,9 +36,13 @@ yocktailApp.controller('UserCocktailCtrl', function ($scope,$routeParams,$fireba
 
 	$scope.checkIfDrinkIsInFavorites = function(ID){
 		favoriteUserCocktails.$loaded(function(data){
-			
 			for (var i = 0; i < favoriteUserCocktails.length; i++) {
-				if (favoriteUserCocktails[i].$value.id === ID) {
+				console.log("favoriteUserCocktails " + i + ": ");
+				console.log(favoriteUserCocktails[i]);
+
+				var favoriteCocktail = favoriteUserCocktails[i];
+
+				if (favoriteCocktail.id === ID) {
 					console.log("item exists");
 					$scope.clicked = true;
 				}else{
@@ -51,8 +56,10 @@ yocktailApp.controller('UserCocktailCtrl', function ($scope,$routeParams,$fireba
 	}
 
 	$scope.addFavorite = function(drinkID){
+		console.log("addFavorite: "+drinkID);
 		// add this new cocktail into the favorite array
 		var newFavortite = {source: "yocktail", id: drinkID};
+		
 		favoriteUserCocktails.$add(newFavortite).then(function(ref){
 			var newCocktailId = ref.key();
 			console.log("Success!");
@@ -61,10 +68,14 @@ yocktailApp.controller('UserCocktailCtrl', function ($scope,$routeParams,$fireba
 	}
 
 	$scope.removeFavorite = function(drinkID){
+		console.log("removeFavorite: "+drinkID);
 		// remove from the favorite array
 		$scope.clicked = false;
 		for (var i = 0; i < favoriteUserCocktails.length; i++) {
-			if (favoriteUserCocktails[i].$value.id === drinkID) {
+
+			var favoriteCocktail = favoriteUserCocktails[i];
+
+			if (favoriteCocktail.id === drinkID) {
 				favoriteUserCocktails.$remove(i).then(function(ref){
 					console.log('item removed, yaay!');
 				});
