@@ -32,10 +32,10 @@ yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$firebaseAr
 
 	$scope.checkIfDrinkIsInFavorites = function(ID){
 		favoriteCocktails.$loaded(function(data){
-			//console.log(data);
+			
 			for (var i = 0; i < favoriteCocktails.length; i++) {
 				if (favoriteCocktails[i].$value === ID) {
-					console.log("item exits");
+					console.log("item exists");
 					$scope.clicked = true;
 				}else{
 					console.log("item doesn't exist");

@@ -51,6 +51,10 @@ yocktailApp.config(['$routeProvider', '$sceDelegateProvider',
         templateUrl: 'partials/edit_profile.html',
         controller: 'EditProfileCtrl'
       }).
+      when('/user_cocktail/:ID', {
+        templateUrl: 'partials/userCocktail.html',
+        controller: 'UserCocktailCtrl'
+      }).
       otherwise({
         redirectTo: '/home'
       });
