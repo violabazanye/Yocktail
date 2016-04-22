@@ -1,22 +1,23 @@
 <div class="container">
+  <h3>Welcome to our community!</h3>
 	<div class="row" style="padding-top:100px;">
 		<div class="col-md-12">
-			<div class="col-md-3 text-center" ng-repeat="cocktail in cocktails">
+			<div class="col-md-3 text-center" ng-repeat="cocktail in communityCocktails">
 				<div class="panel panel-default" ng-mouseover="showCreator=true" ng-mouseleave="showCreator=false">
 					<div class="panel-body" style="height: 280px">
-						<img class="img-rounded cocktail-small" src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" style="margin-bottom:20px;"><br>
-						<a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
-						<p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
-						<p><strong>Skill: </strong>{{cocktail.skill.name}}</p>
+						<img class="img-rounded cocktail-small" ng-src="{{cocktail.image}}" style="margin-bottom:20px;"><br>
+						<a ng-href="#/user_cocktail/{{cocktail.key}}"><strong>{{cocktail.name}}</strong></a><br>
+            <p><strong>{{cocktail.taste}}</strong></p>
+						<p><strong>Skill: </strong>{{cocktail.skill}}</p>
 						<br>
-						<div class="col-md-11 text-left" style="position: absolute; top:0; left:12px; background-color: #81D4FA; opacity: 0.8" ng-show="showCreator" ng-animate="{enter: 'animate slidedown'}">
+						<div class="col-md-11 text-left" style="position: absolute; top:0; left:12px; background-color: #f0ad4e; opacity: 0.95" ng-show="showCreator" ng-animate="{enter: 'animate slidedown'}">
 							<div class="col-md-3">
-							<img ng-show="user.profile_image" ng-src="{{user.profile_image}}" alt="..." class="img-circle" style="width:40px; height:40px; margin-top: 3px">
-							<img ng-show="!user.profile_image" ng-src="images/profile_mockup.png" alt="..." class="img-circle" style="width:40px; height:40px; margin-top: 3px">
+							<img ng-show="cocktail.creator.profile_image" ng-src="{{cocktail.creator.profile_image}}" alt="..." class="img-circle" style="width:30px; height:30px; margin-top: 6px">
+							<img ng-show="!cocktail.creator.profile_image" ng-src="images/profile_mockup.png" alt="..." class="img-circle" style="width:30px; height:30px; margin-top: 6px">
 							</div>
 							<div class="col-md-9 text-left">
-								<p style="margin-bottom:0px; font-size: 15px; color: white">{{user.name}}User name</p>
-								<p style="margin-bottom:5px; font-size: 15px;">{{user.bio}} User bio</p>
+								<p style="margin-bottom:0px; font-size: 15px; color: white"><a ng-href="#/profile/{{cocktail.creator_uid}}">{{cocktail.creator.name}}</a></p>
+								<p style="margin-bottom:5px; font-size: 12px; color: white">{{cocktail.creator.bio}}</p>
 							</div>
 						</div>
 					</div>
