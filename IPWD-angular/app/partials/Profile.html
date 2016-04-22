@@ -31,14 +31,14 @@
 	<div ng-show="cocktails" ng-cloak ng-init="cocktails=true">
 		<h4 class="text-center" style="color:#333" ng-show="isSignedInUser">Here are cocktails you made</h4>
 		<h4 class="text-center" style="color:#333" ng-show="!isSignedInUser">Here are cocktails he/she made</h4>
-		<div class="row" style="margin-top:50px" ng-show="isSignedInUser">
-			<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
+		<div class="row" style="margin-top:50px">
+			<div class="col-xs-6 col-sm-3 text-center cocktail-small-div" ng-show="isSignedInUser">
 				<img class="img-circle cocktail-small" src="images/cocktail_mockup.png" >
 				<h3>Create new cocktail</h3>
 				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Create</button>
 			</div>
 			
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-show="isSignedInUser">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
