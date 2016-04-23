@@ -100,11 +100,11 @@ input:disabled {
 --------------------------------------------------*/
 
 .home-heading-font{
-	font-size:46px;
+	font-size:26px;
 }
 
 .section-font{
-	font-size: 30px;
+	font-size: 16px;
 }
 
 #search-btn {
@@ -167,22 +167,34 @@ input:disabled {
     right: 20%;
   }
 
+.img-position {
+	top: -20px;
+}
+
+.caption-position {
+	top: 50%;
+}
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 
 @media (max-width:768px) {
 	.home-heading-font{
-		font-size:25px;
+		font-size:24px;
 	}
 
 	.section-font{
-		font-size: 20px;
+		font-size: 18px;
 	}
 	
 	.wine-creater{
-    top: 44%;
-    right: 10%;
-  }
+		top: 44%;
+		right: 10%;
+	}
+	
+	.caption-position {
+		top: 0%;
+	}
 }
 
 
@@ -297,18 +309,21 @@ input:disabled {
   }
 
   .section-font{
-	font-size: 26px;
+	font-size: 22px;
   }
-  
+ 
+	.caption-position {
+	top: 40%;
+	}
 }
 
 @media (min-width:992px){
 	.home-heading-font{
-		font-size:46px;
+		font-size:36px;
 	}
 
 	.section-font{
-		font-size: 30px;
+		font-size: 26px;
 	}
 	
 }
