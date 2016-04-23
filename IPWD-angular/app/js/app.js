@@ -55,9 +55,6 @@ yocktailApp.config(['$routeProvider', '$sceDelegateProvider',
         templateUrl: 'partials/userCocktail.html',
         controller: 'UserCocktailCtrl'
       }).
-      when('/goodbye/', {
-        templateUrl: 'partials/goodbye.html'
-      }).
       otherwise({
         redirectTo: '/home'
       });
