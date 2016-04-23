@@ -1,3 +1,4 @@
+<div class="container-fluid">
 <div class="row">
 	<div class="container">
 		<div id="part1" class="col-md-12"> 	<!-- search button -->
@@ -13,8 +14,8 @@
 	</div>
 
 	<div id="part2" class="container border">
-		<div class="col-md-12" style="padding-top: 30px;">
-			<div class="col-md-6 col-md-offset-1">
+		<div class="col-md-12 col-sm-12 col-xs-12" style="padding-top: 30px;">
+			<div class="col-md-6 col-md-offset-1 col-sm-7 col-xs-12">
 				<h2><strong>{{cocktail.result[0].name}}</strong></h2>
 				
 				<div style="margin-top:3vh; margin-bottom:3vh">
@@ -33,16 +34,16 @@
 						</table>
 					</div>
 				</div>
-				<div class="col-md-8" style="margin-top: 5vh; margin-bottom:3vh">
+				<div class="col-md-8  col-sm-8 col-xs-12" style="margin-top: 5vh; margin-bottom:3vh">
 					<h4><b>How to Mix</b></h4>
 					<p>{{cocktail.result[0].descriptionPlain}}</p>
 				</div>
 			</div>
-			<div class="col-md-5 text-center">
+			<div class="col-md-5  col-sm-5 col-xs-12 text-center">
 				<div class="col-md-12">
 					<img class="img-thumbnail" ng-src="https://assets.absolutdrinks.com/drinks/{{cocktail.result[0].id}}.png" style="margin-bottom:20px; height: 60vh"><br>
 				</div>
-				<div class="col-md-12">
+				<div class="col-md-12  col-sm-12 col-xs-12">
 					<!-- <h4><b>Ratings:</b> {{cocktail.result[0].rating}}</h4> 
 					
 						<div style="margin:auto;width:200px">
@@ -70,28 +71,33 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-12 text-center" style="margin-top:40px">
-			<div class="embed-responsive embed-responsive-4by3">
-			  <iframe width="560" height="315" class="embed-responsive-item" ng-src="{{url}}" frameborder="0" allowfullscreen></iframe>
+		<div class="col-md-12  col-sm-12 col-xs-12 text-center" style="margin-top:40px">
+			<div class="embed-responsive embed-responsive-16by9">
+			  <video style="height:30vw" class="embed-responsive-item" ng-src="{{url}}" allowfullscreen alt="no video" controls></video>
 			</div>
 		</div>
 	</div>
+</div>
+	<hr class="container">
 
-	<hr style="margin-left:150px;margin-right:150px;">
+	<div class="container-fluid">
+    <!-- Three columns of text below the carousel -->
+		<div class="row" style="padding: 3%;">
+			<div class="col-md-12 text-center">
+				<span class="section-font">Popular Cocktails</span>
+			</div>
+			{{status}}
+			<br>
 
-	<div id="part3" class="container-fluid" style="margin-top:50px">
-		<div class="col-md-12">
-			<h4 class="text-center"><b>You might also be intrested in</b></h4>
-			
-			<div class="DocumentList" style="margin-top:30px">
-      <ul class="list-inline">
-        <li class="DocumentItem text-center" ng-repeat="cocktail in cocktails">
-          <img class="img-circle cocktail-small" ng-src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" ><br>
-          <a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
-          <p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
-        </li>
-      </ul>
-    </div>
-		</div>
+			<div class="DocumentList">
+				<ul class="list-inline">
+					<li class="DocumentItem text-center" ng-repeat="cocktail in cocktails">
+						<img class="img-circle cocktail-small" ng-src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" ><br>
+						<a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
+						<p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
+					</li>
+				</ul>
+			</div>
+		</div><!-- /.row -->
 	</div>
 </div>
