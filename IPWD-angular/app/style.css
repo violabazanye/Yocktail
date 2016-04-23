@@ -4,6 +4,8 @@
   @include box-sizing(border-box); 
 }
 
+body { padding-top: 70px; }
+
 footer {
   background-color: #222;
   border-color: #222;
@@ -97,23 +99,13 @@ input:disabled {
 /* CAROUSEL
 --------------------------------------------------*/
 
-.pgl, .pgr {
-	display: block;
-	position: absolute;
-	width: 55px;
-	height: 55px;
-	cursor: pointer;
-	background: url('/images/a03.png') no-repeat;
-	overflow: hidden;
-	z-index:10000;
-	top:95px;
+.home-heading-font{
+	font-size:46px;
 }
 
-.pgl { background-position: -3px -33px; }
-.pgr { background-position: -63px -33px; }
-.pgl:hover { background-position: -123px -33px; }
-.pgr:hover { background-position: -183px -33px; }
-
+.section-font{
+	font-size: 30px;
+}
 
 #search-btn {
   width: 200px;
@@ -166,9 +158,34 @@ input:disabled {
   padding-right: 50px;
 }
 
+.wine-creater{
+    z-index: 10;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 47%;
+    right: 20%;
+  }
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
+
+@media (max-width:768px) {
+	.home-heading-font{
+		font-size:25px;
+	}
+
+	.section-font{
+		font-size: 20px;
+	}
+	
+	.wine-creater{
+    top: 44%;
+    right: 10%;
+  }
+}
+
+
 
 @media (min-width: 768px) {
 
@@ -194,10 +211,7 @@ input:disabled {
     font-size: 21px;
     line-height: 1.4;
   }
-  .cocktail-small{
-    width: 140px;
-    height: 140px;
-  }
+  
   .cocktail-small-div{
     width: 25%;
   }
@@ -247,10 +261,10 @@ input:disabled {
   .wine-creater{
     z-index: 10;
     position: absolute;
-    width: 80px;
-    height: 80px;
-    top: 60px;
-    left:160px;
+    width: 60px;
+    height: 60px;
+    top: 44%;
+    right: 20%;
   }
 
   /**about page*/
@@ -277,6 +291,25 @@ input:disabled {
     float:left;
     margin-left: 40px;
   }
+	
+  .home-heading-font{
+	font-size:32px;
+  }
 
+  .section-font{
+	font-size: 26px;
+  }
+  
+}
+
+@media (min-width:992px){
+	.home-heading-font{
+		font-size:46px;
+	}
+
+	.section-font{
+		font-size: 30px;
+	}
+	
 }
 

@@ -1,25 +1,31 @@
 <div class="container">
-	<div class="row" style="padding-top:60px;">
-    <h3>Welcome to our community!</h3>
-    <br/>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<span class="section-font">Welcome to our community!</span>
+			</br>
+		</div>
 		<div class="col-md-12">
-			<div class="col-md-3 text-center" ng-repeat="cocktail in communityCocktails">
+			<div class="col-md-3 col-sm-4 col-xs-12 text-center" ng-repeat="cocktail in communityCocktails" style="margin-top:20px">
 				<div class="panel panel-default" ng-mouseover="showCreator=true" ng-mouseleave="showCreator=false">
-					<div class="panel-body" style="height: 280px">
-						<img ng-show="cocktail.image" class="img-rounded cocktail-small" ng-src="{{cocktail.image}}" style="margin-bottom:20px;"><br>
-						<img ng-show="!cocktail.image" class="img-rounded cocktail-small" ng-src="images/cocktail_mockup.png" style="margin-bottom:20px;"><br>
+					<div class="panel-body" style="height: 260px; margin-top:20px">
+						<img ng-show="cocktail.image" class="img-rounded cocktail-small" ng-src="{{cocktail.image}}"><br>
+						<img ng-show="!cocktail.image" class="img-rounded cocktail-small" ng-src="images/cocktail_mockup.png"><br>
 						<a ng-href="#/user_cocktail/{{cocktail.key}}"><strong>{{cocktail.name}}</strong></a><br>
 						<p><strong>{{cocktail.taste}}</strong></p>
 						<p><strong>Skill: </strong>{{cocktail.skill}}</p>
 						<br>
-						<div class="col-md-11 text-left" style="position: absolute; top:0; left:12px; background-color: #f0ad4e; opacity: 0.95" ng-show="showCreator" ng-animate="{enter: 'animate slidedown'}">
-							<div class="col-md-3">
-								<img ng-show="cocktail.creator.profile_image" ng-src="{{cocktail.creator.profile_image}}" alt="..." class="img-circle" style="width:30px; height:30px; margin-top: 6px">
-								<img ng-show="!cocktail.creator.profile_image" ng-src="images/profile_mockup.png" alt="..." class="img-circle" style="width:30px; height:30px; margin-top: 6px">
+						<div class="col-md-12 col-sm-12 col-xs-12 text-left" style="position: absolute; top:0; left:0" ng-show="showCreator">
+							<div class="panel panel-default">
+								<div class="panel-body" style="background-color: #ccc; opacity: 0.95">
+							<div class="col-md-3 col-sm-3 col-xs-3">
+								<img ng-show="cocktail.creator.profile_image" ng-src="{{cocktail.creator.profile_image}}" alt="..." class="img-circle" style="width:40px; height:40px; margin-top: 4px">
+								<img ng-show="!cocktail.creator.profile_image" ng-src="images/profile_mockup.png" alt="..." class="img-circle" style="width:40px; height:40px; margin-top: 4px">
 							</div>
-							<div class="col-md-9 text-left">
+							<div class="col-md-9 col-sm-9 col-xs-9 text-left">
 								<p style="margin-bottom:0px; font-size: 15px; color: white"><a ng-href="#/profile/{{cocktail.creator_uid}}">{{cocktail.creator.name}}</a></p>
 								<p style="margin-bottom:5px; font-size: 12px; color: white">{{cocktail.creator.bio}}</p>
+							</div>
+							</div>
 							</div>
 						</div>
 					</div>

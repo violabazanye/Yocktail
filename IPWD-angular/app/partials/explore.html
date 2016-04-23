@@ -1,45 +1,41 @@
-<div class="container marketing" style="padding-top: 120px">
-
-  <h2 style="margin:auto;width:400px;">discover cocktail recipes</h2>
-  <br>
-  <div class="row">
-    <div class="col-lg-6 col-md-offset-3">
-      <div class="input-group">
-        <input type="text" class="form-control" ng-model="query" placeholder="search for ingredients like grape, lemon, bourbon...">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button" ng-click="search(query)"><span class="glyphicon glyphicon-search" aria-hidden="true"></button>
-        </span>
-      </div><!-- /input-group -->
-    </div><!-- /.col-lg-6 -->
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2 style="padding-bottom: 30px">Discover cocktail recipes</h2>
+		</div>
+  
+		<div class="col-md-6 col-md-offset-3">
+		  <div class="input-group">
+			<input type="text" class="form-control" ng-model="query" placeholder="search for ingredients like grape, lemon, bourbon...">
+			<span class="input-group-btn">
+			  <button class="btn btn-default" type="button" ng-click="search(query)"><span class="glyphicon glyphicon-search" aria-hidden="true"></button>
+			</span>
+		  </div><!-- /input-group -->
+		</div><!-- /.col-lg-6 -->
   </div><!-- /.row -->
 
-  
-    <div class="images-box" ng-init="occasion=false">
+	<div class="row" ng-init="occasion=false" style="margin-top: 50px">
+	  <div class="col-xs-12 col-sm-6 col-md-3">
+		<input type="image" src="images/Cocktail-1.jpg" class="categories" ng-model="occasion" ng-click="occasions('afternoon',query) ; !occasion" ng-disabled="occasion"/>
+		<h4 class="img_txt">Afternoon Drinks</h4>
+	  </div>
+	  <div class="col-xs-12 col-sm-6 col-md-3" style="position:relative;">
+		<input type="image" src="images/Cocktail-2.jpg" class="categories" ng-model="occasion" ng-click="occasions('pre-dinner',query)" ng-disabled="occasion"/>
+		<h4 class="img_txt">Pre - Dinner</h4>
+	  </div>
+	  <div class="col-xs-12 col-sm-6 col-md-3" style="position:relative;">
+		<input type="image" src="images/Cocktail-3.jpg" class="categories" ng-model="occasion" ng-click="occasions('after-dinner',query)" ng-disabled="occasion"/>
+		<h4 class="img_txt">After Dinner</h4>
+	  </div>
+	  <div class="col-xs-12 col-sm-6 col-md-3" style="position:relative;">
+		<input type="image" src="images/Cocktail-4.jpg" class="categories" ng-model="occasion" ng-click="occasions('evening',query)" ng-disabled="occasion"/>
+		<h4 class="img_txt">Evening Drinks</h4>
+	  </div>
+	</div>
 
-        <div class="row">
-          <div class="col-xs-6 col-sm-3" style="position:relative;">
-            <input type="image" src="images/Cocktail-1.jpg" class="categories" ng-model="occasion" ng-click="occasions('afternoon',query) ; !occasion" ng-disabled="occasion"/>
-            <h4 class="img_txt">Afternoon Drinks</h4>
-          </div>
-          <div class="col-xs-6 col-sm-3" style="position:relative;">
-            <input type="image" src="images/Cocktail-2.jpg" class="categories" ng-model="occasion" ng-click="occasions('pre-dinner',query)" ng-disabled="occasion"/>
-            <h4 class="img_txt">Pre - Dinner</h4>
-          </div>
-          <div class="col-xs-6 col-sm-3" style="position:relative;">
-            <input type="image" src="images/Cocktail-3.jpg" class="categories" ng-model="occasion" ng-click="occasions('after-dinner',query)" ng-disabled="occasion"/>
-            <h4 class="img_txt">After Dinner</h4>
-          </div>
-          <div class="col-xs-6 col-sm-3" style="position:relative;">
-            <input type="image" src="images/Cocktail-4.jpg" class="categories" ng-model="occasion" ng-click="occasions('evening',query)" ng-disabled="occasion"/>
-            <h4 class="img_txt">Evening Drinks</h4>
-          </div>
-        </div>
+    
 
-    </div>
-
-  <hr class="featurette-divider" style="margin-bottom: 20px">
-
-  <div class="featurette">
+  <div>
 
     <h3>{{status}}</h3>
     <br>
@@ -54,5 +50,5 @@
       </div>
       <br>
     </div>
-
+	</div>
 </div><!-- /.container -->
