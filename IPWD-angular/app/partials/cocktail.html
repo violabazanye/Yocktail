@@ -40,7 +40,7 @@
 			</div>
 			<div class="col-md-5 text-center">
 				<div class="col-md-12">
-					<img class="img-thumbnail" ng-src="http://assets.absolutdrinks.com/drinks/{{cocktail.result[0].id}}.png" style="margin-bottom:20px; height: 60vh"><br>
+					<img class="img-thumbnail" ng-src="https://assets.absolutdrinks.com/drinks/{{cocktail.result[0].id}}.png" style="margin-bottom:20px; height: 60vh"><br>
 				</div>
 				<div class="col-md-12">
 					<!-- <h4><b>Ratings:</b> {{cocktail.result[0].rating}}</h4> 
@@ -60,10 +60,13 @@
 									<a href=""><img style="width:30px" src="images/social_4.png"/></a>
 								</li>
 							</ul>
-						</div> -->
+						</div> something-->
 					
 					
-					<button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-heart"></span>  Add to favorites</button>
+					<button type="button" class="btn btn-warning" ng-click="addFavorite(cocktail.result[0].id)" ng-show="!clicked" ng-disabled="!isSignedIn"><span class="glyphicon glyphicon-heart-empty" ></span>  Add to favorites</button>
+					<button type="button" class="btn btn-default" ng-click="removeFavorite(cocktail.result[0].id)" ng-show="clicked" ng-disabled="!isSignedIn"><span class="glyphicon glyphicon-heart"></span>  Remove from favorites</button>
+					<br/>
+					<p style="color:grey;" ng-show="!isSignedIn"><a href="#/signin">Sign in to add this cocktail to your favorites</a></p>
 				</div>
 			</div>
 		</div>
@@ -79,20 +82,11 @@
 	<div id="part3" class="container-fluid" style="margin-top:50px">
 		<div class="col-md-12">
 			<h4 class="text-center"><b>You might also be intrested in</b></h4>
-			<!-- <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 20px">
-				  {{status}}
-				<br>
-				<br>
-				<div class="col-xs-6 col-sm-3 text-center cocktail-small-div" ng-repeat="cocktail in cocktails">
-				  <img class="img-circle cocktail-small" src="http://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" ><br>
-				  <a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
-				  <p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
-				</div> 
-			</div> -->
+			
 			<div class="DocumentList" style="margin-top:30px">
       <ul class="list-inline">
         <li class="DocumentItem text-center" ng-repeat="cocktail in cocktails">
-          <img class="img-circle cocktail-small" ng-src="http://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" ><br>
+          <img class="img-circle cocktail-small" ng-src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" ><br>
           <a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
           <p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
         </li>

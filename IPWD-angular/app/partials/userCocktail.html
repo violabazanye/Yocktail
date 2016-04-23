@@ -1,0 +1,86 @@
+<div class="row" style="padding-top:100px;">
+	<div class="container">
+		<div id="part1" class="col-md-12"> 	<!-- search button -->
+			<div class="col-md-6 col-md-offset-3" style="margin-bottom: 1em;">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-model="query" placeholder="search for ingredients like grape, lemon, bourbon...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button" ng-click="search(query)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="part2" class="container border">
+		<div class="col-md-12" style="padding-top: 30px;">
+			<div class="col-md-6 col-md-offset-1">
+				<h2><strong>{{userCocktail.name}}</strong></h2>
+				
+				<div style="margin-top:3vh; margin-bottom:3vh">
+					<span class="col-md-12 col-sm-12 col-xs-12">Description: {{userCocktail.description}}</span>
+					<span class="col-md-12 col-sm-12 col-xs-12">Glass Type: {{userCocktail.type}}</span>
+					<span class="col-md-12 col-sm-12 col-xs-12">Taste: {{userCocktail.taste}}</span>
+					<span class="col-md-12 col-sm-12 col-xs-12">Skill Level: {{userCocktail.skill}} </span>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 5vh; margin-bottom:3vh">
+					<h4><b>Ingredients</b></h4>
+					<div class="table-responsive">
+						<table class="">
+								<tr ng-repeat="ingredient in userCocktail.ingredients">
+									<td>{{ingredient}}</td>
+								</tr> 
+						</table>
+					</div>
+				</div>
+				<div class="col-md-8" style="margin-top: 5vh; margin-bottom:3vh">
+					<h4><b>How to Mix</b></h4>
+					<p>{{userCocktail.how_to_mix}}</p>
+				</div>
+			</div>
+			<div class="col-md-5 text-center">
+				<div class="col-md-12">
+					<img class="img-thumbnail" ng-src="{{userCocktail.image}}" style="margin-bottom:20px; height: 60vh"><br>
+				</div>
+				<div class="col-md-12">
+					
+					
+					<button type="button" class="btn btn-warning" ng-click="addFavorite(userCocktail.id)" ng-show="!clicked"><span class="glyphicon glyphicon-heart-empty"></span>  Add to favorites</button>
+					<button type="button" class="btn btn-default" ng-click="removeFavorite(userCocktail.id)" ng-show="clicked"><span class="glyphicon glyphicon-heart"></span>  Remove from favorites</button>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="col-md-12 text-center" style="margin-top:40px">
+			<div class="embed-responsive embed-responsive-4by3">
+			  <iframe width="560" height="315" class="embed-responsive-item" ng-src="{{url}}" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div> -->
+	</div>
+
+	<hr style="margin-left:150px;margin-right:150px;">
+
+	<div id="part3" class="container-fluid" style="margin-top:50px">
+		<div class="col-md-12">
+			<h4 class="text-center"><b>You might also be intrested in</b></h4>
+			<!-- <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 20px">
+				  {{status}}
+				<br>
+				<br>
+				<div class="col-xs-6 col-sm-3 text-center cocktail-small-div" ng-repeat="cocktail in cocktails">
+				  <img class="img-circle cocktail-small" src="http://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" ><br>
+				  <a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
+				  <p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
+				</div> 
+			</div> -->
+			<div class="DocumentList" style="margin-top:30px">
+      <ul class="list-inline">
+        <li class="DocumentItem text-center" ng-repeat="cocktail in cocktails">
+          <img class="img-circle cocktail-small" ng-src="http://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" ><br>
+          <a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
+          <p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
+        </li>
+      </ul>
+    </div>
+		</div>
+	</div>
+</div>
