@@ -1,7 +1,6 @@
 yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 
 	$scope.isSignedIn = Cocktail.isSignedIn();
-	$scope.oldEnough = true;
 
 	$scope.$on('$viewContentLoaded', function(){
 
@@ -27,9 +26,8 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
         age = todayYear - num; 
 
 	    if(age < 18){
-	    	$scope.oldEnough = false;
 	    	console.log("you're too young!");
-	    	$location.path("/goodbye/");
+	    	$('#myNoModal').modal({backdrop: 'static', keyboard: false , show: true});
 	    }
 	}
 
