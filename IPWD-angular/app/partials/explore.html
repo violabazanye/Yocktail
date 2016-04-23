@@ -1,54 +1,53 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 text-center">
-			<h2 style="padding-bottom: 30px">Discover cocktail recipes</h2>
+			<span class="section-font">Discover cocktail recipes</h2>
 		</div>
   
-		<div class="col-md-6 col-md-offset-3">
-		  <div class="input-group">
-			<input type="text" class="form-control" ng-model="query" placeholder="search for ingredients like grape, lemon, bourbon...">
-			<span class="input-group-btn">
-			  <button class="btn btn-default" type="button" ng-click="search(query)"><span class="glyphicon glyphicon-search" aria-hidden="true"></button>
-			</span>
-		  </div><!-- /input-group -->
+		<div class="col-md-12 text-center" style="padding-top: 18px; padding-bottom:3%">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-model="query" placeholder="search for ingredients like grape, lemon, bourbon...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button" ng-click="search(query)"><span class="glyphicon glyphicon-search" aria-hidden="true"></button>
+					</span>
+				</div><!-- /input-group -->
+			</div>
 		</div><!-- /.col-lg-6 -->
-  </div><!-- /.row -->
+  
 
-	<div class="row" ng-init="occasion=false" style="margin-top: 50px">
-	  <div class="col-xs-12 col-sm-6 col-md-3">
-		<input type="image" src="images/Cocktail-1.jpg" class="categories" ng-model="occasion" ng-click="occasions('afternoon',query) ; !occasion" ng-disabled="occasion"/>
-		<h4 class="img_txt">Afternoon Drinks</h4>
-	  </div>
-	  <div class="col-xs-12 col-sm-6 col-md-3" style="position:relative;">
-		<input type="image" src="images/Cocktail-2.jpg" class="categories" ng-model="occasion" ng-click="occasions('pre-dinner',query)" ng-disabled="occasion"/>
-		<h4 class="img_txt">Pre - Dinner</h4>
-	  </div>
-	  <div class="col-xs-12 col-sm-6 col-md-3" style="position:relative;">
-		<input type="image" src="images/Cocktail-3.jpg" class="categories" ng-model="occasion" ng-click="occasions('after-dinner',query)" ng-disabled="occasion"/>
-		<h4 class="img_txt">After Dinner</h4>
-	  </div>
-	  <div class="col-xs-12 col-sm-6 col-md-3" style="position:relative;">
-		<input type="image" src="images/Cocktail-4.jpg" class="categories" ng-model="occasion" ng-click="occasions('evening',query)" ng-disabled="occasion"/>
-		<h4 class="img_txt">Evening Drinks</h4>
-	  </div>
-	</div>
-
-    
-
-  <div>
-
-    <h3>{{status}}</h3>
-    <br>
-    <br>
-
-    <div class="row" style="margin-bottom: 60px">
-      <div class="col-xs-6 col-sm-3 text-center cocktail-small-div" ng-repeat="cocktail in cocktails">
-        <img class="img-circle cocktail-small" src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" style="margin-bottom:20px;"><br>
-        <a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
-        <p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
-        <p><strong>Skill: </strong>{{cocktail.skill.name}}</p>
-      </div>
-      <br>
-    </div>
-	</div>
+		<div ng-init="occasion=false" style="margin-top: 5%;">
+			<div class="col-xs-12 col-sm-6 col-md-3 text-center">
+				<input type="image" src="images/Cocktail-1.jpg" class="categories" ng-model="occasion" ng-click="occasions('afternoon',query) ; !occasion" ng-disabled="occasion"/>
+				<h4 class="img_txt" ng-model="occasion" ng-click="occasions('afternoon',query) ; !occasion" ng-disabled="occasion" style="cursor: pointer">Afternoon Drinks</h4>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-3 text-center">
+				<input type="image" src="images/Cocktail-2.jpg" class="categories" ng-model="occasion" ng-click="occasions('pre-dinner',query)" ng-disabled="occasion"/>
+				<h4 class="img_txt">Pre - Dinner</h4>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-3 text-center">
+				<input type="image" src="images/Cocktail-3.jpg" class="categories" ng-model="occasion" ng-click="occasions('after-dinner',query)" ng-disabled="occasion"/>
+				<h4 class="img_txt">After Dinner</h4>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-3 text-center">
+				<input type="image" src="images/Cocktail-4.jpg" class="categories" ng-model="occasion" ng-click="occasions('evening',query)" ng-disabled="occasion"/>
+				<h4 class="img_txt">Evening Drinks</h4>
+			</div>
+		</div>
+		
+		<div class="col-md-12">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 30px">
+				<span class="section-font">{{status}}</span>
+			</div>
+			<div style="margin-bottom: 60px">
+				<div class="col-xs-12 col-sm-4 col-md-3 text-center cocktail-small-div" style="height: 260px;" ng-repeat="cocktail in cocktails">
+					<img class="img-circle cocktail-small" src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" style="margin-bottom:20px;"><br>
+					<a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
+					<p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
+					<p><strong>Skill: </strong>{{cocktail.skill.name}}</p>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div><!-- /.row -->
 </div><!-- /.container -->
