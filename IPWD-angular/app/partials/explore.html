@@ -40,7 +40,7 @@
 				<span class="section-font">{{status}}</span>
 			</div>
 			<div style="margin-bottom: 60px">
-				<div class="col-xs-12 col-sm-4 col-md-3 text-center cocktail-small-div" style="height: 260px;" ng-repeat="cocktail in cocktails">
+				<div class="col-xs-12 col-sm-4 col-md-3 text-center cocktail-small-div" style="height: 280px;" ng-repeat="cocktail in cocktails">
 					<img class="img-circle cocktail-small" src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" style="margin-bottom:20px;"><br>
 					<a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
 					<p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>

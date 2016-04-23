@@ -121,7 +121,7 @@
 		<h4 class="text-center" style="color:#333;" ng-show="isSignedInUser">Here are your favourite cocktails</h4>
 		<h4 class="text-center" style="color:#333;" ng-show="!isSignedInUser">Here are his/her favourite cocktails</h4>
 		<div class="row" style="margin-top:50px">
-			<div class="col-md-12">
+			<div class="col-md-12" style="min-height: 200px">
 				<div ng-repeat="cocktail in favoriteCocktails track by $index">
 				<div class="col-xs-6 col-sm-3 text-center cocktail-small-div">
 					<img class="img-circle cocktail-small" ng-src="{{cocktail.image}}" >
