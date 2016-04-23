@@ -1,11 +1,11 @@
 <!-- Carousel
   ================================================== -->
-<div id="myCarousel" class="carousel slide">
+<div id="myCarousel" class="carousel slide img-position">
 	<div class="carousel-inner">
 		<div class="item active">
 			<img src="images/slide-1.png" style="width:100%" class="img-responsive">
 			<div class="container">
-				<div class="carousel-caption" style="padding-bottom: 10%;">
+				<div class="carousel-caption caption-position">
 					<span class="home-heading-font">Start exploring the world of cocktails</span>
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
@@ -50,7 +50,7 @@
 
 <!--   <hr class="featurette-divider" style="padding-bottom: 0px; margin-bottom: 0px"> -->
 
-<div style="padding: 30px; background-color:#aaa; width:100%;">
+<div style="padding: 30px; background-color:grey; width:100%;">
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<span class="section-font" style="color:#eee;">Newly created cocktails</span>
@@ -72,10 +72,13 @@
 
   <div ng-show="!isSignedIn">
     <div class="footer-img" style="padding-top:0px;">
-      <div style="padding-top:100px;">
-        <h2 style="margin:auto;width:950px;color:#fff;">sign up to create your own cocktails and share with your community</h2>
+      <div class="col-md-12 text-center" style="padding-top:80px;">
+        <span class="section-font" style="color:#fff;">Sign up to create your own cocktails and share with your community</span>
+	  </div>
         <br>
-        <button class="btn btn-default btn-lg btn-block" type="button" style="margin:auto;width:400px;border-radius:0px;border:5px solid;border-color:#fff;opacity:0.8;"><a href="#signin">sign in/ sign up</a></button>
+		<div class="col-md-12 text-center" style="margin-top:30px">
+        <button class="btn btn-default btn-lg" type="button" style="border-radius:0px;border:5px solid #fff;opacity:0.8;"><a href="#signin">sign in/ sign up</a></button>
+		</div>
       </div>
     </div>
   </div>
