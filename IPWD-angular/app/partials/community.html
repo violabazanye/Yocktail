@@ -7,15 +7,15 @@
 				<div class="panel panel-default" ng-mouseover="showCreator=true" ng-mouseleave="showCreator=false">
 					<div class="panel-body" style="height: 280px">
 						<img ng-show="cocktail.image" class="img-rounded cocktail-small" ng-src="{{cocktail.image}}" style="margin-bottom:20px;"><br>
-            <img ng-show="!cocktail.image" class="img-rounded cocktail-small" ng-src="images/cocktail_mockup.png" style="margin-bottom:20px;"><br>
+						<img ng-show="!cocktail.image" class="img-rounded cocktail-small" ng-src="images/cocktail_mockup.png" style="margin-bottom:20px;"><br>
 						<a ng-href="#/user_cocktail/{{cocktail.key}}"><strong>{{cocktail.name}}</strong></a><br>
-            <p><strong>{{cocktail.taste}}</strong></p>
+						<p><strong>{{cocktail.taste}}</strong></p>
 						<p><strong>Skill: </strong>{{cocktail.skill}}</p>
 						<br>
 						<div class="col-md-11 text-left" style="position: absolute; top:0; left:12px; background-color: #f0ad4e; opacity: 0.95" ng-show="showCreator" ng-animate="{enter: 'animate slidedown'}">
 							<div class="col-md-3">
-							<img ng-show="cocktail.creator.profile_image" ng-src="{{cocktail.creator.profile_image}}" alt="..." class="img-circle" style="width:30px; height:30px; margin-top: 6px">
-							<img ng-show="!cocktail.creator.profile_image" ng-src="images/profile_mockup.png" alt="..." class="img-circle" style="width:30px; height:30px; margin-top: 6px">
+								<img ng-show="cocktail.creator.profile_image" ng-src="{{cocktail.creator.profile_image}}" alt="..." class="img-circle" style="width:30px; height:30px; margin-top: 6px">
+								<img ng-show="!cocktail.creator.profile_image" ng-src="images/profile_mockup.png" alt="..." class="img-circle" style="width:30px; height:30px; margin-top: 6px">
 							</div>
 							<div class="col-md-9 text-left">
 								<p style="margin-bottom:0px; font-size: 15px; color: white"><a ng-href="#/profile/{{cocktail.creator_uid}}">{{cocktail.creator.name}}</a></p>
@@ -27,81 +27,4 @@
 			</div>
 		</div>
 	</div> 
-
-<!--  <div class="col-md-4" style="border-right:medium #ccc solid; height:100%;">
-  	<h4 style="margin:auto;width:105px;">Hall of Fame</h4>
-  	<br>
-  	<p style="margin:auto;width:50px;color:#ccc">Top 10</p>
-  	<br>
-  	<table class="center">
-  		<tr>
-  			<td style="text-align:center;"><img src="images/Robert.jpg" alt="..." class="img-circle profile-thumbnail"></td>
-  			<td style="text-align:center;"><a href="#">John Doe</a>
-  			<p style="color:#ccc;">Cocktail Master</p></td>
-  		</tr>
-  		<tr>
-  			<td style="text-align:center;"><img src="images/woman.jpg" alt="..." class="img-circle profile-thumbnail"></td>
-  			<td style="text-align:center;"><a href="#">Jane Doe</a>
-  			<p style="color:#ccc;">Apprentice</p></td>
-  		</tr>
-  		<tr>
-  			<td style="text-align:center;"><img src="images/man.jpg" alt="..." class="img-circle profile-thumbnail"></td>
-  			<td style="text-align:center;"><a href="#">John Doe II</a>
-  			<p style="color:#ccc;">Novice</p></td>
-  		</tr>
-  	</table>
-  	<br>
-  </div> -->
-
-  <!-- end hall of fame -->
-
-  <!-- <div class="col-md-4" style="border-right:medium #ccc solid; height:100%;">
-  	<h4 class="center">Most Popular Cocktails</h4>
-  	<br>
-  	<p style="margin:auto;width:50px;color:#ccc">Top 10</p>
-  	<br>
-  	<table class="center">
-  		<tr ng-repeat="cocktail in cocktails">
-  			<td style="text-align:center;"><img ng-src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" alt="..." class="img-circle profile-thumbnail"></td>
-  			<td style="text-align:center;"><a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
-  			<p ng-repeat="taste in cocktail.tastes" style="display:inline;color:#ccc">{{taste.text}}.</p>
-  		</tr>
-  	</table>
-  	<br>
-  </div> -->
-
-  <!-- end of popular cocktails -->
-
-  <!--<div class="col-md-4">
-  	<h4 class="center">Newly-made Cocktails</h4>
-  	<br>
-  	<p style="margin:auto;width:80px;color:#ccc">Latest 10</p>
-  	<br>
-  	<table class="center">
-  		<tr>
-  			<td > <a href="#/cocktail" style="text-align:center;"><img src="images/Cocktail-1.jpg" alt="..." class="img-circle profile-thumbnail"></a></td>
-  			<td style="text-align:center;"><a href="#/cocktail">Negorine</a>
-  			<p style="color:#ccc;">Gin, Campari, Vermouth Sweet, Orange</p></td>
-  		</tr>
-  		<tr>
-  			<td style="text-align:center;"><img src="images/Cocktail-2.jpg" alt="..." class="img-circle profile-thumbnail"></td>
-  			<td style="text-align:center;"><a href="#">Negorine</a>
-  			<p style="color:#ccc;">Gin, Campari, Vermouth Sweet, Orange</p></td>
-  		</tr>
-  		<tr>
-  			<td style="text-align:center;"><img src="images/Cocktail-3.jpg" alt="..." class="img-circle profile-thumbnail"></td>
-  			<td style="text-align:center;"><a href="#">Negorine</a>
-  			<p style="color:#ccc;">Gin, Campari, Vermouth Sweet, Orange</p></td>
-  		</tr>
-  	</table>
-  	<br>
-  </div> -->
 </div>
-
-<script> 
-$(document).ready(function(){
-    $("#flip").click(function(){
-        $("#panel").slideDown("slow");
-    });
-});
-</script>
