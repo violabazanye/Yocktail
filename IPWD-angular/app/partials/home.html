@@ -1,74 +1,74 @@
 <!-- Carousel
   ================================================== -->
-  <div id="myCarousel" class="carousel slide">
-  
-
-  <div class="carousel-inner">
-    <div class="item active">
-      <img src="images/slide-1.png" style="width:100%" class="img-responsive">
-      <div class="container">
-        <div class="carousel-caption" style="padding-bottom: 10%">
-          <h1>start exploring the world of cocktails</h1>
-          <div class="row">
-            <div class="col-lg-6 col-md-offset-3">
-              <div class="input-group">
-                <input type="text" class="form-control" ng-model="query" placeholder="search for ingredients like grape, lemon, bourbon...">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-click="search(query)"><span class="glyphicon glyphicon-search" aria-hidden="true"></button>
-                </span>
-              </div><!-- /input-group -->
-            </div><!-- /.col-lg-6 -->
-          </div><!-- /.row --> 
-        </div>
-      </div>
-    </div>
-
+<div id="myCarousel" class="carousel slide">
+	<div class="carousel-inner">
+		<div class="item active">
+			<img src="images/slide-1.png" style="width:100%" class="img-responsive">
+			<div class="container">
+				<div class="carousel-caption" style="padding-bottom: 10%;">
+					<span class="home-heading-font">Start exploring the world of cocktails</span>
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<div class="input-group">
+								<input type="text" class="form-control" ng-model="query" placeholder="search for ingredients like grape, lemon, bourbon...">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button" ng-click="search(query)"><span class="glyphicon glyphicon-search" aria-hidden="true"></button>
+								</span>
+							</div><!-- /input-group -->
+						</div><!-- /.col-lg-6 -->
+					</div><!-- /.row --> 
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- /.carousel -->
 
-
-  <div class="carousel-inner">
-
+<div class="container-fluid">
     <!-- Three columns of text below the carousel -->
-    <div class="row" style="padding: 80px;">
-      <br>
-      <h2 style="margin:auto;width:250px;">Popular Cocktails</h2>
-      {{status}}
-      <br>
-      <br>
-   
-    <div class="DocumentList">
-      <ul class="list-inline">
-        <li class="DocumentItem text-center" ng-repeat="cocktail in cocktails">
-          <img class="img-circle cocktail-small" ng-src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" ><br>
-          <a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
-          <p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
-        </li>
-      </ul>
-    </div>
+    <div class="row" style="padding: 3%;">
+		<div class="col-md-12 text-center">
+			<span class="section-font">Popular Cocktails</span>
+		</div>
+		{{status}}
+		<br>
 
-  </div><!-- /.row -->
+		<div class="DocumentList">
+			<ul class="list-inline">
+				<li class="DocumentItem text-center" ng-repeat="cocktail in cocktails">
+					<img class="img-circle cocktail-small" ng-src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" ><br>
+					<a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
+					<p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
+				</li>
+			</ul>
+		</div>
+	</div><!-- /.row -->
+</div>
 
 
   <!-- START THE FEATURETTES -->
 
 <!--   <hr class="featurette-divider" style="padding-bottom: 0px; margin-bottom: 0px"> -->
 
-  <div class="featurette" style="padding: 80px; background-color:grey;width:100%;">
-    <h2 style="margin:auto;width:350px;color:#fff">Newly created cocktails</h2>
-    <br>
-    <br>
-    <div class="row">
-      <div class="col-xs-6 col-sm-3 text-center cocktail-small-div" ng-repeat="cocktail in userMadeCocktails">
-        <img class="img-circle cocktail-small" ng-show="cocktail.image" ng-src="{{cocktail.image}}" >
-        <img class="img-circle cocktail-small" ng-show="!cocktail.image" ng-src="images/cocktail_mockup.png" >
-        <img class="img-circle cocktail-small wine-creater" ng-show="cocktail.creator.profile_image" ng-src="{{cocktail.creator.profile_image}}">
-        <img class="img-circle cocktail-small wine-creater" ng-show="!cocktail.creator.profile_image" ng-src="images/profile_mockup.png">
-        <h3><a ng-href="#/user_cocktail/{{cocktail.key}}">{{cocktail.name}}</a></h3>
-        <p>{{cocktail.taste}}</p>
-      </div>
-    </div>
-  </div>
+<div style="padding: 30px; background-color:#aaa; width:100%;">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<span class="section-font" style="color:#eee;">Newly created cocktails</span>
+		</div>
+		<div class="col-md-12" style="margin-top:20px">
+			<div class="container">
+				<div class="col-xs-8 col-sm-3 text-center" ng-repeat="cocktail in userMadeCocktails" >
+					<img class="img-circle cocktail-small" ng-show="cocktail.image" ng-src="{{cocktail.image}}" >
+					<img class="img-circle cocktail-small" ng-show="!cocktail.image" ng-src="images/cocktail_mockup.png" >
+					<img class="img-circle cocktail-small wine-creater" ng-show="cocktail.creator.profile_image" ng-src="{{cocktail.creator.profile_image}}">
+					<img class="img-circle cocktail-small wine-creater" ng-show="!cocktail.creator.profile_image" ng-src="images/profile_mockup.png">
+					<h3><a ng-href="#/user_cocktail/{{cocktail.key}}">{{cocktail.name}}</a></h3>
+					<p>{{cocktail.taste}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
   <div ng-show="!isSignedIn">
     <div class="footer-img" style="padding-top:0px;">
