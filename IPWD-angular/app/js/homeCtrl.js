@@ -12,7 +12,7 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 		});
 
 		if (!($scope.isSignedIn)) {
-			$('#myModal').modal('show');
+			$('#myModal').modal({backdrop: 'static', keyboard: false , show: true});
 		};
 		
 	});
