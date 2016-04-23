@@ -1,6 +1,9 @@
 yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 
 	$scope.isSignedIn = Cocktail.isSignedIn();
+	$scope.saved = localStorage.getItem('stored_age');
+	$scope.stored_age = [];
+
 
 	$scope.$on('$viewContentLoaded', function(){
 
@@ -11,8 +14,14 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 		});
 
 		if (!($scope.isSignedIn)) {
-			$('#myModal').modal({backdrop: 'static', keyboard: false , show: true});
+			if($scope.saved === undefined){
+				$('#myModal').modal({backdrop: 'static', keyboard: false , show: true});
+			}else{
+				$scope.checkAge($scope.saved, false);
+			}
+			
 		};
+		console.log($scope.saved);
 		
 	});
 
@@ -20,7 +29,7 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 		$location.path("/explore/" + query);
 	}
 
-	$scope.checkAge = function(num){
+	$scope.checkAge = function(num, store){
 		var todayDate = new Date(),
         todayYear = todayDate.getFullYear();
         age = todayYear - num; 
@@ -28,7 +37,11 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 	    if(age < 18){
 	    	console.log("you're too young!");
 	    	$('#myNoModal').modal({backdrop: 'static', keyboard: false , show: true});
-	    }
+	    }else if (store) {
+	    	console.log("it's checked!");
+	    	$scope.stored_age = (localStorage.getItem('stored_age')!==null) ? JSON.parse($scope.saved) : [ {year: num} ];
+			localStorage.setItem('stored_age', JSON.stringify($scope.stored_age));
+	    };
 	}
 
     var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");
