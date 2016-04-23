@@ -1,5 +1,8 @@
 yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 
+	$scope.isSignedIn = Cocktail.isSignedIn();
+	$scope.oldEnough = true;
+
 	$scope.$on('$viewContentLoaded', function(){
 
 		Cocktail.PopularCocktails.get({numerical_condition:"gt90"},function(data){
@@ -7,13 +10,27 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 		},function(data){
 			$scope.status = "There was an error. Try again.";
 		});
+
+		if (!($scope.isSignedIn)) {
+			$('#myModal').modal('show');
+		};
 		
 	});
 
-	$scope.isSignedIn = Cocktail.isSignedIn();
-
 	$scope.search = function(query){
 		$location.path("/explore/" + query);
+	}
+
+	$scope.checkAge = function(num){
+		var todayDate = new Date(),
+        todayYear = todayDate.getFullYear();
+        age = todayYear - num; 
+
+	    if(age < 18){
+	    	$scope.oldEnough = false;
+	    	console.log("you're too young!");
+	    	$location.path("/goodbye/");
+	    }
 	}
 
     var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");

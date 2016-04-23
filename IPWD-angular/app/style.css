@@ -95,6 +95,11 @@ input:disabled {
 
  .profile-option:hover{ border-bottom:3px solid #555;}
 
+ .bye{
+    background-repeat:no-repeat;
+    background-size:contain;
+ }
+
 
 /* CAROUSEL
 --------------------------------------------------*/

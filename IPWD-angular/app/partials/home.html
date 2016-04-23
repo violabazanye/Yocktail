@@ -52,10 +52,10 @@
 
 <!--   <hr class="featurette-divider" style="padding-bottom: 0px; margin-bottom: 0px"> -->
 
-<div style="padding: 30px; background-color:grey; width:100%;">
+<div style="padding: 30px; background-color:#999; width:100%;">
 	<div class="row">
 		<div class="col-md-12 text-center">
-			<span class="section-font" style="color:#eee;">Newly created cocktails</span>
+			<span class="section-font" style="color:#fff;">Newly created cocktails</span>
 		</div>
 		<div class="col-md-12" style="margin-top:20px">
 			<div class="container">
@@ -64,7 +64,7 @@
 					<img class="img-circle cocktail-small" ng-show="!cocktail.image" ng-src="images/cocktail_mockup.png" >
 					<img class="img-circle cocktail-small wine-creater" ng-show="cocktail.creator.profile_image" ng-src="{{cocktail.creator.profile_image}}">
 					<img class="img-circle cocktail-small wine-creater" ng-show="!cocktail.creator.profile_image" ng-src="images/profile_mockup.png">
-					<h3><a ng-href="#/user_cocktail/{{cocktail.key}}">{{cocktail.name}}</a></h3>
+					<h4><a ng-href="#/user_cocktail/{{cocktail.key}}">{{cocktail.name}}</a></h4>
 					<p>{{cocktail.taste}}</p>
 				</div>
 			</div>
@@ -84,4 +84,36 @@
       </div>
     </div>
   </div>
+
+  <!-- modal to check age -->
+  <div class="container">
+	  <!-- <h2>Modal Example</h2>
+	  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+
+	  <!-- Modal -->
+	  <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+	          <h4 class="modal-title">Are you old enough to view this site?</h4>
+	        </div>
+	        <div class="modal-body">
+	          <p>Please enter the year you were born:</p>
+	          <div class="form-group">
+                    <label class="sr-only" >Year(YYYY)</label>
+                    <input type="number" name="birthyear" placeholder="Year(YYYY)" class="form-control" ng-model="user_bday"/>
+                </div>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="checkAge(user_bday)">Submit</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+	  
+	</div>
 
