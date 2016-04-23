@@ -53,8 +53,7 @@ table.center {
 .img_txt {
   position: absolute; 
   top: 30px; 
-  left: 100px; 
-  width: 100%; 
+  width: 95%; 
   color: #fff;
 }
 
