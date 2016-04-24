@@ -179,6 +179,39 @@ input:disabled {
 	top: 50%;
 }
 
+ /**about page*/
+  #about-header{
+    background: url("images/about-header.jpg");
+    height:350px;
+    background-size: 100% 100%;
+    width:100%
+  }
+
+  #about-title{
+    width: 50%;
+    height: 100%;
+    background-color: rgba(51, 17, 17, 0.18);
+    margin: 0 auto;
+  }
+  
+  #about-info-content{ 
+    font-family: initial;
+  }
+  
+  #icon-img{
+    width:40px;
+  }
+  
+  .contact-font{
+	  font-size:20px;
+  }
+
+  .logo-img{
+	  width:130px;
+	  margin-top:-25px;
+  }
+
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 
@@ -199,6 +232,18 @@ input:disabled {
 	.caption-position {
 		top: 0%;
 	}
+	
+	#about-header{
+		height:180px;
+	}
+	
+	#about-title{
+		width: 65%;
+	}
+	
+	.contact-font{
+	  font-size:13px;
+  }
 }
 
 
@@ -282,31 +327,6 @@ input:disabled {
     top: 44%;
     right: 20%;
   }
-
-  /**about page*/
-  #about-header{
-    background: url("images/about-header.jpg");
-    height:350px;
-    background-size: 100% 100%;
-    width:100%
-  }
-
-  #about-title{
-    width: 50%;
-    height: 90%;
-    background-color: rgba(51, 17, 17, 0.18);
-    margin-left: 28%
-  }
-  #about-info-content{
-    text-align:center; 
-    padding-bottom:30px;
-    font-family: initial;
-    font-size: 19px;
-  }
-  #icon-img{
-    float:left;
-    margin-left: 40px;
-  }
 	
   .home-heading-font{
 	font-size:32px;
@@ -316,9 +336,9 @@ input:disabled {
 	font-size: 22px;
   }
  
-	.caption-position {
+  .caption-position {
 	top: 40%;
-	}
+  }
 }
 
 @media (min-width:992px){
