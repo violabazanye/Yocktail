@@ -7,10 +7,6 @@
                     <div class="form-top" name="signinForm" role="form">
                         <div class="form-top-left">
                             <h3>Login to our site</h3>
-                            <p>Enter your email and password to log on:</p>
-                        </div>
-                        <div class="form-top-right">
-                            <i class="fa fa-lock"></i>
                         </div>
                     </div>
                     <div class="form-bottom">
@@ -26,14 +22,17 @@
                                 <p class="help-block" ng-show="signinForm.password.$error.minlength">Min password length is 8 characters.</p>
                             </div>
                             <p style="color:red;" ng-show="regError">{{regErrorMessage}}</p>
-                            <button ng-disabled="!user.email || !user.password" type="button" ng-click="SignIn($event)" class="btn btn-lg btn-primary btn-block">Sign in!</button>
+                            <button ng-disabled="!user.email || !user.password" type="button" ng-click="SignIn($event)" class="btn btn-lg btn-warning btn-block">Sign in!</button>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3 social-login">
-                    <a href="#/signup"><h3>...or create a new account</h3></a>
+                    <h4 style="color:white; padding-bottom: 0px">Don't have a account? </h4></br>
+                    <a href="#/signup"> 
+                        <h3 style="padding-top: 0px; margin-top: 0px;">Sign up for FREE in 30 secs!</h3>
+                    </a>
                 </div>
             </div>
         </div>

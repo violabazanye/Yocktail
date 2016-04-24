@@ -44,16 +44,19 @@
 					<img class="img-thumbnail" ng-src="{{userCocktail.image}}" style="margin-bottom:20px; height: 60vh; width: 40vh"><br>
 				</div>
 				<div class="col-md-12 col-sm-12 col-xs-12">
-					<button type="button" class="btn btn-warning" ng-click="addFavorite(userCocktail.id)" ng-show="!clicked"><span class="glyphicon glyphicon-heart-empty"></span>  Add to favorites</button>
-					<button type="button" class="btn btn-default" ng-click="removeFavorite(userCocktail.id)" ng-show="clicked"><span class="glyphicon glyphicon-heart"></span>  Remove from favorites</button>
+					<button type="button" class="btn btn-warning" ng-click="addFavorite(userCocktail.id)" ng-show="!clicked" ng-disabled="!isSignedIn"><span class="glyphicon glyphicon-heart-empty"></span>  Add to favorites</button>
+					<button type="button" class="btn btn-default" ng-click="removeFavorite(userCocktail.id)" ng-show="clicked" ng-disabled="!isSignedIn"><span class="glyphicon glyphicon-heart"></span>  Remove from favorites</button>
+					<br/>
+					<p style="color:grey;" ng-show="!isSignedIn"><a href="#/signin" style="color:#666;">Sign in to add this cocktail to your favorites</a></p>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top:40px">
+		<!-- There is no video to show for user made cocktails currently-->
+		<!-- <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top:40px">
 			<div class="embed-responsive embed-responsive-16by9">
 			  <video style="height:30vw" class="embed-responsive-item" ng-src="{{url}}" allowfullscreen alt="no video" controls></video>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
 <hr class="container">

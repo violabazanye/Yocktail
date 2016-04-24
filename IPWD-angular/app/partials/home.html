@@ -41,7 +41,7 @@
 			<ul class="list-inline">
 				<li class="DocumentItem text-center" ng-repeat="cocktail in cocktails">
 					<img class="img-circle cocktail-small" ng-src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" ><br>
-					<a ng-href="#/cocktail/{{cocktail.id}}"><strong>{{cocktail.name}}</strong></a><br>
+					<a ng-href="#/cocktail/{{cocktail.id}}" style="color:#333;"><strong>{{cocktail.name}}</strong></a><br>
 					<p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
 				</li>
 			</ul>
@@ -57,7 +57,7 @@
 <div style="padding: 30px; background-color:#999; width:100%;">
 	<div class="row">
 		<div class="col-md-12 text-center">
-			<span class="section-font" style="color:#fff;">Newly created cocktails</span>
+			<a href="#/community"><span class="section-font" style="color:#fff;">Newly created cocktails</span></a>
 		</div>
 		<div class="col-md-12" style="margin-top:20px">
 			<div class="container">
@@ -66,7 +66,7 @@
 					<img class="img-circle cocktail-small" ng-show="!cocktail.image" ng-src="images/cocktail_mockup.png" >
 					<img class="img-circle cocktail-small wine-creater" ng-show="cocktail.creator.profile_image" ng-src="{{cocktail.creator.profile_image}}">
 					<img class="img-circle cocktail-small wine-creater" ng-show="!cocktail.creator.profile_image" ng-src="images/profile_mockup.png">
-					<h4><a ng-href="#/user_cocktail/{{cocktail.key}}">{{cocktail.name}}</a></h4>
+					<h4><a ng-href="#/user_cocktail/{{cocktail.key}}" style="color:#333;">{{cocktail.name}}</a></h4>
 					<p>{{cocktail.taste}}</p>
 				</div>
 			</div>
@@ -77,11 +77,11 @@
   <div ng-show="!isSignedIn">
     <div class="footer-img" style="padding-top:0px;">
       <div class="col-md-12 text-center" style="padding-top:80px;">
-        <span class="section-font" style="color:#fff;">Sign up to create your own cocktails and share with your community</span>
+        <span class="section-font" style="color:#fff;">Be our member to create your own cocktails and share with your community</span>
 	  </div>
         <br>
 		<div class="col-md-12 text-center" style="margin-top:30px">
-        <button class="btn btn-default btn-lg" type="button" style="border-radius:0px;border:5px solid #fff;opacity:0.8;"><a href="#signin">sign in/ sign up</a></button>
+        <button class="btn btn-default btn-lg" type="button" style="border-radius:0px;border:5px solid #fff;opacity:0.8;"><a href="#signin" style="color:#333;">sign in/ sign up</a></button>
 		</div>
       </div>
     </div>
