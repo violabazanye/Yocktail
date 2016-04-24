@@ -36,7 +36,7 @@ yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$firebaseAr
 		favoriteCocktails.$loaded(function(data){
 			
 			for (var i = 0; i < favoriteCocktails.length; i++) {
-				var favoriteCocktail = favoriteUserCocktails[i];
+				var favoriteCocktail = favoriteCocktails[i];
 
 				if (favoriteCocktails[i].id === ID) {
 					console.log("item exists");
