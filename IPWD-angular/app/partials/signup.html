@@ -36,7 +36,7 @@
                                 <p class="help-block" ng-show="regForm.confirmedPassword.$error.minlength">Min password length is 8 characters.</p>
                             </div>
                             <p style="color:red;" ng-show="regError">{{regErrorMessage}}</p>
-                            <button type="button" ng-click="SignUp();" ng-disabled="!user.name || ! user.birthday || !user.email || !user.password || !user.confirmedPassword" class="btn btn-lg btn-primary btn-block">Sign Up!</button>
+                            <button type="button" ng-click="SignUp();" ng-disabled="!user.name || ! user.birthday || !user.email || !user.password || !user.confirmedPassword" class="btn btn-lg btn-warning btn-block">Sign Up!</button>
                         </form>
                     </div>
                 </div>

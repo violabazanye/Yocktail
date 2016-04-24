@@ -18,10 +18,12 @@
 	<hr>
 	<div class="row">
 		<div class="col-xs-6 col-sm-4 col-md-5 text-right">
-			<span ng-click="cocktails=true; favourites=false" class="profile-option">Self-made Cocktails</span>
+			<span ng-show="cocktails" ng-click="cocktails=true; favourites=falsel;" class="profile-option" style="font-weight: bold;">Self-made Cocktails</span>
+			<span ng-show="!cocktails" ng-click="cocktails=true; favourites=falsel;" class="profile-option" style="font-weight: normal;">Self-made Cocktails</span>
 		</div>
 		<div class="col-xs-6 col-sm-4 col-md-5 col-md-offset-2">
-			<span class="profile-option" ng-click="cocktails=false; favourites=true">Favorites</span>
+			<span ng-show="favourites" class="profile-option" ng-click="cocktails=false; favourites=true" style="font-weight: bold;">Favorites</span>
+			<span ng-show="!favourites" class="profile-option" ng-click="cocktails=false; favourites=true" style="font-weight: normal;">Favorites</span>
 		</div>
 	</div>
 	<hr>
@@ -137,17 +139,3 @@
 </div>
 
 <br>
-
-	<script>
-		var ingredientList = [];
-		function addData(){
-			var ingredient = document.getElementById('newCocktailIngredient');
-			var display = document.getElementById('displayIngredient');
-			ingredientList.push(ingredient.value);
-			display.innerHTML= "";
-			display.innerHTML += ingredientList.join(",");
-			ingredient.value="";
-		}
-		
-		
-	</script>
