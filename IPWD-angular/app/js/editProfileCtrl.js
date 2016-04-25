@@ -19,7 +19,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 			$scope.imageString = currentUser.profile_image;
 			$scope.hasProfileImage = true;
 		}else{
-			console.log("the user does's have a profile_image, use mockup image instead");
+			console.log("the user does have a profile_image, use mockup image instead");
 
 			$scope.imageString = "";
 			$scope.hasProfileImage = false;
@@ -134,7 +134,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 				if(newName == currentUser.name && newBio == currentUser.bio){
 					// no change, not update
 					$scope.updateBasicInfoFormError = false;
-					$scope.updateBasicInfoFormSuccessMessage = "You information is updated!";
+					$scope.updateBasicInfoFormSuccessMessage = "Your information is updated!";
 					console.log('EditProfileCtrl UpdatBasicInfo success');
 				}else{
 					// update in firebase
@@ -146,7 +146,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 
 								$scope.$apply(function(){
 									$scope.updateBasicInfoFormError = false;
-									$scope.updateBasicInfoFormSuccessMessage = "You information is updated!";
+									$scope.updateBasicInfoFormSuccessMessage = "Your information is updated!";
 									console.log('EditProfileCtrl UpdatBasicInfo success');
 								});
 							}else{
@@ -159,7 +159,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 						});
 					}else{
 						$scope.updateBasicInfoFormError = false;
-						$scope.updateBasicInfoFormSuccessMessage = "You information is updated!";
+						$scope.updateBasicInfoFormSuccessMessage = "Your information is updated!";
 						console.log('EditProfileCtrl UpdatBasicInfo success');
 					}
 					
@@ -171,7 +171,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 
 								$scope.$apply(function(){
 									$scope.updateBasicInfoFormError = false;
-									$scope.updateBasicInfoFormSuccessMessage = "You information is updated!";
+									$scope.updateBasicInfoFormSuccessMessage = "Your information is updated!";
 									console.log('EditProfileCtrl UpdatBasicInfo success');
 								});
 							}else{
@@ -184,7 +184,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 						});
 					}else{
 						$scope.updateBasicInfoFormError = false;
-						$scope.updateBasicInfoFormSuccessMessage = "You information is updated!";
+						$scope.updateBasicInfoFormSuccessMessage = "Your information is updated!";
 						console.log('EditProfileCtrl UpdatBasicInfo success');
 					}
 				}
@@ -209,7 +209,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 				if (newEmail == currentUser.email) {
 					// no change, not update
 					$scope.changeEmailFormError = false;
-					$scope.changeEmailFormSuccessMessage = "You email remains the same.";
+					$scope.changeEmailFormSuccessMessage = "Your email remains the same.";
 					console.log('EditProfileCtrl ChangeEmail success');
 				}else{
 					// update email
@@ -227,7 +227,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 
 								$scope.$apply(function(){
 									$scope.changeEmailFormError = false;
-									$scope.changeEmailFormSuccessMessage = "You email has been changed successfully"; // why not showing?
+									$scope.changeEmailFormSuccessMessage = "Your email has been changed successfully"; // why not showing?
 									console.log('EditProfileCtrl ChangeEmail success');
 								});
 							}else{
@@ -272,7 +272,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 						newPassword: newPassword
 					}).then(function() {
 						$scope.changePasswordFormError = false;
-						$scope.changePasswordFormSuccessMessage = "You password has been changed successfully";
+						$scope.changePasswordFormSuccessMessage = "Your password has been changed successfully";
 						console.log('EditProfileCtrl Password changed successfully!');
 					}).catch(function(error) {
 						console.error("Error: ", error);
