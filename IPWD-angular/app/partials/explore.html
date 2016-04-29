@@ -16,7 +16,7 @@
 		</div><!-- /.col-lg-6 -->
   
 
-		<div ng-init="occasion=false" style="margin-top: 5%;">
+		<div ng-init="occasion=false" style="margin-top: 5%;" ng-cloak>
 			<div class="col-xs-12 col-sm-6 col-md-3 text-center">
 				<input type="image" src="images/Cocktail-1.jpg" class="categories" ng-model="occasion" ng-click="occasions('afternoon',query) ; !occasion" ng-disabled="occasion"/>
 				<h4 class="img_txt" ng-model="occasion" ng-click="occasions('afternoon',query) ; !occasion" ng-disabled="occasion" style="cursor: pointer">Afternoon Drinks</h4>

@@ -5,7 +5,7 @@
 			</br>
 		</div>
 		<div class="col-md-12">
-			<div class="col-md-3 col-sm-4 col-xs-12 text-center" ng-repeat="cocktail in communityCocktails" style="margin-top:20px">
+			<div class="col-md-3 col-sm-4 col-xs-12 text-center" ng-repeat="cocktail in communityCocktails" style="margin-top:20px" ng-cloak>
 				<div class="panel panel-default" ng-mouseover="showCreator=true" ng-mouseleave="showCreator=false">
 					<div class="panel-body" style="height: 260px; margin-top:20px">
 						<img ng-show="cocktail.image" class="img-rounded cocktail-small" ng-src="{{cocktail.image}}"><br>
