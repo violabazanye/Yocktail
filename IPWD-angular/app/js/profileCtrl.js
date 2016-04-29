@@ -3,6 +3,8 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	var visitingUid = $routeParams.userUid;
 	var currentUser = Cocktail.getUser();
 	$scope.isSignedInUser = false;
+	$scope.loadingSelfMadeCocktails = true;
+	$scope.loadingFavoriteCocktails = true;
 
 	// creating a Firebase database Reference for users
 	var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");  
@@ -56,6 +58,7 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 			});
 
 			$scope.userMadeCocktails.reverse();
+			$scope.loadingSelfMadeCocktails = false;
 		});
 	}
 
@@ -113,6 +116,8 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 					// do nothing
 				}
 			});
+			
+			$scope.loadingFavoriteCocktails = false;
 		});
 	}
 
