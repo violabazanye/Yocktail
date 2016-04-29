@@ -1,8 +1,6 @@
-    <a href="#/profile" class="btn btn-default " style="margin-top: 2%;margin-left:2%">Return to my profile</a>
-
+<a href="#/profile" class="btn btn-default" style="margin-top: 2%; margin-right:5% color:#333;">Return to my profile</a>
 
 </br></br>
-
 
 <div class="container-fluid">
   <div class="row-fluid">
@@ -18,7 +16,7 @@
             <br/><br/>
             <p style="color:green;" ng-show="!uploadImageError">{{uploadImageSuccessMessage}}</p>
             <p style="color:red;" ng-show="uploadImageError">{{uploadImageErrorMessage}}</p>
-            <button type="button" ng-click="UpdateProfileImage();" ng-disabled="!hasLoadedImage" class="btn btn-default">Update Profile Image</button>
+            <button type="button" ng-click="UpdateProfileImage();" ng-disabled="!hasLoadedImage" class="btn btn-warning">Update Profile Image</button>
             <button type="button " ng-click="DeleteProfileImage();" ng-show="hasProfileImage" class="btn  btn-default" style="margin-top:10px">Delete Profile Image </button>
           </div>
         </div>
@@ -43,7 +41,7 @@
                 </div>
                 <p style="color:green;" ng-show="!updateBasicInfoFormError">{{updateBasicInfoFormSuccessMessage}}</p>
                 <p style="color:red;" ng-show="updateBasicInfoFormError">{{updateBasicInfoFormErrorMessage}}</p>
-                <button style="margin-top: 15px" type="button" ng-click="UpdatBasicInfo();" ng-disabled="!editUser.name" class="btn btn-default">Update Basic Information</button>
+                <button style="margin-top: 15px" type="button" ng-click="UpdatBasicInfo();" ng-disabled="!editUser.name" class="btn btn-warning">Update Basic Information</button>
             </form>
           </div>
 
@@ -71,7 +69,7 @@
             
             <p style="color:green;" ng-show="!changeEmailFormError">{{changeEmailFormSuccessMessage}}</p>
             <p style="color:red;" ng-show="changeEmailFormError">{{changeEmailFormErrorMessage}}</p>
-            <button style="margin-top: 15px" type="button" ng-click="ChangeEmail();" ng-disabled="!editUser.email || !editUser.password" class="btn btn-default">Change Email</button>
+            <button style="margin-top: 15px" type="button" ng-click="ChangeEmail();" ng-disabled="!editUser.email || !editUser.password" class="btn btn-warning">Change Email</button>
             </form></div>
         </div>
 
@@ -95,7 +93,7 @@
                 </div>
                 <p style="color:green;" ng-show="!changePasswordFormError">{{changePasswordFormSuccessMessage}}</p>
                 <p style="color:red;" ng-show="changePasswordFormError">{{changePasswordFormErrorMessage}}</p>
-                <button style="margin-top: 15px" type="button" ng-click="ChangePassword();" ng-disabled=" !editUser.currentPassword || !editUser.newPassword || !editUser.confirmedNewPassword" class="btn btn-default">Change Password</button>
+                <button style="margin-top: 15px" type="button" ng-click="ChangePassword();" ng-disabled=" !editUser.currentPassword || !editUser.newPassword || !editUser.confirmedNewPassword" class="btn btn-warning">Change Password</button>
             </form>
         </div>
         </div>
