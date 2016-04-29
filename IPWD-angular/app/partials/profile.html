@@ -50,14 +50,16 @@
 						<div class="modal-body">
 							<div class="row">
 								<div class="col-md-12">
-									<div class="col-md-5">
-									    <img ng-show="!newCocktailImage" ng-src="images/cocktail_mockup.png" />
-									    <img ng-show="newCocktailImage" ng-src="{{newCocktailImage}}" />
+									<div class="col-md-5" style="margin-bottom: 12px">
+										<div class="text-center">
+											<img ng-show="!newCocktailImage" ng-src="images/cocktail_mockup.png" class="img-circle cocktail-small"/>
+											<img ng-show="newCocktailImage" ng-src="{{newCocktailImage}}" class="img-circle cocktail-small" />
+										</div>
 									    </br></br>
-									    <input type='file' ng-model-instant onchange="angular.element(this).scope().imageSelect(event)" />
+									    <input type='file' ng-model-instant onchange="angular.element(this).scope().imageSelect(event)" style="width: 100%;" />
 									    <p style="color:red;" ng-show="selectImageError">{{selectImageErrorMessage}}</p>
 									</div>
-									<div class="col-md-7" style="border-left: 2px solid #ccc">
+									<div class="col-md-7" style="border-left: 1px solid #ccc">
 										<input type="text" class="form-control" id="newCocktailName" placeholder="Name of the cocktail" ng-model="newCocktail.name"> 
 										</br>
 										<input type="text" class="form-control" id="newCocktailGlasstype" placeholder="Type of glass" ng-model="newCocktail.type"> 
