@@ -6,6 +6,7 @@ yocktailApp.controller('CommunityCtrl', function ($scope, $firebase, $firebaseAr
 	//var cocktails = $firebaseArray(cocktailsRef);
 
 	$scope.communityCocktails = [];
+	$scope.loadingCommunityCocktails = true;
 
 	cocktailsRef.once("value", function(snapshot) {
 
@@ -29,6 +30,9 @@ yocktailApp.controller('CommunityCtrl', function ($scope, $firebase, $firebaseAr
 				$scope.$apply();
 			});
 		});
+
+
+		$scope.loadingCommunityCocktails = false;
 	});
 
 	// $scope.$on('$viewContentLoaded', function(){
