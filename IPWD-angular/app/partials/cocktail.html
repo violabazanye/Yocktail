@@ -14,7 +14,7 @@
 	</div>
 
 	<div id="part2" class="container border">
-		<div class="col-md-12 col-sm-12 col-xs-12" style="padding-top: 30px;">
+		<div class="col-md-12 col-sm-12 col-xs-12" style="padding-top: 30px;" ng-cloak>
 			<div class="col-md-6 col-md-offset-1 col-sm-7 col-xs-12">
 				<h2><strong>{{cocktail.result[0].name}}</strong></h2>
 				
@@ -91,7 +91,7 @@
 
 			<div class="DocumentList">
 				<ul class="list-inline">
-					<li class="DocumentItem text-center" ng-repeat="cocktail in cocktails">
+					<li class="DocumentItem text-center" ng-repeat="cocktail in cocktails" ng-cloak>
 						<img class="img-circle cocktail-small" ng-src="https://assets.absolutdrinks.com/drinks/{{cocktail.id}}.png" ><br>
 						<a ng-href="#/cocktail/{{cocktail.id}}" style="color:#333;"><strong>{{cocktail.name}}</strong></a><br>
 						<p ng-repeat="taste in cocktail.tastes" style="display:inline;">{{taste.text}}. </p>
