@@ -3,14 +3,21 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 	$scope.isSignedIn = Cocktail.isSignedIn();
 	$scope.saved = localStorage.getItem('stored_age');
 	$scope.stored_age = [];
-
+	$scope.loadingIcon = true;
 
 	$scope.$on('$viewContentLoaded', function(){
 
 		Cocktail.PopularCocktails.get({numerical_condition:"gt90"},function(data){
 			$scope.cocktails=data.result;
+			$scope.loadingIcon = false;
 		},function(data){
-			$scope.status = "There was an error. Try again.";
+			$scope.loadingIcon = false;
+			if($scope.status == -1)
+			{
+				$scope.status = "Please check your internet connection.";  
+			}else{
+				$scope.status = "There was an error. Try again.";
+			}
 		});
 
 		if (!($scope.isSignedIn)) {
