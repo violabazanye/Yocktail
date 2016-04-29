@@ -1,5 +1,7 @@
 yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location, Cocktail, $window) {
 
+	$scope.loading = false;
+
 	$scope.$on('$viewContentLoaded', function(){
 		if(Cocktail.getUser() != ''){
 			$location.path('/profile');
@@ -16,6 +18,8 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
     var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");  
 
 	$scope.SignIn = function(e) {
+
+		$scope.loading = true;
 
 	    e.preventDefault();
 	    var email = $scope.user.email;
@@ -45,11 +49,15 @@ yocktailApp.controller('SigninCtrl', function ($scope, $firebaseAuth, $location,
                     console.log("user:" + Cocktail.getUser());
 
                     // $location.path('/profile/'+uid);
+                    $scope.loading = false;
+                    
                     $window.location.reload();
                     //$scope.$apply();
 	            });
 	        }, function(error) {
 	            //Failure callback
+	            $scope.loading = false;
+
 	            $scope.regError = true;
 				$scope.regErrorMessage = "Sorry, failed to sign in. Please try again.";
 	            console.log('SigninCtrl Authentication failure');

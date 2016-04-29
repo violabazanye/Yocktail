@@ -13,7 +13,7 @@ yocktailApp.controller('UserCocktailCtrl', function ($scope,$routeParams,$fireba
 	
 	userCocktails.$loaded().then(function(x) {
 	    $scope.userCocktail = userCocktails.$getRecord($routeParams.ID);
-	    $scope.loadingUserCocktails = true;
+	    $scope.loadingUserCocktails = false;
 	    $scope.userCocktail.id = $routeParams.ID;
 	  }).catch(function(error) {
 	    console.log("Error:", error);

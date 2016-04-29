@@ -1,4 +1,5 @@
 yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase, $location, Cocktail, $window) {
+    $scope.loading = false;
 
     $scope.$on('$viewContentLoaded', function(){
         if(Cocktail.getUser() != ''){
@@ -16,6 +17,7 @@ yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase,
     var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");  
 
     $scope.SignUp = function(){
+        $scope.loading = true;
 
    		if (!$scope.regForm.$invalid) {
             var name = $scope.user.name;
@@ -60,9 +62,13 @@ yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase,
                                     Cocktail.setUser("user", newUser2);
 
                                     //$location.path('/profile/'+uid);
+                                    $scope.loading = false;
+
                                     $window.location.reload();
 
                                 }, function(error) {
+                                    $scope.loading = false;
+
                                     //Failure callback
                                     $scope.regError = true;
                                     $scope.regErrorMessage = "Sorry, failed to sign in. Please try again.";
@@ -71,6 +77,8 @@ yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase,
                             }, function(error) {
                                 // do things if failure
 
+                                $scope.loading = false;
+
                                 console.log(error);
                                 $scope.regError = true;
                                 $scope.regErrorMessage = error.message;
@@ -78,10 +86,14 @@ yocktailApp.controller('SignupCtrl', function ($scope, $firebaseAuth, $firebase,
                             }
                         );
                 }else{
+                    $scope.loading = false;
+
                     $scope.regError = true;
                     $scope.regErrorMessage = "The two passwords does not match.";
                 }
             }else{
+                $scope.loading = false;
+
                 $scope.regError = true;
                 $scope.regErrorMessage = "Please fill out all the required information.";
             }
