@@ -100,7 +100,7 @@
 							<p style="color:green;" ng-show="!createNewCocktailError">{{createNewCocktailSuccessMessage}}</p>
     						<p style="color:red;" ng-show="createNewCocktailError">{{createNewCocktailErrorMessage}}</p>
 							<button type="button" class="btn btn-default" ng-click="CancelCreateNewCocktail();" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" ng-click="CreateNewCocktail();" ng-disabled="!newCocktail.name || !newCocktail.type || !newCocktail.taste || !newCocktail.skill || !newIngredientsString || !newCocktail.category || !newCocktail.description || !newCocktail.how_to_mix">Save changes</button>
+							<button type="button" class="btn btn-warning" ng-click="CreateNewCocktail();" ng-disabled="!newCocktail.name || !newCocktail.type || !newCocktail.taste || !newCocktail.skill || !newIngredientsString || !newCocktail.category || !newCocktail.description || !newCocktail.how_to_mix">Save changes</button>
 						</div>
 					</div>
 				</div>
@@ -137,7 +137,7 @@
 		</div>
 	</div>
 	
-	<div ng-show="loadingFavoriteCocktails" id="loading-icon-div" class="col-md-12" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:1000; background-color:grey; opacity: 0.8;">
+	<div ng-show="loadingPage" id="loading-icon-div" class="col-md-12" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:1000; background-color:grey; opacity: 0.8;">
 		<img src="../images/loading-img.gif" class="ajax-loader" style="position: absolute; left: 50%; top: 50%; margin-left: -32px; margin-top: -32px; display: block;"/>
 	</div>
 </div>

@@ -3,8 +3,7 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	var visitingUid = $routeParams.userUid;
 	var currentUser = Cocktail.getUser();
 	$scope.isSignedInUser = false;
-	$scope.loadingSelfMadeCocktails = true;
-	$scope.loadingFavoriteCocktails = true;
+	$scope.loadingPage = true;
 
 	// creating a Firebase database Reference for users
 	var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");  
@@ -58,7 +57,6 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 			});
 
 			$scope.userMadeCocktails.reverse();
-			$scope.loadingSelfMadeCocktails = false;
 		});
 	}
 
@@ -117,7 +115,7 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 				}
 			});
 			
-			$scope.loadingFavoriteCocktails = false;
+			$scope.loadingPage = false;
 		});
 	}
 
@@ -272,7 +270,6 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 
 				$scope.createNewCocktailError = false;
 				$scope.createNewCocktailSuccessMessage = "Your cocktail has been created!";
-
 				// refresh the page
 				$window.location.reload();
 
@@ -297,6 +294,7 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	// }
 
 	$scope.DeleteCocktail = function(cocktail){
+		$scope.loadingPage = true;
 		console.log("DeleteCocktail cocktail.key: "+ cocktail.key);
 		console.log(cocktail);
 
@@ -310,6 +308,7 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 
 							userMadeCocktailsFirebaseArray.$remove(i).then(function(){
 								console.log('item removed from user made cocktail');
+								$scope.loadingPage = false;
 							    // refresh the page
 							    $window.location.reload();
 
@@ -317,6 +316,7 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 						}
 					}
 				}).catch(function(error) {
+					$scope.loadingPage = false;
 					console.log('DeleteCocktail error in delete from cocktails: ', error);
 				});
 			}
@@ -332,11 +332,14 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 
 	$scope.DeleteFavorite = function(cocktail){
 		$scope.clicked = false;
+		$scope.loadingPage = true;
+
 		for (var i = 0; i < favoriteCocktails.length; i++) {
 			if (favoriteCocktails[i].$value.id === cocktail.key) {
 				favoriteCocktails.$remove(i).then(function(ref){
 					console.log('item removed, yaay!');
 
+					$scope.loadingPage = false;
 					// refresh the page
 					$window.location.reload();
 				});
