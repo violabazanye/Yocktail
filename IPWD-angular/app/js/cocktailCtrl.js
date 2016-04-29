@@ -1,6 +1,7 @@
 yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$firebaseArray,$location,Cocktail) {
 	
 	$scope.isSignedIn = Cocktail.isSignedIn();
+	$scope.loadingCocktails = true;
 	
 	var currentUser = Cocktail.getUser();
 	var favoriteCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + currentUser.uid + "/favorites/");
@@ -10,6 +11,7 @@ yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$firebaseAr
     	console.log(cocktail.result[0].name);
     	console.log($scope.cocktail.result[0].name); // will print the same
     	$scope.url = $scope.getUrl($scope.cocktail.result[0].id);
+    	$scope.loadingCocktails = false;
 	});
 
 	$scope.getUrl = function (givenId) {
