@@ -8,7 +8,7 @@
 				</div>
 				<div class="col-md-12">
 					<p class="lead" style="margin-bottom:0px">{{user.name}}</p>
-					<span style="color:#ccc;">Cocktail master</span>
+					<span ng-show="isSignedInUser"><a href="#/edit_profile" style="color:#ccc;">Edit Profile</a></span>
 				</div>
 				<div class="col-md-12" style="margin-top:10px;"><p style="color:#ccc;">{{user.bio}}</p></div>
 			</div>	
