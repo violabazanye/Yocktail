@@ -3,15 +3,16 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 	$scope.isSignedIn = Cocktail.isSignedIn();
 	$scope.saved = localStorage.getItem('stored_age');
 	$scope.stored_age = [];
-	$scope.loadingIcon = true;
+	$scope.loadingPopularCocktails = true;
+	$scope.loadingNewlyCreatedCocktails = true;
 
 	$scope.$on('$viewContentLoaded', function(){
 
 		Cocktail.PopularCocktails.get({numerical_condition:"gt90"},function(data){
 			$scope.cocktails=data.result;
-			$scope.loadingIcon = false;
+			$scope.loadingPopularCocktails = false;
 		},function(data){
-			$scope.loadingIcon = false;
+			$scope.loadingPopularCocktails = false;
 			if($scope.status == -1)
 			{
 				$scope.status = "Please check your internet connection.";  
@@ -79,5 +80,7 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 				$scope.$apply();
 			});
 		});
+
+		$scope.loadingNewlyCreatedCocktails = false;
 	});
 });
