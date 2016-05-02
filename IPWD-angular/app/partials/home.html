@@ -28,8 +28,7 @@
 </div>
 <!-- /.carousel -->
 
-<div class="container-fluid">
-    <!-- Three columns of text below the carousel -->
+<div class="container-fluid" style="padding: 40px;">
     <div class="row" style="padding: 3%;">
 		<div class="col-md-12 text-center">
 			<span class="section-font">Popular Cocktails</span>
@@ -50,7 +49,7 @@
 			</ul>
 		</div>
 	</div><!-- /.row -->
-	<div ng-show="loadingPopularCocktails" class="row" style="margin-top:20px">
+	<div ng-show="loadingPopularCocktails" class="row" style="padding: 3%;">
 		<div class="col-md-6 col-sm-6 col-xs-6">
 		</div>
 		<div class="col-md-6 col-sm-6 col-xs-6">
@@ -61,13 +60,8 @@
 	</div>
 </div>
 
-
-  <!-- START THE FEATURETTES -->
-
-<!--   <hr class="featurette-divider" style="padding-bottom: 0px; margin-bottom: 0px"> -->
-
-<div style="padding: 30px; background-color:#999; width:100%;">
-	<div class="row">
+<div style="padding: 50px; background-color:#999; width:100%;">
+	<div class="row" style="padding-top: 3%; padding-bottom: 3%;">
 		<div class="col-md-12 text-center">
 			<a href="#/community"><span class="section-font" style="color:#fff;">Newly created cocktails</span></a>
 		</div>
@@ -84,7 +78,7 @@
 			</div>
 		</div>
 	</div>
-	<div ng-show="loadingNewlyCreatedCocktails" class="row" style="margin-top:20px">
+	<div ng-show="loadingNewlyCreatedCocktails" class="row" style="padding: 3%;">
 		<div class="col-md-6 col-sm-6 col-xs-6">
 		</div>
 		<div class="col-md-6 col-sm-6 col-xs-6">
@@ -95,18 +89,17 @@
 	</div>
 </div>
 
-  <div ng-show="!isSignedIn">
-    <div class="footer-img" style="padding-top:0px;">
-      <div class="col-md-12 text-center" style="padding-top:80px;">
-        <span class="section-font" style="color:#fff;">Be our member to create your own cocktails and share with your community</span>
-	  </div>
-        <br>
-		<div class="col-md-12 text-center" style="margin-top:30px">
-        <button class="btn btn-default btn-lg" type="button" style="border-radius:0px;border:5px solid #fff;opacity:0.8;"><a href="#signin" style="color:#333;">sign in/ sign up</a></button>
-		</div>
-      </div>
-    </div>
+<div class="footer-img" style="padding-top:0px;">
+  <div class="col-md-12 text-center" style="padding-top:80px;">
+    <span ng-show="!isSignedIn" class="section-font" style="color:#fff;">Be our member to create your own cocktails and share with community</span>
+    <span ng-show="isSignedIn" class="section-font" style="color:#fff;">Create your own cocktails and share with community</span>
   </div>
+    <br>
+	<div class="col-md-12 text-center" style="margin-top:30px">
+    <button ng-show="!isSignedIn" class="btn btn-default btn-lg" type="button" style="border-radius:0px;border:5px solid #fff;opacity:0.8;"><a href="#signin" style="color:#333;">sign in/ sign up</a></button>
+	</div>
+  </div>
+</div>
 
   <!-- modal to check age -->
   <div class="container">
