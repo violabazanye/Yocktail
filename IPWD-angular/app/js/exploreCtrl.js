@@ -1,10 +1,10 @@
 yocktailApp.controller('ExploreCtrl', function ($scope,$routeParams,Cocktail) {
-
 	var external_search = $routeParams.search_input;
-	$scope.loadingCocktails = true;
-
+	
 	$scope.$on('$viewContentLoaded', function(){
 	    $scope.status = "Searching...";
+	    $scope.loadingCocktails = true;
+
 	    if (external_search) {
 	    	$scope.query = external_search;
 	    	$scope.search(external_search);

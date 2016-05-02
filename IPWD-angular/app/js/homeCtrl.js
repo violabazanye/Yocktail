@@ -7,7 +7,6 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 	$scope.stored_age = [];
 
 	$scope.$on('$viewContentLoaded', function(){
-
 		$scope.loadingPopularCocktails = true;
 		$scope.loadingNewlyCreatedCocktails = true;
 

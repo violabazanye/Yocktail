@@ -1,32 +1,32 @@
 yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$firebaseArray,$location,Cocktail) {
 	
 	$scope.isSignedIn = Cocktail.isSignedIn();
-	$scope.loadingCocktails = true;
 	
 	var currentUser = Cocktail.getUser();
 	var favoriteCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + currentUser.uid + "/favorites/");
 	var favoriteCocktails = $firebaseArray(favoriteCocktailsRef);
   	
-  	$scope.cocktail = Cocktail.SingleCocktail.get({id:$routeParams.cocktailId}, function(cocktail) {
-    	console.log(cocktail.result[0].name);
-    	console.log($scope.cocktail.result[0].name); // will print the same
-    	$scope.url = $scope.getUrl($scope.cocktail.result[0].id);
-    	$scope.loadingCocktails = false;
-	});
-
 	$scope.getUrl = function (givenId) {
 		return 'https://assets.absolutdrinks.com/videos/'+ givenId +'.mp4'
 	}
 
 	$scope.$on('$viewContentLoaded', function(){
+		$scope.loadingCocktails = true;
 
-	      Cocktail.PopularCocktails.get({numerical_condition:"gt90"},function(data){
+		$scope.cocktail = Cocktail.SingleCocktail.get({id:$routeParams.cocktailId}, function(cocktail) {
+	    	console.log(cocktail.result[0].name);
+	    	console.log($scope.cocktail.result[0].name); // will print the same
+	    	$scope.url = $scope.getUrl($scope.cocktail.result[0].id);
+	    	$scope.loadingCocktails = false;
+		});
+
+	    Cocktail.PopularCocktails.get({numerical_condition:"gt90"},function(data){
 	        $scope.cocktails=data.result;
-	      },function(data){
+	    },function(data){
 	        $scope.status = "There was an error. Try again.";
-	      });
+	    });
 	      
-	      $scope.checkIfDrinkIsInFavorites($routeParams.cocktailId);
+	    $scope.checkIfDrinkIsInFavorites($routeParams.cocktailId);
 	      	   
 	});
 
@@ -78,7 +78,6 @@ yocktailApp.controller('CocktailCtrl', function ($scope,$routeParams,$firebaseAr
 			
 		};
 	}
-
 
 });
 

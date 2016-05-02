@@ -3,7 +3,6 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 	var visitingUid = $routeParams.userUid;
 	var currentUser = Cocktail.getUser();
 	$scope.isSignedInUser = false;
-	$scope.loadingPage = true;
 
 	// creating a Firebase database Reference for users
 	var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");  
@@ -119,67 +118,75 @@ yocktailApp.controller('ProfileCtrl', function ($scope, $firebase, $firebaseAuth
 		});
 	}
 
-    // check if visitingUid is in routeParams
-    if (visitingUid) {
-		// visitingUid specified
-		// check if it is the profile page of the signed in user
-		if(currentUser == ''){
-			// no signed in user
-			$scope.isSignedInUser = false;
+	var self = this;
+
+	$scope.$on('$viewContentLoaded', function(){
+		$scope.loadingPage = true;
+
+		// check if visitingUid is in routeParams
+	    if (visitingUid) {
+			// visitingUid specified
+			// check if it is the profile page of the signed in user
+			if(currentUser == ''){
+				// no signed in user
+				$scope.isSignedInUser = false;
+			}else{
+		    	// user signed in
+		    	if(currentUser.uid == visitingUid){
+		    		$scope.isSignedInUser = true;
+		    	}else{
+		    		$scope.isSignedInUser = false;
+		    	}
+		    }
+
+		    if ($scope.isSignedInUser) {
+		    	// is the profile page of the signed in user 
+		    	$scope.user = currentUser;
+		    }else{
+		    	// not the profile page of the signed in user 
+		    	// get data of the profile page of the user with visitingUid
+		    	usersRef.child(visitingUid).once("value", function(data){
+		    		console.log("ProfileCtrl visiting user data");
+		    		console.log(data.val());
+		    		if (data.val()) {
+		    			var visitingUser = data.val();
+		    			visitingUser.uid = visitingUid;
+		    			//var visitingUser = { uid: visitingUid, name: visitingUserData.name};
+		    			console.log("visitingUser: " + visitingUser);
+
+		    			$scope.user = visitingUser;
+		    		}else{
+		    			console.log("ProfileCtrl: Data is not valid.");
+		    			$location.path('/signin');
+		    		}
+		    		$scope.$apply();
+		        	// $apply() is used to execute an expression in angular from outside of the angular framework. 
+		        	// (For example from browser DOM events, setTimeout, XHR or third party libraries).
+		        });
+		    }
+
+		    // set the user made cocktails
+		    self.setUserMadeCocktail(visitingUid);
+
+		    // set the user's favorites
+		    self.setUserFavorites(visitingUid);
+
 		}else{
-	    	// user signed in
-	    	if(currentUser.uid == visitingUid){
-	    		$scope.isSignedInUser = true;
-	    	}else{
-	    		$scope.isSignedInUser = false;
-	    	}
-	    }
-
-	    if ($scope.isSignedInUser) {
-	    	// is the profile page of the signed in user 
-	    	$scope.user = currentUser;
-	    }else{
-	    	// not the profile page of the signed in user 
-	    	// get data of the profile page of the user with visitingUid
-	    	usersRef.child(visitingUid).once("value", function(data){
-	    		console.log("ProfileCtrl visiting user data");
-	    		console.log(data.val());
-	    		if (data.val()) {
-	    			var visitingUser = data.val();
-	    			visitingUser.uid = visitingUid;
-	    			//var visitingUser = { uid: visitingUid, name: visitingUserData.name};
-	    			console.log("visitingUser: " + visitingUser);
-
-	    			$scope.user = visitingUser;
-	    		}else{
-	    			console.log("ProfileCtrl: Data is not valid.");
-	    			$location.path('/signin');
-	    		}
-	    		$scope.$apply();
-	        	// $apply() is used to execute an expression in angular from outside of the angular framework. 
-	        	// (For example from browser DOM events, setTimeout, XHR or third party libraries).
-	        });
-	    }
-
-	    // set the user made cocktails
-	    this.setUserMadeCocktail(visitingUid);
-
-	    // set the user's favorites
-	    this.setUserFavorites(visitingUid);
-
-	}else{
-		// no visitingUid specified
-		// check if user signed in
-		if (currentUser == '') {
-			// no user signed in
-			// redirect to signin page
-			$location.path('/signin');
-		}else{
-			// user signed in
-			// redirect to the profile with uid
-			$location.path('/profile/'+currentUser.uid);
+			// no visitingUid specified
+			// check if user signed in
+			if (currentUser == '') {
+				// no user signed in
+				// redirect to signin page
+				$location.path('/signin');
+			}else{
+				// user signed in
+				// redirect to the profile with uid
+				$location.path('/profile/'+currentUser.uid);
+			}
 		}
-	}
+	});
+
+    
 	
 	$scope.addIngredient = function(ingredient){
 		if(ingredient){

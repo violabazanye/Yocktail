@@ -1,7 +1,6 @@
 yocktailApp.controller('UserCocktailCtrl', function ($scope,$routeParams,$firebaseArray,$location,Cocktail) {
 
 	$scope.isSignedIn = Cocktail.isSignedIn();
-	$scope.loadingUserCocktails = true;
 	
 	var userCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/cocktails");
 	var userCocktails = $firebaseArray(userCocktailsRef);
@@ -10,33 +9,33 @@ yocktailApp.controller('UserCocktailCtrl', function ($scope,$routeParams,$fireba
 	var favoriteUserCocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/users/" + currentUser.uid + "/favorites/");
 	var favoriteUserCocktails = $firebaseArray(favoriteUserCocktailsRef);
 
-	
-	userCocktails.$loaded().then(function(x) {
-	    $scope.userCocktail = userCocktails.$getRecord($routeParams.ID);
-	    $scope.loadingUserCocktails = false;
-	    $scope.userCocktail.id = $routeParams.ID;
-	  }).catch(function(error) {
-	    console.log("Error:", error);
-	  });
-
 	$scope.$on('$viewContentLoaded', function(){
+		$scope.loadingUserCocktails = true;
 
-	      Cocktail.PopularCocktails.get({numerical_condition:"gt90"},function(data){
+		userCocktails.$loaded().then(function(x) {
+		    $scope.userCocktail = userCocktails.$getRecord($routeParams.ID);
+		    $scope.loadingUserCocktails = false;
+		    $scope.userCocktail.id = $routeParams.ID;
+		}).catch(function(error) {
+		    console.log("Error:", error);
+		    $scope.loadingUserCocktails = false;
+		});
+
+
+	    Cocktail.PopularCocktails.get({numerical_condition:"gt90"},function(data){
 	        $scope.cocktails=data.result;
-	      },function(data){
+	    },function(data){
 	        $scope.status = "There was an error. Try again.";
-	      });
+	    });
 	      
-	      favoriteUserCocktails.$loaded(function(data){
+	    favoriteUserCocktails.$loaded(function(data){
 	      	$scope.checkIfDrinkIsInFavorites($scope.userCocktail.id);
-	      });
-	      	   
+	    });
 	});
 
 	$scope.search = function(query){
 		$location.path("/explore/" + query);
 	}
-
 
 	$scope.checkIfDrinkIsInFavorites = function(ID){
 		favoriteUserCocktails.$loaded(function(data){
