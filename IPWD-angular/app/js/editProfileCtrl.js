@@ -6,6 +6,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 	$scope.hasProfileImage = false;
 	$scope.hasLoadedImage = false;
 	$scope.editUser = {uid: currentUser.uid, name: currentUser.name, bio: currentUser.bio, birthday: currentUser.birthday, email: currentUser.email};
+	$scope.loading = false;
 
 	// check if user already signed in
 	if (currentUser == '') {
@@ -72,6 +73,10 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 	}
 
 	$scope.UpdateProfileImage = function(){
+		$scope.loading = true;
+		$scope.uploadImageSuccessMessage = "";
+		$scope.uploadImageErrorMessage = "";
+
 		var imageData = $scope.imageString;
 
 		if(imageData && $scope.hasLoadedImage){
@@ -88,21 +93,29 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 						$scope.uploadImageError = false;
 						$scope.uploadImageSuccessMessage = "Your profile image has been updated.";
 						$scope.hasProfileImage = true;
+						$scope.loading = false;
 					});
 				}else{
 					$scope.$apply(function() {
 						$scope.uploadImageError = true;
 						$scope.uploadImageErrorMessage = "Failed to update your profile image. Please try again.";
+						$scope.loading = false;
 					});
 				}
 			});
+
 		}else{
 			$scope.uploadImageError = true;
 			$scope.uploadImageErrorMessage = "Please choose a image to upload.";
+			$scope.loading = false;
 		}
 	};
 
 	$scope.DeleteProfileImage = function(){
+		$scope.loading = true;
+		$scope.uploadImageSuccessMessage = "";
+		$scope.uploadImageErrorMessage = "";
+
 		usersRef.child(currentUser.uid).child("profile_image").set("", function(error){
 			if(!error){
 				console.log("imageData deleted success");
@@ -114,18 +127,24 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 					$scope.hasProfileImage = false;
 					$scope.uploadImageError = false;
 					$scope.uploadImageSuccessMessage = "Your profile image has been deleted.";
+					$scope.loading = false;
 				});
 			}else{
 				console.log("imageData deleted failure "+ error.message);
 				$scope.$apply(function() {
 					$scope.uploadImageError = true;
 					$scope.uploadImageErrorMessage = "Your profile image has been deleted.";
+					$scope.loading = false;
 				});
 			}
 		});
 	}
 
 	$scope.UpdatBasicInfo = function() {
+		$scope.loading = true;
+		$scope.updateBasicInfoFormSuccessMessage = "";
+		$scope.updateBasicInfoFormErrorMessage = "";
+
 		if (!$scope.updateBasicInfoForm.$invalid) {
 			var newName = $scope.editUser.name;
 			var newBio = $scope.editUser.bio;
@@ -135,6 +154,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 					// no change, not update
 					$scope.updateBasicInfoFormError = false;
 					$scope.updateBasicInfoFormSuccessMessage = "Your information is updated!";
+					$scope.loading = false;
 					console.log('EditProfileCtrl UpdatBasicInfo success');
 				}else{
 					// update in firebase
@@ -147,12 +167,14 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 								$scope.$apply(function(){
 									$scope.updateBasicInfoFormError = false;
 									$scope.updateBasicInfoFormSuccessMessage = "Your information is updated!";
+									$scope.loading = false;
 									console.log('EditProfileCtrl UpdatBasicInfo success');
 								});
 							}else{
 								$scope.$apply(function(){
 									$scope.updateBasicInfoFormError = true;
 									$scope.updateBasicInfoFormErrorMessage = "Failed to update your name information. Please try again.";
+									$scope.loading = false;
 									console.log('EditProfileCtrl UpdatBasicInfo success');
 								});
 							}
@@ -160,6 +182,7 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 					}else{
 						$scope.updateBasicInfoFormError = false;
 						$scope.updateBasicInfoFormSuccessMessage = "Your information is updated!";
+						$scope.loading = false;
 						console.log('EditProfileCtrl UpdatBasicInfo success');
 					}
 					
@@ -172,12 +195,14 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 								$scope.$apply(function(){
 									$scope.updateBasicInfoFormError = false;
 									$scope.updateBasicInfoFormSuccessMessage = "Your information is updated!";
+									$scope.loading = false;
 									console.log('EditProfileCtrl UpdatBasicInfo success');
 								});
 							}else{
 								$scope.$apply(function(){
 									$scope.updateBasicInfoFormError = true;
 									$scope.updateBasicInfoFormErrorMessage = "Failed to update your bio information. Please try again.";
+									$scope.loading = false;
 									console.log('EditProfileCtrl UpdatBasicInfo success');
 								});
 							}
@@ -185,31 +210,41 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 					}else{
 						$scope.updateBasicInfoFormError = false;
 						$scope.updateBasicInfoFormSuccessMessage = "Your information is updated!";
+						$scope.loading = false;
 						console.log('EditProfileCtrl UpdatBasicInfo success');
 					}
 				}
 			}else{
 				$scope.updateBasicInfoFormError = true;
 				$scope.updateBasicInfoFormErrorMessage = "Name is mandatory.";
+				$scope.loading = false;
 				console.log('EditProfileCtrl UpdatBasicInfo failure');
 			}
 		}else{
 			$scope.updateBasicInfoFormError = true;
 			$scope.updateBasicInfoFormErrorMessage = "Plese fill out the form.";
+			$scope.loading = false;
 			console.log('EditProfileCtrl UpdatBasicInfo failure');
 		}
 	};
 
 	$scope.ChangeEmail = function() {
+		$scope.loading = true;
+		$scope.changeEmailFormSuccessMessage = "";
+		$scope.changeEmailFormErrorMessage = "";
+
 		if (!$scope.changeEmailForm.$invalid) {
 			var newEmail = $scope.editUser.email;
 			var password = $scope.editUser.password;
+			$scope.editUser.password = "";
 
 			if (newEmail && password) {
 				if (newEmail == currentUser.email) {
 					// no change, not update
 					$scope.changeEmailFormError = false;
 					$scope.changeEmailFormSuccessMessage = "Your email remains the same.";
+					$scope.loading = false;
+
 					console.log('EditProfileCtrl ChangeEmail success');
 				}else{
 					// update email
@@ -228,12 +263,14 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 								$scope.$apply(function(){
 									$scope.changeEmailFormError = false;
 									$scope.changeEmailFormSuccessMessage = "Your email has been changed successfully"; // why not showing?
+									$scope.loading = false;
 									console.log('EditProfileCtrl ChangeEmail success');
 								});
 							}else{
 								$scope.$apply(function(){
 									$scope.changeEmailFormError = true;
 									$scope.changeEmailFormErrorMessage = error.message;
+									$scope.loading = false;
 									console.log("EditProfileCtrl ChangeEmail failure Error: " + error);
 								});
 							}
@@ -242,26 +279,37 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 					}).catch(function(error) {
 						$scope.changeEmailFormError = true;
 						$scope.changeEmailFormErrorMessage = error.message;
+						$scope.loading = false;
 						console.log("EditProfileCtrl ChangeEmail failure Error: " + error);
 					});
 				}
 			}else{
 				$scope.changeEmailFormError = true;
 				$scope.changeEmailFormErrorMessage = "Plese fill all the fields.";
+				$scope.loading = false;
 				console.log('EditProfileCtrl ChangeEmail failure');
 			}
 		}else{
 			$scope.changeEmailFormError = true;
 			$scope.changeEmailFormErrorMessage = "Plese fill out  all the fields.";
+			$scope.loading = false;
 			console.log('EditProfileCtrl UpdatBasicInfo failure');
 		}
 	};
 
 	$scope.ChangePassword = function() {
+		$scope.loading = true;
+		$scope.changePasswordFormSuccessMessage = "";
+		$scope.changePasswordFormErrorMessage = "";
+
 		if (!$scope.changePasswordForm.$invalid) {
 			var currentPassword = $scope.editUser.currentPassword;
 			var newPassword = $scope.editUser.newPassword;
 			var confirmedNewPassword = $scope.editUser.confirmedNewPassword;
+
+			$scope.editUser.currentPassword = "";
+			$scope.editUser.newPassword = "";
+			$scope.editUser.confirmedNewPassword = "";
 
 			if(currentPassword && newPassword && confirmedNewPassword){
 				if(newPassword == confirmedNewPassword){
@@ -273,23 +321,28 @@ yocktailApp.controller('EditProfileCtrl', function ($scope, $firebaseAuth, $loca
 					}).then(function() {
 						$scope.changePasswordFormError = false;
 						$scope.changePasswordFormSuccessMessage = "Your password has been changed successfully";
+						$scope.loading = false;
 						console.log('EditProfileCtrl Password changed successfully!');
 					}).catch(function(error) {
 						console.error("Error: ", error);
 						$scope.changePasswordFormError = true;
 						$scope.changePasswordFormErrorMessage = error.message;
+						$scope.loading = false;
 					});
 				}else{
 					$scope.changePasswordFormError = true;
 					$scope.changePasswordFormErrorMessage = "The two passwords are not the same.";
+					$scope.loading = false;
 				}
 			}else{
 				$scope.changePasswordFormError = true;
 				$scope.changePasswordFormErrorMessage = "Please fill out all the fields.";
+				$scope.loading = false;
 			}
 		}else{
 			$scope.changePasswordFormError = true;
 			$scope.changePasswordFormErrorMessage = "Please fill out all the fields.";
+			$scope.loading = false;
 		}
 	};
 
