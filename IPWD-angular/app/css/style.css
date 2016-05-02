@@ -15,7 +15,7 @@ footer {
 }
 
 .footer-img {
-  background-image: url("images/slide-2.png");
+  background-image: url("../images/slide-2.png");
   background-repeat: no-repeat;
   background-size: cover;
   height: 400px;
@@ -181,7 +181,7 @@ input:disabled {
 
  /**about page*/
   #about-header{
-    background: url("images/about-header.jpg");
+    background: url("../images/about-header.jpg");
     height:350px;
     background-size: 100% 100%;
     width:100%

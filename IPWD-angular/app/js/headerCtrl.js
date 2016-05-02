@@ -7,14 +7,6 @@ yocktailApp.controller('HeaderCtrl', function ($scope, Cocktail, $location, $win
 
     $scope.isSignedIn = Cocktail.isSignedIn();
 
-	// $scope.$watch(Cocktail.getUser(), function(newVal, oldVal){
- //        $scope.user = newVal;
- //    });
-
- //    $scope.$watch(Cocktail.isSignedIn(), function(newVal, oldVal){
- //        $scope.isSignedIn = newVal;
- //    });
-
     $scope.search = function(query){
         $location.path("/explore/" + query);
     }

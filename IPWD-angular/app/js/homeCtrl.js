@@ -3,10 +3,11 @@ yocktailApp.controller('HomeCtrl', function ($scope,Cocktail, $location) {
 	$scope.isSignedIn = Cocktail.isSignedIn();
 	$scope.saved = localStorage.getItem('stored_age');
 	$scope.stored_age = [];
-	$scope.loadingPopularCocktails = true;
-	$scope.loadingNewlyCreatedCocktails = true;
 
 	$scope.$on('$viewContentLoaded', function(){
+
+		$scope.loadingPopularCocktails = true;
+		$scope.loadingNewlyCreatedCocktails = true;
 
 		Cocktail.PopularCocktails.get({numerical_condition:"gt90"},function(data){
 			$scope.cocktails=data.result;

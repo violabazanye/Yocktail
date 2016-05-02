@@ -47,8 +47,8 @@ yocktailApp.config(['$routeProvider', '$sceDelegateProvider',
         templateUrl: 'partials/profile.html',
         controller: 'ProfileCtrl'
       }).
-      when('/edit_profile/', {
-        templateUrl: 'partials/edit_profile.html',
+      when('/editProfile/', {
+        templateUrl: 'partials/editProfile.html',
         controller: 'EditProfileCtrl'
       }).
       when('/user_cocktail/:ID', {

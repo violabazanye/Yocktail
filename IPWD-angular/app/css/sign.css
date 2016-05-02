@@ -180,7 +180,7 @@ h3 {
 
 
 .top-content-log{
-	background:url(images/log_bg.jpg);
+	background:url(../images/log_bg.jpg);
 	background-repeat: no-repeat;
 	background-size:100% 100%;
 }
@@ -188,7 +188,7 @@ h3 {
 
 /*account editing*/
 #account-edit-body{
-	/*background: url(images/account-edit-bg.jpg);*/
+	/*background: url(../images/account-edit-bg.jpg);*/
 	background-color:rgb(252, 252, 252);
 	background-size: 100% 100%;
 

@@ -41,14 +41,14 @@
                     <a href="#/signup">Sign Up</a>
                 </li>
                 <li ng-show="isSignedIn">
-                    <div class="dropdown">
+                    <div class="dropdown" style="margin-top: 8px;">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             {{ user.name }}
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             <li><a href="#/profile">My Profile</a></li>
-                            <li><a href="#/edit_profile">Account Settings</a></li>
+                            <li><a href="#/editProfile">Account Settings</a></li>
                             <li><a ng-click="logout();">Log out</a></li>
                         </ul>
                         {{ happy }}
