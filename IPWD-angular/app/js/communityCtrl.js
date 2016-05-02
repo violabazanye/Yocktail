@@ -1,50 +1,39 @@
 yocktailApp.controller('CommunityCtrl', function ($scope, $firebase, $firebaseArray, Cocktail) {
 
     var usersRef = new Firebase("https://yocktail.firebaseio.com/web/data/users");
-
 	var cocktailsRef = new Firebase("https://yocktail.firebaseio.com/web/data/cocktails"); 
-	//var cocktails = $firebaseArray(cocktailsRef);
 
-	$scope.communityCocktails = [];
-	$scope.loadingCommunityCocktails = true;
+	$scope.$on('$viewContentLoaded', function(){
 
-	cocktailsRef.once("value", function(snapshot) {
+		$scope.communityCocktails = [];
+		$scope.loadingCommunityCocktails = true;
 
-		snapshot.forEach(function(data) {
-			var cocktail = data.val();
-			console.log("cocktail");
-			console.log(cocktail);
+		cocktailsRef.once("value", function(snapshot) {
 
-			cocktail.key = data.key();
+			snapshot.forEach(function(data) {
+				var cocktail = data.val();
+				console.log("cocktail");
+				console.log(cocktail);
 
-			var creatorUid = cocktail.creator_uid;
-			console.log("creatorUid :"+creatorUid);
+				cocktail.key = data.key();
 
-			usersRef.child(creatorUid).once("value", function(data){
-				cocktail.creator = data.val();
+				var creatorUid = cocktail.creator_uid;
+				console.log("creatorUid :"+creatorUid);
 
-				console.log("cocktail.creator :");
-				console.log(cocktail.creator);
+				usersRef.child(creatorUid).once("value", function(data){
+					cocktail.creator = data.val();
 
-				$scope.communityCocktails.push(cocktail);
-				$scope.$apply();
+					console.log("cocktail.creator :");
+					console.log(cocktail.creator);
+
+					$scope.communityCocktails.push(cocktail);
+					$scope.$apply();
+				});
 			});
+
+			$scope.loadingCommunityCocktails = false;
 		});
 
-
-		$scope.loadingCommunityCocktails = false;
 	});
-
-	// $scope.$on('$viewContentLoaded', function(){
-
-	// 	Cocktail.Top10Cocktails.get({numerical_condition:"gt90"},function(data){
-	// 		$scope.cocktails=data.result;
-	// 	},function(data){
-	// 		$scope.status = "There was an error. Try again.";
-	// 	});
-
-	// 	The callback function will get all the cocktails the user has made
-
-	// });
 
 });

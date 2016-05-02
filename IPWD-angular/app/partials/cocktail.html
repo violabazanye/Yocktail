@@ -1,49 +1,49 @@
 <div class="container-fluid">
-<div class="row">
-	<div class="container">
-		<div id="part1" class="col-md-12"> 	<!-- search button -->
-			<div class="col-md-6 col-md-offset-3" style="margin-bottom: 1em;">
-				<div class="input-group">
-					<input type="text" class="form-control" ng-model="query" placeholder="search for ingredients like grape, lemon, bourbon...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button" ng-click="search(query)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-					</span>
+	<div class="row">
+		<div class="container">
+			<div id="part1" class="col-md-12"> 	<!-- search button -->
+				<div class="col-md-6 col-md-offset-3" style="margin-bottom: 1em;">
+					<div class="input-group">
+						<input type="text" class="form-control" ng-model="query" placeholder="search for ingredients like grape, lemon, bourbon...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" ng-click="search(query)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+						</span>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div id="part2" class="container border">
-		<div class="col-md-12 col-sm-12 col-xs-12" style="padding-top: 30px;" ng-cloak>
-			<div class="col-md-6 col-md-offset-1 col-sm-7 col-xs-12">
-				<h2><strong>{{cocktail.result[0].name}}</strong></h2>
-				
-				<div style="margin-top:3vh; margin-bottom:3vh">
-					<span class="col-md-12 col-sm-12 col-xs-12">Rating: {{cocktail.result[0].rating}}</span>
-					<span class="col-md-12 col-sm-12 col-xs-12">Glass Type: {{cocktail.result[0].servedIn.text}}</span>
-					<span class="col-md-12 col-sm-12 col-xs-12">Taste: <span ng-repeat="taste in cocktail.result[0].tastes" style="display:inline;">{{taste.text}}. </span></span>
-					<span class="col-md-12 col-sm-12 col-xs-12">Skill Level: {{cocktail.result[0].skill.name}} </span>
-				</div>
-				<div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 5vh; margin-bottom:3vh">
-					<h4><b>Ingredients</b></h4>
-					<div class="table-responsive">
-						<table class="">
+		<div id="part2" class="container border">
+			<div class="col-md-12 col-sm-12 col-xs-12" style="padding-top: 30px;" ng-cloak>
+				<div class="col-md-6 col-md-offset-1 col-sm-7 col-xs-12">
+					<h2><strong>{{cocktail.result[0].name}}</strong></h2>
+					
+					<div style="margin-top:3vh; margin-bottom:3vh">
+						<span class="col-md-12 col-sm-12 col-xs-12">Rating: {{cocktail.result[0].rating}}</span>
+						<span class="col-md-12 col-sm-12 col-xs-12">Glass Type: {{cocktail.result[0].servedIn.text}}</span>
+						<span class="col-md-12 col-sm-12 col-xs-12">Taste: <span ng-repeat="taste in cocktail.result[0].tastes" style="display:inline;">{{taste.text}}. </span></span>
+						<span class="col-md-12 col-sm-12 col-xs-12">Skill Level: {{cocktail.result[0].skill.name}} </span>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 5vh; margin-bottom:3vh">
+						<h4><b>Ingredients</b></h4>
+						<div class="table-responsive">
+							<table class="">
 								<tr ng-repeat="ingredient in cocktail.result[0].ingredients">
 									<td>{{ingredient.textPlain}}</td>
 								</tr> 
-						</table>
+							</table>
+						</div>
+					</div>
+					<div class="col-md-8  col-sm-8 col-xs-12" style="margin-top: 5vh; margin-bottom:3vh">
+						<h4><b>How to Mix</b></h4>
+						<p>{{cocktail.result[0].descriptionPlain}}</p>
 					</div>
 				</div>
-				<div class="col-md-8  col-sm-8 col-xs-12" style="margin-top: 5vh; margin-bottom:3vh">
-					<h4><b>How to Mix</b></h4>
-					<p>{{cocktail.result[0].descriptionPlain}}</p>
-				</div>
-			</div>
-			<div class="col-md-5  col-sm-5 col-xs-12 text-center">
-				<div class="col-md-12">
-					<img class="img-thumbnail" ng-src="https://assets.absolutdrinks.com/drinks/{{cocktail.result[0].id}}.png" style="margin-bottom:20px; height: 60vh"><br>
-				</div>
-				<div class="col-md-12  col-sm-12 col-xs-12">
+				<div class="col-md-5  col-sm-5 col-xs-12 text-center">
+					<div class="col-md-12">
+						<img class="img-thumbnail" ng-src="https://assets.absolutdrinks.com/drinks/{{cocktail.result[0].id}}.png" style="margin-bottom:20px; height: 60vh"><br>
+					</div>
+					<div class="col-md-12  col-sm-12 col-xs-12">
 					<!-- <h4><b>Ratings:</b> {{cocktail.result[0].rating}}</h4> 
 					
 						<div style="margin:auto;width:200px">
@@ -62,26 +62,26 @@
 								</li>
 							</ul>
 						</div> something-->
-					
-					
-					<button type="button" class="btn btn-warning" ng-click="addFavorite(cocktail.result[0].id)" ng-show="!clicked" ng-disabled="!isSignedIn"><span class="glyphicon glyphicon-heart-empty" ></span>  Add to favorites</button>
-					<button type="button" class="btn btn-default" ng-click="removeFavorite(cocktail.result[0].id)" ng-show="clicked" ng-disabled="!isSignedIn"><span class="glyphicon glyphicon-heart"></span>  Remove from favorites</button>
-					<br/>
-					<p style="color:grey;" ng-show="!isSignedIn"><a href="#/signin" style="color:#666;">Sign in to add this cocktail to your favorites</a></p>
+						
+						
+						<button type="button" class="btn btn-warning" ng-click="addFavorite(cocktail.result[0].id)" ng-show="!clicked" ng-disabled="!isSignedIn"><span class="glyphicon glyphicon-heart-empty" ></span>  Add to favorites</button>
+						<button type="button" class="btn btn-default" ng-click="removeFavorite(cocktail.result[0].id)" ng-show="clicked" ng-disabled="!isSignedIn"><span class="glyphicon glyphicon-heart"></span>  Remove from favorites</button>
+						<br/>
+						<p style="color:grey;" ng-show="!isSignedIn"><a href="#/signin" style="color:#666;">Sign in to add this cocktail to your favorites</a></p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12  col-sm-12 col-xs-12 text-center" style="margin-top:40px">
+				<div class="embed-responsive embed-responsive-16by9">
+					<video style="height:30vw" class="embed-responsive-item" ng-src="{{url}}" allowfullscreen alt="no video" controls></video>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-12  col-sm-12 col-xs-12 text-center" style="margin-top:40px">
-			<div class="embed-responsive embed-responsive-16by9">
-			  <video style="height:30vw" class="embed-responsive-item" ng-src="{{url}}" allowfullscreen alt="no video" controls></video>
-			</div>
-		</div>
 	</div>
-</div>
 	<hr class="container">
 
 	<div class="container-fluid">
-    <!-- Three columns of text below the carousel -->
+		<!-- Three columns of text below the carousel -->
 		<div class="row" style="padding: 3%;">
 			<div class="col-md-12 text-center">
 				<span class="section-font">Popular Cocktails</span>

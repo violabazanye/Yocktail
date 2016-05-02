@@ -8,9 +8,9 @@
 				</div>
 				<div class="col-md-12">
 					<p class="lead" style="margin-bottom:0px">{{user.name}}</p>
-					<span ng-show="isSignedInUser"><a href="#/editProfile" style="color:#ccc;">Edit Profile</a></span>
+					<span ng-show="isSignedInUser"><a href="#/editProfile" style="color:#ddd;">Edit Profile</a></span>
 				</div>
-				<div class="col-md-12" style="margin-top:10px;"><p style="color:#ccc;">{{user.bio}}</p></div>
+				<div class="col-md-12" style="margin-top:10px;"><p class="lead" style="color:#aaa; font-size: 15px;">{{user.bio}}</p></div>
 			</div>	
 		</div>
 	</div>
@@ -34,8 +34,7 @@
 		<div class="row" style="margin-top:50px">
 			<div class="col-xs-6 col-sm-3 text-center cocktail-small-div" ng-show="isSignedInUser">
 				<img class="img-circle cocktail-small" src="images/cocktail_mockup.png" >
-				<h5>Create new cocktail</h5>
-				<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Create</button>
+				<button style="margin-top: 20px;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Create new cocktail</button>
 			</div>
 			
 			<!-- modal starts here -->
