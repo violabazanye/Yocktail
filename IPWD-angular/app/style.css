@@ -243,7 +243,11 @@ input:disabled {
 	
 	.contact-font{
 	  font-size:13px;
-  }
+    }
+	
+	.upper-margin-xs{
+		margin-top:3%;
+	}
 }
 
 
